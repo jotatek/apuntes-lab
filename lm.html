@@ -1,0 +1,3640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compendio profesional de introducción al lenguaje de marcas y HTML: estructura, etiquetas, formularios y buenas prácticas del desarrollo web.">
+    <meta name="author" content="Apuntes de Desarrollo Web">
+    <meta name="theme-color" content="#0a0f1f">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M10 4h44l-4 47-18 8-18-8z' fill='%23E34F26'/%3E%3Cpath d='M32 8v48l14-6 3-42z' fill='%23F16529'/%3E%3Ctext x='32' y='45' font-family='sans-serif' font-size='26' font-weight='900' fill='%23fff' text-anchor='middle'%3E5%3C/text%3E%3C/svg%3E">
+
+    <!-- ⚡ Inicialización de tema (antes del CSS, sin flash) -->
+    <script>
+        (function () {
+            try {
+                var s = localStorage.getItem('theme');
+                var d = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (d) document.documentElement.classList.add('dark');
+                document.documentElement.setAttribute('data-theme', d ? 'dark' : 'light');
+            } catch (e) {}
+        })();
+    </script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <title>Compendio · Introducción al Lenguaje de Marcas y HTML</title>
+
+    <style>
+        /* ============================================================
+           TOKENS · TEMA CLARO
+           ============================================================ */
+        :root {
+            --bg: #f6f7fb;
+            --bg-elevated: #ffffff;
+            --bg-soft: #f8fafc;
+            --bg-hover: #eef2f7;
+
+            --text: #0b1220;
+            --text-2: #334155;
+            --text-muted: #64748b;
+            --text-soft: #94a3b8;
+
+            --primary: #2563eb;
+            --primary-2: #1d4ed8;
+            --primary-3: #60a5fa;
+            --primary-soft: rgba(37, 99, 235, 0.10);
+
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+
+            --border: #e5e9f0;
+            --border-2: #cbd5e1;
+
+            --code-bg: #0b1220;
+            --code-text: #e6edf7;
+            --code-inline-bg: #eef2ff;
+            --code-inline-text: #4338ca;
+
+            --toc-bg: rgba(255, 255, 255, 0.85);
+
+            --mark-bg: #fef08a;
+            --mark-text: #422006;
+            --mark-ring: rgba(234, 179, 8, 0.55);
+
+            --brand-html: #E34F26;
+            --brand-css:  #1572B6;
+            --brand-js:   #F7DF1E;
+
+            --shadow-xs: 0 1px 2px rgba(11, 18, 32, 0.05);
+            --shadow-sm: 0 1px 3px rgba(11, 18, 32, 0.06), 0 1px 2px rgba(11, 18, 32, 0.04);
+            --shadow-md: 0 4px 16px rgba(11, 18, 32, 0.08);
+            --shadow-lg: 0 20px 48px rgba(11, 18, 32, 0.14);
+
+            --hero-bg:
+                radial-gradient(ellipse 60% 55% at 15% 20%, rgba(96, 165, 250, 0.35), transparent 60%),
+                radial-gradient(ellipse 50% 50% at 85% 30%, rgba(139, 92, 246, 0.30), transparent 60%),
+                radial-gradient(ellipse 60% 50% at 50% 100%, rgba(59, 130, 246, 0.35), transparent 60%),
+                linear-gradient(160deg, #0a0f1f 0%, #111a35 45%, #1e3a8a 100%);
+        }
+
+        /* ============================================================
+           TOKENS · TEMA OSCURO
+           ============================================================ */
+        html.dark {
+            --bg: #05090f;
+            --bg-elevated: #0b1220;
+            --bg-soft: #080e18;
+            --bg-hover: #131c30;
+
+            --text: #e6edf7;
+            --text-2: #cbd5e1;
+            --text-muted: #94a3b8;
+            --text-soft: #64748b;
+
+            --primary: #60a5fa;
+            --primary-2: #3b82f6;
+            --primary-3: #93c5fd;
+            --primary-soft: rgba(96, 165, 250, 0.14);
+
+            --accent: #fbbf24;
+            --success: #34d399;
+            --danger: #f87171;
+
+            --border: #162033;
+            --border-2: #263349;
+
+            --code-bg: #010409;
+            --code-text: #e6edf7;
+            --code-inline-bg: #1e1b4b;
+            --code-inline-text: #a5b4fc;
+
+            --toc-bg: rgba(11, 18, 32, 0.85);
+
+            --mark-bg: #fbbf24;
+            --mark-text: #1c1917;
+            --mark-ring: rgba(251, 191, 36, 0.65);
+
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.55);
+            --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.7);
+
+            --hero-bg:
+                radial-gradient(ellipse 60% 55% at 15% 20%, rgba(37, 99, 235, 0.30), transparent 60%),
+                radial-gradient(ellipse 50% 50% at 85% 30%, rgba(139, 92, 246, 0.22), transparent 60%),
+                radial-gradient(ellipse 60% 50% at 50% 100%, rgba(59, 130, 246, 0.25), transparent 60%),
+                linear-gradient(160deg, #02050a 0%, #050c1a 45%, #0a1730 100%);
+        }
+
+        /* ============================================================
+           RESET & BASE
+           ============================================================ */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 96px;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            transition: background-color .3s ease, color .3s ease;
+            overflow-x: hidden;
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+        }
+
+        ::selection {
+            background: var(--primary-3);
+            color: #fff;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color .18s ease;
+        }
+        a:hover { color: var(--primary-2); }
+
+        :focus-visible {
+            outline: 2px solid var(--primary-3);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* Scrollbar premium */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-2) transparent;
+        }
+        *::-webkit-scrollbar { width: 10px; height: 10px; }
+        *::-webkit-scrollbar-track { background: transparent; }
+        *::-webkit-scrollbar-thumb {
+            background: var(--border-2);
+            border-radius: 10px;
+            border: 3px solid var(--bg);
+        }
+        *::-webkit-scrollbar-thumb:hover { background: var(--text-soft); }
+
+        /* Transiciones suaves al cambiar tema */
+        body, .section, .toc, .footer, input, button, .search, .stat, .tarjeta {
+            transition:
+                background-color .3s ease,
+                color .3s ease,
+                border-color .3s ease;
+        }
+
+        /* ============================================================
+           BARRA DE PROGRESO
+           ============================================================ */
+        .progress {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: transparent;
+            z-index: 10000;
+            pointer-events: none;
+        }
+        .progress__bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary-3), var(--accent));
+            transition: width .08s linear;
+            box-shadow: 0 0 12px var(--primary-3);
+        }
+
+        /* ============================================================
+           SKIP LINK
+           ============================================================ */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: 12px;
+            padding: .6rem 1rem;
+            background: var(--bg-elevated);
+            color: var(--text);
+            border-radius: 8px;
+            z-index: 10001;
+            box-shadow: var(--shadow-md);
+            font-weight: 600;
+        }
+        .skip-link:focus { left: 12px; }
+
+        /* ============================================================
+           HERO
+           ============================================================ */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 5.5rem 1.5rem 4.5rem;
+            color: #fff;
+            isolation: isolate;
+            background: var(--hero-bg);
+            text-align: center;
+        }
+
+        /* Grid sutil de fondo */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+            background-size: 56px 56px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 80%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Ruido de grano */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+            opacity: .08;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .hero__content {
+            position: relative;
+            max-width: 780px;
+            margin: 0 auto;
+            z-index: 1;
+            animation: fadeUp .8s cubic-bezier(.2,.7,.3,1) both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .42rem 1rem;
+            background: rgba(255,255,255,.09);
+            border: 1px solid rgba(255,255,255,.16);
+            border-radius: 999px;
+            font-size: .78rem;
+            font-weight: 600;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            margin-bottom: 1.5rem;
+            color: rgba(255,255,255,.92);
+        }
+        .hero__badge-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #34d399;
+            box-shadow: 0 0 0 3px rgba(52, 211, 153, .3);
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(52,211,153,.3); }
+            50%      { box-shadow: 0 0 0 7px rgba(52,211,153,.05); }
+        }
+
+        .hero__title {
+            margin: 0 0 1rem;
+            font-size: clamp(1.85rem, 5vw, 3.15rem);
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -.03em;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 130%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, .2);
+        }
+
+        .hero__subtitle {
+            margin: 0 auto 1.75rem;
+            max-width: 620px;
+            font-size: clamp(.98rem, 1.5vw, 1.12rem);
+            line-height: 1.65;
+            color: rgba(255,255,255,.78);
+        }
+
+        /* Stats del hero */
+        .hero__stats {
+            display: flex;
+            justify-content: center;
+            gap: .6rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .stat {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .4rem .85rem;
+            border-radius: 999px;
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.13);
+            font-size: .82rem;
+            color: rgba(255,255,255,.85);
+            backdrop-filter: blur(8px);
+        }
+        .stat strong {
+            color: #fff;
+            font-weight: 700;
+        }
+        .stat__icon { color: var(--primary-3); display: inline-flex; }
+
+        /* Herramientas */
+        .hero__tools {
+            display: flex;
+            gap: .65rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Buscador */
+        .search {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .35rem .45rem .35rem 1.05rem;
+            background: rgba(255,255,255,.97);
+            border-radius: 999px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .28);
+            min-width: 320px;
+            max-width: 460px;
+            flex: 1;
+            transition: transform .2s ease, box-shadow .2s ease;
+            border: 1px solid rgba(255,255,255,.4);
+        }
+        .search:focus-within {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 36px rgba(0, 0, 0, .35), 0 0 0 3px rgba(96,165,250,.35);
+        }
+        .search__icon { color: #64748b; flex-shrink: 0; }
+        .search input {
+            border: none;
+            background: transparent;
+            color: #0b1220;
+            font-size: .95rem;
+            outline: none;
+            width: 100%;
+            font-family: inherit;
+            font-weight: 500;
+            padding: .55rem 0;
+        }
+        .search input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+        }
+        .search input::-webkit-search-cancel-button {
+            -webkit-appearance: none;
+            width: 14px; height: 14px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M18 6L6 18M6 6l12 12'/%3E%3C/svg%3E") no-repeat center;
+            cursor: pointer;
+        }
+        .search__kbd {
+            flex-shrink: 0;
+            font-size: .68rem;
+            font-weight: 700;
+            padding: .28rem .5rem;
+            border-radius: 6px;
+            background: #e2e8f0;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            font-family: inherit;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        /* Botón de tema */
+        .theme-toggle {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.35);
+            background: rgba(255,255,255,.14);
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform .3s ease, background .2s, box-shadow .25s;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .2);
+        }
+        .theme-toggle:hover {
+            background: rgba(255,255,255,.25);
+            transform: rotate(-18deg) scale(1.08);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, .3);
+        }
+        .theme-toggle:active { transform: rotate(-18deg) scale(.94); }
+        .theme-toggle svg { position: absolute; transition: opacity .3s, transform .4s; }
+        .theme-toggle .icon-moon { opacity: 0; transform: rotate(-45deg); }
+        html.dark .theme-toggle .icon-sun  { opacity: 0; transform: rotate(45deg); }
+        html.dark .theme-toggle .icon-moon { opacity: 1; transform: rotate(0); }
+
+        .hero__status {
+            margin: 1.3rem auto 0;
+            font-size: .9rem;
+            font-weight: 500;
+            color: rgba(255,255,255,.9);
+            min-height: 1.3em;
+            transition: color .2s;
+        }
+
+        /* Iconos tecnológicos flotantes */
+        .hero__tech {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .hero__tech svg {
+            position: absolute;
+            opacity: .12;
+            filter: blur(.4px) drop-shadow(0 12px 24px rgba(0,0,0,.35));
+            animation: floatTech 11s ease-in-out infinite;
+        }
+        .hero__tech .t-html { top: 18%; left: 6%; width: 84px; animation-delay: -2s; }
+        .hero__tech .t-css  { top: 58%; right: 7%; width: 72px; animation-delay: -5s; }
+        .hero__tech .t-js   { bottom: 12%; left: 12%; width: 62px; animation-delay: -8s; }
+
+        @keyframes floatTech {
+            0%, 100% { transform: translateY(0) rotate(-4deg); }
+            50%      { transform: translateY(-18px) rotate(4deg); }
+        }
+
+        /* ============================================================
+           TOC STICKY
+           ============================================================ */
+        .toc {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--toc-bg);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+        }
+        .toc__inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: .55rem 1rem;
+            display: flex;
+            gap: .3rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .toc__inner::-webkit-scrollbar { display: none; }
+
+        .toc__inner a {
+            flex-shrink: 0;
+            padding: .42rem .95rem;
+            border-radius: 999px;
+            color: var(--text-muted);
+            font-size: .85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: background .18s, color .18s;
+            border: 1px solid transparent;
+        }
+        .toc__inner a:hover {
+            background: var(--bg-hover);
+            color: var(--text);
+        }
+        .toc__inner a.active {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 3px 14px var(--primary-soft);
+        }
+
+        /* ============================================================
+           CONTENIDO PRINCIPAL
+           ============================================================ */
+        .content {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 3rem 1.25rem 5rem;
+        }
+
+        .section {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.25rem 2.5rem;
+            margin-bottom: 1.75rem;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow .3s, border-color .3s;
+            position: relative;
+        }
+        .section:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-2);
+        }
+        .section[hidden] { display: none; }
+
+        .section__header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0 0 1.75rem;
+            padding-bottom: 1.1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section__badge {
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.02rem;
+            letter-spacing: -.02em;
+            color: #fff;
+            background: linear-gradient(135deg, #F16529 0%, #E34F26 100%);
+            box-shadow: 0 8px 20px rgba(227, 79, 38, .30);
+            position: relative;
+            overflow: hidden;
+        }
+        .section__badge::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,.3), transparent 55%);
+            pointer-events: none;
+        }
+
+        .section__title {
+            margin: 0;
+            font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+            line-height: 1.3;
+            color: var(--text);
+            font-weight: 700;
+            letter-spacing: -.015em;
+        }
+
+        /* Tipografía interna */
+        h3 {
+            color: var(--text);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 2rem 0 .9rem;
+            padding-left: .9rem;
+            border-left: 3px solid var(--primary);
+            letter-spacing: -.01em;
+        }
+        h4 {
+            color: var(--text);
+            margin: 0 0 .4rem;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        p {
+            margin: 0 0 .9rem;
+            color: var(--text-2);
+        }
+        p strong { color: var(--text); font-weight: 700; }
+
+        ul.lista, ol.lista {
+            padding-left: 1.4rem;
+            margin: 0 0 1rem;
+            color: var(--text-2);
+        }
+        ul.lista li, ol.lista li {
+            margin-bottom: .55rem;
+            padding-left: .2rem;
+        }
+        ul.lista li::marker { color: var(--primary); font-weight: 800; }
+        ol.lista li::marker { color: var(--primary); font-weight: 800; }
+
+        /* ============================================================
+           RESALTADO DE BÚSQUEDA
+           ============================================================ */
+        mark.highlight {
+            background: var(--mark-bg);
+            color: var(--mark-text);
+            padding: .06em .22em;
+            border-radius: 4px;
+            box-shadow: 0 0 0 1.5px var(--mark-ring);
+            font-weight: 700;
+            animation: markPop .25s ease;
+        }
+        @keyframes markPop {
+            from { transform: scale(.85); opacity: .4; }
+            to   { transform: scale(1);  opacity: 1; }
+        }
+        pre mark.highlight {
+            background: #fde047;
+            color: #111827;
+            box-shadow: 0 0 0 1.5px rgba(253, 224, 71, .6);
+        }
+
+        /* ============================================================
+           CÓDIGO
+           ============================================================ */
+        code {
+            background: var(--code-inline-bg);
+            color: var(--code-inline-text);
+            padding: .16em .45em;
+            border-radius: 6px;
+            font-family: "JetBrains Mono", ui-monospace, Consolas, "Courier New", monospace;
+            font-size: .87em;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        pre {
+            position: relative;
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 2.4rem 1.35rem 1.25rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: "JetBrains Mono", ui-monospace, Consolas, "Courier New", monospace;
+            font-size: .87rem;
+            line-height: 1.65;
+            margin: 1.1rem 0;
+            border: 1px solid rgba(255,255,255,.06);
+            box-shadow: var(--shadow-md);
+        }
+
+        pre::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 0; left: 0;
+            padding: .28rem .85rem;
+            background: rgba(255,255,255,.06);
+            color: rgba(255,255,255,.75);
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            border-bottom-right-radius: 8px;
+            border-right: 1px solid rgba(255,255,255,.06);
+            border-bottom: 1px solid rgba(255,255,255,.06);
+            font-family: "Inter", sans-serif;
+        }
+
+        pre::after {
+            content: '';
+            position: absolute;
+            top: 14px; right: 14px;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+            box-shadow:
+                16px 0 0 #f59e0b,
+                32px 0 0 #10b981;
+            opacity: .8;
+        }
+        pre.has-copy::after { display: none; }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+            font-weight: 400;
+            word-break: normal;
+            border-radius: 0;
+        }
+
+        pre.diagram {
+            color: #a5b4fc;
+            font-size: .78rem;
+            line-height: 1.5;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: .65rem;
+            right: .65rem;
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .35rem .7rem;
+            font-size: .72rem;
+            font-weight: 600;
+            color: rgba(255,255,255,.85);
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.14);
+            border-radius: 7px;
+            cursor: pointer;
+            font-family: inherit;
+            opacity: 0;
+            transition: opacity .2s, background .2s, color .2s;
+            z-index: 2;
+        }
+        pre:hover .copy-btn,
+        .copy-btn:focus-visible { opacity: 1; }
+        .copy-btn:hover {
+            background: rgba(255,255,255,.18);
+            color: #fff;
+        }
+        .copy-btn.copied {
+            background: var(--success);
+            border-color: var(--success);
+            color: #fff;
+            opacity: 1;
+        }
+
+        /* ============================================================
+           TARJETAS DE TECNOLOGÍAS
+           ============================================================ */
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+            gap: 1rem;
+            margin: 1.4rem 0 1.5rem;
+        }
+
+        .tarjeta {
+            position: relative;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            padding: 1.2rem 1.2rem 1.2rem 1.15rem;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: transform .25s cubic-bezier(.2,.7,.3,1), box-shadow .25s, border-color .25s;
+        }
+        .tarjeta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--tarjeta-color, var(--primary));
+            opacity: .9;
+        }
+        .tarjeta--html { --tarjeta-color: var(--brand-html); }
+        .tarjeta--css  { --tarjeta-color: var(--brand-css); }
+        .tarjeta--js   { --tarjeta-color: var(--brand-js); }
+
+        .tarjeta:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--tarjeta-color);
+        }
+
+        .tarjeta__icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 11px;
+            background: var(--bg-elevated);
+            box-shadow: 0 2px 10px rgba(0,0,0,.06);
+        }
+        html.dark .tarjeta__icon { box-shadow: 0 2px 10px rgba(0,0,0,.5); }
+        .tarjeta__icon svg { width: 36px; height: 36px; display: block; }
+
+        .tarjeta__body h4 {
+            margin: .15rem 0 .35rem;
+            font-weight: 800;
+            font-size: 1.05rem;
+            letter-spacing: -.01em;
+        }
+        .tarjeta--html .tarjeta__body h4 { color: var(--brand-html); }
+        .tarjeta--css  .tarjeta__body h4 { color: var(--brand-css); }
+        .tarjeta--js   .tarjeta__body h4 { color: #a16207; }
+        html.dark .tarjeta--js .tarjeta__body h4 { color: var(--brand-js); }
+
+        .tarjeta__body p {
+            margin: 0;
+            font-size: .9rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        /* ============================================================
+           TABLAS
+           ============================================================ */
+        .tabla-contenedor {
+            overflow-x: auto;
+            margin: 1rem 0 1.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-xs);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .93rem;
+            min-width: 560px;
+            background: var(--bg-elevated);
+        }
+        caption {
+            caption-side: top;
+            text-align: left;
+            font-weight: 700;
+            color: var(--text-muted);
+            padding: .75rem 1.1rem;
+            font-size: .78rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            background: var(--bg-soft);
+            border-bottom: 1px solid var(--border);
+        }
+        th, td {
+            padding: .8rem 1.1rem;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-2);
+        }
+        thead th {
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            font-size: .86rem;
+            letter-spacing: .02em;
+            border-bottom-color: transparent;
+        }
+        tbody tr:last-child th,
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:nth-child(even) { background: var(--bg-soft); }
+        tbody tr { transition: background .15s; }
+        tbody tr:hover { background: var(--primary-soft); }
+        tbody th {
+            font-weight: 600;
+            color: var(--text);
+            background: transparent;
+        }
+
+        /* ============================================================
+           CALLOUTS
+           ============================================================ */
+        .callout {
+            display: flex;
+            gap: .85rem;
+            padding: .95rem 1.15rem;
+            border-radius: 12px;
+            margin: 1.3rem 0;
+            font-size: .94rem;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--primary);
+            color: var(--text-2);
+        }
+        .callout strong { color: var(--text); }
+        .callout__icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            color: var(--primary);
+            margin-top: .1rem;
+        }
+        .callout--tip {
+            border-left-color: var(--success);
+        }
+        .callout--tip .callout__icon { color: var(--success); }
+        .callout--warn {
+            border-left-color: var(--accent);
+        }
+        .callout--warn .callout__icon { color: var(--accent); }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .footer {
+            background: var(--code-bg);
+            color: #94a3b8;
+            padding: 3rem 1.5rem 2rem;
+            font-size: .9rem;
+            border-top: 1px solid rgba(255,255,255,.06);
+        }
+        .footer__inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+        .footer__brand h3 {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0 0 .6rem;
+            border: none;
+            padding: 0;
+        }
+        .footer__brand p {
+            margin: 0;
+            color: #94a3b8;
+            font-size: .88rem;
+            line-height: 1.6;
+        }
+        .footer__col h4 {
+            color: #e2e8f0;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin: 0 0 .9rem;
+        }
+        .footer__col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer__col li {
+            margin-bottom: .5rem;
+        }
+        .footer__col a {
+            color: #94a3b8;
+            font-size: .88rem;
+        }
+        .footer__col a:hover { color: #fff; }
+
+        .footer__bottom {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: #64748b;
+            font-size: .82rem;
+        }
+        .footer__bottom a { color: #93c5fd; }
+
+        /* ============================================================
+           BOTÓN VOLVER ARRIBA
+           ============================================================ */
+        .back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .28), 0 0 0 1px rgba(255,255,255,.1) inset;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(14px);
+            transition: opacity .3s, transform .3s, visibility .3s, background .2s;
+            z-index: 200;
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--primary-2); transform: translateY(-3px); }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 900px) {
+            .footer__inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            .footer__brand { grid-column: 1 / -1; }
+        }
+
+        @media (max-width: 700px) {
+            .hero { padding: 3.5rem 1rem 3rem; }
+            .hero__tech svg { opacity: .08; }
+            .hero__tech .t-html { width: 56px; }
+            .hero__tech .t-css  { width: 48px; }
+            .hero__tech .t-js   { width: 42px; }
+            .hero__tools { flex-direction: column; align-items: stretch; }
+            .search { width: 100%; max-width: none; min-width: 0; }
+            .theme-toggle { align-self: center; }
+            .section { padding: 1.5rem 1.2rem; border-radius: 16px; }
+            .section__header { gap: .8rem; margin-bottom: 1.4rem; }
+            .section__badge { width: 44px; height: 44px; font-size: .9rem; border-radius: 12px; }
+            .toc__inner { padding: .5rem .7rem; }
+            .toc__inner a { font-size: .8rem; padding: .35rem .75rem; }
+            .copy-btn { opacity: 1; }
+            .search__kbd { display: none; }
+            .content { padding: 2rem 1rem 4rem; }
+            pre { padding: 2.2rem 1rem 1rem; }
+            .footer__inner { grid-template-columns: 1fr; gap: 1.5rem; }
+        }
+
+        /* ============================================================
+           IMPRESIÓN
+           ============================================================ */
+        @media print {
+            .toc, .back-to-top, .progress, .hero__tools, .copy-btn,
+            .hero__tech, .skip-link { display: none !important; }
+            body { background: #fff !important; color: #000 !important; }
+            .hero { background: #fff !important; color: #000 !important; padding: 2rem 1rem; }
+            .hero__title { color: #000 !important; background: none !important; -webkit-text-fill-color: #000 !important; }
+            .hero__subtitle, .hero__badge, .hero__stats { color: #333 !important; }
+            .hero::before, .hero::after { display: none; }
+            .section { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+            pre { background: #f5f5f5 !important; color: #000 !important; border: 1px solid #ddd; }
+            pre::before, pre::after { display: none; }
+            mark.highlight { background: #fde047; color: #000; box-shadow: none; }
+            .footer { background: #f5f5f5; color: #000; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .001ms !important;
+                transition-duration: .001ms !important;
+                scroll-behavior: auto !important;
+            }
+            .hero__tech svg { animation: none; }
+        }
+
+        /* ============================================================
+           CAPÍTULO 8 · PRÁCTICA (simulador, minijuegos y herramientas)
+           ============================================================ */
+        .section__badge--accent {
+            background: linear-gradient(135deg, #F16529 0%, #E34F26 100%);
+            box-shadow: 0 8px 20px rgba(227, 79, 38, .30);
+        }
+        /* Punto 1 en negro (el resto, naranja HTML) */
+        #tema1 .section__badge {
+            background: linear-gradient(135deg, #2b2b2b 0%, #000 100%);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .35);
+        }
+        html.dark #tema1 .section__badge {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, .22), 0 8px 20px rgba(0, 0, 0, .6);
+        }
+
+        .lab__intro { margin-bottom: 1.25rem; }
+
+        /* Panel de progreso global */
+        .lab__stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: .75rem;
+            margin: 0 0 1.5rem;
+        }
+        .kpi {
+            padding: .9rem 1rem;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        .kpi__label {
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .kpi__value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -.02em;
+            color: var(--text);
+            line-height: 1.2;
+            margin-top: .15rem;
+        }
+        .kpi__bar {
+            height: 6px;
+            border-radius: 999px;
+            background: var(--border);
+            margin-top: .5rem;
+            overflow: hidden;
+        }
+        .kpi__bar > span {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--primary-3), var(--success));
+            transition: width .4s ease;
+        }
+
+        /* Pestañas de modos */
+        .lab__tabs {
+            display: flex;
+            gap: .4rem;
+            flex-wrap: wrap;
+            margin: 0 0 1.25rem;
+            padding: .4rem;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+        .lab__tab {
+            flex: 1 1 auto;
+            padding: .55rem .9rem;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            background: transparent;
+            color: var(--text-muted);
+            font: inherit;
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background .18s, color .18s, box-shadow .18s;
+        }
+        .lab__tab:hover { background: var(--bg-hover); color: var(--text); }
+        .lab__tab[aria-selected="true"] {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 14px var(--primary-soft);
+        }
+        .lab__panel[hidden] { display: none; }
+        .lab__panel { animation: fadeUp .35s ease both; }
+
+        /* Botones */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .4rem;
+            padding: .6rem 1.1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-2);
+            background: var(--bg-elevated);
+            color: var(--text);
+            font: inherit;
+            font-size: .9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform .15s, background .18s, border-color .18s, box-shadow .18s;
+        }
+        .btn:hover { background: var(--bg-hover); transform: translateY(-1px); }
+        .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+        .btn--primary {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 14px var(--primary-soft);
+        }
+        .btn--primary:hover { background: var(--primary-2); }
+        .btn--ghost { background: transparent; }
+        .btn--row { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+
+        /* Tarjeta de juego */
+        .game {
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.4rem;
+        }
+        .game__top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: .75rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            font-size: .85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .25rem .7rem;
+            border-radius: 999px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--text-2);
+        }
+        .chip--hot { color: #ea580c; border-color: rgba(234, 88, 12, .4); }
+        .chip--time { font-variant-numeric: tabular-nums; }
+        .chip--time.low { color: var(--danger); border-color: var(--danger); }
+
+        .game__prompt {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0 0 1rem;
+            line-height: 1.5;
+        }
+        .game__prompt small {
+            display: block;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: .3rem;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: .6rem;
+        }
+        .option {
+            padding: .8rem 1rem;
+            text-align: left;
+            background: var(--bg-elevated);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-family: "JetBrains Mono", ui-monospace, Consolas, monospace;
+            font-size: .9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform .15s, border-color .18s, background .18s;
+        }
+        .option--text { font-family: inherit; font-size: .92rem; }
+        .option:hover:not(:disabled) { border-color: var(--primary); transform: translateY(-2px); }
+        .option:disabled { cursor: default; }
+        .option.ok  { border-color: var(--success); background: rgba(16, 185, 129, .14); }
+        .option.bad { border-color: var(--danger);  background: rgba(239, 68, 68, .12); animation: shake .35s; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .answer-row { display: flex; gap: .6rem; flex-wrap: wrap; }
+        .answer-input {
+            flex: 1 1 220px;
+            padding: .75rem 1rem;
+            border-radius: 12px;
+            border: 1.5px solid var(--border-2);
+            background: var(--bg-elevated);
+            color: var(--text);
+            font-family: "JetBrains Mono", ui-monospace, Consolas, monospace;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color .18s, box-shadow .18s;
+        }
+        .answer-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+        .answer-input.ok  { border-color: var(--success); }
+        .answer-input.bad { border-color: var(--danger); }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: .8rem 1rem;
+            border-radius: 10px;
+            font-size: .92rem;
+            border: 1px solid var(--border);
+            background: var(--bg-elevated);
+            color: var(--text-2);
+            min-height: 1rem;
+        }
+        .feedback:empty { display: none; }
+        .feedback.ok  { border-color: var(--success); background: rgba(16, 185, 129, .1); }
+        .feedback.bad { border-color: var(--danger);  background: rgba(239, 68, 68, .08); }
+
+        .result {
+            text-align: center;
+            padding: 1.5rem 1rem;
+        }
+        .result__score {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: -.04em;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+        }
+        .result__msg { margin: .5rem 0 1rem; color: var(--text-2); }
+        .review-list {
+            text-align: left;
+            margin: 1rem 0 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: .5rem;
+        }
+        .review-list li {
+            padding: .6rem .9rem;
+            border-radius: 10px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            font-size: .88rem;
+            color: var(--text-2);
+        }
+
+        /* Flashcards */
+        .flash-wrap { perspective: 1200px; }
+        .flash {
+            position: relative;
+            width: 100%;
+            min-height: 230px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform .55s cubic-bezier(.2, .7, .3, 1);
+            border: none;
+            background: none;
+            padding: 0;
+            font: inherit;
+            color: inherit;
+        }
+        .flash.flipped { transform: rotateY(180deg); }
+        .flash__face {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 16px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-2);
+            box-shadow: var(--shadow-md);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .flash__face--back {
+            transform: rotateY(180deg);
+            background: linear-gradient(160deg, var(--bg-elevated), var(--primary-soft));
+        }
+        .flash__label {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .flash__big {
+            font-family: "JetBrains Mono", ui-monospace, Consolas, monospace;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--primary);
+            word-break: break-word;
+        }
+        .flash__text { font-size: 1.02rem; color: var(--text); max-width: 520px; }
+        .flash__hint { font-size: .78rem; color: var(--text-soft); }
+
+        .leitner {
+            display: flex;
+            gap: .5rem;
+            margin: 1rem 0 0;
+            flex-wrap: wrap;
+        }
+        .leitner .chip strong { color: var(--text); }
+
+        /* Detector de errores de código */
+        .code-lines {
+            margin: .75rem 0 0;
+            padding: 2.2rem 0 .6rem;
+            background: var(--code-bg);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, .06);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow-x: auto;
+        }
+        .code-lines::before {
+            content: 'html';
+            position: absolute;
+            top: 0; left: 0;
+            padding: .28rem .85rem;
+            background: rgba(255, 255, 255, .06);
+            color: rgba(255, 255, 255, .75);
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            border-bottom-right-radius: 8px;
+            font-family: "Inter", sans-serif;
+        }
+        .code-line {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            padding: .22rem 1.1rem;
+            background: transparent;
+            border: none;
+            border-left: 3px solid transparent;
+            color: var(--code-text);
+            font-family: "JetBrains Mono", ui-monospace, Consolas, monospace;
+            font-size: .87rem;
+            text-align: left;
+            cursor: pointer;
+            white-space: pre;
+            transition: background .15s, border-color .15s;
+        }
+        .code-line:hover:not(:disabled) { background: rgba(96, 165, 250, .15); border-left-color: var(--primary-3); }
+        .code-line:disabled { cursor: default; }
+        .code-line .ln { color: rgba(255, 255, 255, .35); min-width: 1.4rem; text-align: right; user-select: none; }
+        .code-line.ok  { background: rgba(16, 185, 129, .22); border-left-color: var(--success); }
+        .code-line.bad { background: rgba(239, 68, 68, .22);  border-left-color: var(--danger); }
+
+        /* Ordenar esqueleto (drag & drop + botones) */
+        .sortlist {
+            list-style: none;
+            margin: .5rem 0 0;
+            padding: 0;
+            display: grid;
+            gap: .4rem;
+        }
+        .sortitem {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .55rem .7rem;
+            background: var(--code-bg);
+            color: var(--code-text);
+            border: 1.5px solid rgba(255, 255, 255, .08);
+            border-radius: 10px;
+            font-family: "JetBrains Mono", ui-monospace, Consolas, monospace;
+            font-size: .85rem;
+            cursor: grab;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .sortitem.dragging { opacity: .45; }
+        .sortitem.over { border-color: var(--primary-3); }
+        .sortitem.ok  { border-color: var(--success); }
+        .sortitem.bad { border-color: var(--danger); }
+        .sortitem__grip { color: rgba(255, 255, 255, .4); user-select: none; }
+        .sortitem__txt { flex: 1; }
+        .sortitem__btns { display: flex; gap: .25rem; }
+        .mini {
+            width: 28px; height: 28px;
+            border-radius: 7px;
+            border: 1px solid rgba(255, 255, 255, .18);
+            background: rgba(255, 255, 255, .07);
+            color: #fff;
+            cursor: pointer;
+            font-size: .8rem;
+            line-height: 1;
+        }
+        .mini:hover { background: rgba(255, 255, 255, .2); }
+
+        /* Relacionar columnas */
+        .match {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .6rem 1.5rem;
+        }
+        .match__col { display: grid; gap: .5rem; align-content: start; }
+        .match__item {
+            padding: .7rem .9rem;
+            background: var(--bg-elevated);
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: .88rem;
+            text-align: left;
+            cursor: pointer;
+            font-family: inherit;
+            transition: border-color .18s, background .18s, transform .15s;
+        }
+        .match__item--tag { font-family: "JetBrains Mono", ui-monospace, Consolas, monospace; }
+        .match__item:hover:not(:disabled) { border-color: var(--primary); }
+        .match__item.sel { border-color: var(--primary); background: var(--primary-soft); transform: scale(1.02); }
+        .match__item.done { border-color: var(--success); background: rgba(16, 185, 129, .13); opacity: .75; cursor: default; }
+        .match__item.bad { border-color: var(--danger); animation: shake .35s; }
+
+        /* Playground */
+        .play {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .play__editor, .play__preview {
+            min-height: 260px;
+            border-radius: 12px;
+            border: 1px solid var(--border-2);
+            width: 100%;
+        }
+        .play__editor {
+            padding: 1rem;
+            background: var(--code-bg);
+            color: var(--code-text);
+            font-family: "JetBrains Mono", ui-monospace, Consolas, monospace;
+            font-size: .85rem;
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+            tab-size: 2;
+        }
+        .play__editor:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+        .play__preview { background: #fff; }
+        .play__task {
+            padding: .8rem 1rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            background: var(--primary-soft);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: .93rem;
+        }
+        .checklist { list-style: none; margin: .75rem 0 0; padding: 0; display: grid; gap: .3rem; font-size: .88rem; }
+        .checklist li { color: var(--text-muted); }
+        .checklist li.ok { color: var(--success); font-weight: 600; }
+        .checklist li::before { content: '○ '; }
+        .checklist li.ok::before { content: '✓ '; }
+
+        /* Glosario */
+        .gloss-search {
+            width: 100%;
+            padding: .7rem 1rem;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            border: 1.5px solid var(--border-2);
+            background: var(--bg-elevated);
+            color: var(--text);
+            font: inherit;
+            outline: none;
+        }
+        .gloss-search:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+        .gloss-filters { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .gloss-filters .chip { cursor: pointer; font-family: inherit; }
+        .gloss-filters .chip[aria-pressed="true"] { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .gloss-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .7rem; }
+        .gloss-item {
+            padding: .85rem 1rem;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        .gloss-item code { font-weight: 700; }
+        .gloss-item p { margin: .35rem 0 0; font-size: .86rem; color: var(--text-muted); line-height: 1.5; }
+        .gloss-item small { font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-soft); }
+
+        /* Marcar capítulos como leídos */
+        .read-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            margin: 1.4rem 0 0;
+            padding: .45rem .9rem;
+            border-radius: 999px;
+            border: 1px solid var(--border-2);
+            background: var(--bg-soft);
+            color: var(--text-muted);
+            font: inherit;
+            font-size: .82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .18s, color .18s, border-color .18s;
+        }
+        .read-toggle:hover { background: var(--bg-hover); color: var(--text); }
+        .read-toggle[aria-pressed="true"] { background: rgba(16, 185, 129, .14); border-color: var(--success); color: var(--success); }
+        .toc__inner a.is-read::after { content: ' ✓'; color: var(--success); font-weight: 800; }
+        .toc__inner a.active.is-read::after { color: #fff; }
+
+        /* Notas personales */
+        .note {
+            margin-top: 1rem;
+            width: 100%;
+            min-height: 70px;
+            padding: .7rem .9rem;
+            border-radius: 10px;
+            border: 1px dashed var(--border-2);
+            background: var(--bg-soft);
+            color: var(--text);
+            font: inherit;
+            font-size: .88rem;
+            resize: vertical;
+            outline: none;
+        }
+        .note:focus { border-style: solid; border-color: var(--primary); }
+
+        @media (max-width: 700px) {
+            .play { grid-template-columns: 1fr; }
+            .match { grid-template-columns: 1fr; }
+            .lab__tab { flex: 1 1 45%; }
+            .game { padding: 1rem; }
+        }
+        @media print {
+            #tema8, .read-toggle, .note { display: none !important; }
+        }
+
+        /* ============================================================
+           XP · NIVELES · INSIGNIAS
+           ============================================================ */
+        .xp {
+            margin: 0 0 1.25rem;
+            padding: 1.1rem 1.2rem;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+        .xp__head { display: flex; align-items: center; gap: 1rem; }
+        .xp__lvl {
+            flex-shrink: 0; width: 58px; height: 58px; border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: 800; color: #fff;
+            background: linear-gradient(135deg, #F16529 0%, #E34F26 100%);
+            box-shadow: 0 8px 20px rgba(227, 79, 38, .30);
+        }
+        .xp__info { flex: 1; min-width: 0; }
+        .xp__title { font-weight: 800; color: var(--text); font-size: 1.05rem; letter-spacing: -.01em; }
+        .xp__sub { font-size: .82rem; color: var(--text-muted); margin: .1rem 0 .5rem; }
+        .xp__bar { height: 10px; border-radius: 999px; background: var(--border); overflow: hidden; }
+        .xp__bar > span {
+            display: block; height: 100%;
+            background: linear-gradient(90deg, #F16529, #E34F26);
+            border-radius: inherit;
+        }
+        .xp__badges {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+            gap: .6rem; margin-top: 1rem;
+        }
+        .xp__badge {
+            display: flex; flex-direction: column; align-items: center; text-align: center; gap: .15rem;
+            padding: .65rem .4rem; border-radius: 12px;
+            background: var(--bg-elevated); border: 1px dashed var(--border-2);
+            opacity: .55; filter: grayscale(1);
+        }
+        .xp__badge.on {
+            opacity: 1; filter: none; border-style: solid;
+            border-color: rgba(227, 79, 38, .55);
+            box-shadow: 0 4px 14px rgba(227, 79, 38, .14);
+        }
+        .xp__ico { font-size: 1.6rem; line-height: 1.2; }
+        .xp__bn { font-size: .74rem; font-weight: 700; color: var(--text); line-height: 1.2; }
+        .xp__bl { font-size: .68rem; font-weight: 700; color: var(--text-muted); letter-spacing: .06em; text-transform: uppercase; }
+        .xp__rules { margin-top: .9rem; font-size: .86rem; color: var(--text-2); }
+        .xp__rules summary { cursor: pointer; font-weight: 700; color: var(--text); }
+        .xp__rules ul { margin: .5rem 0 0; padding-left: 1.2rem; }
+        .xp__rules li { margin: .2rem 0; }
+
+        .xp-tag {
+            display: inline-block; margin-left: .35rem; padding: .05rem .5rem;
+            border-radius: 999px; font-size: .78rem; font-weight: 800; color: #fff;
+            background: linear-gradient(135deg, #F16529, #E34F26); white-space: nowrap;
+        }
+
+        /* HUD fijo + "+XP" flotante */
+        .xp-hud {
+            position: fixed; left: 1rem; bottom: 1rem; z-index: 200;
+            display: flex; align-items: center; gap: .55rem;
+            padding: .35rem .8rem .35rem .4rem;
+            background: var(--bg-elevated); color: var(--text);
+            border: 1px solid var(--border-2); border-radius: 999px;
+            box-shadow: var(--shadow-md); cursor: pointer; font-family: inherit;
+        }
+        .xp-hud__lvl {
+            width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: .9rem; color: #fff;
+            background: linear-gradient(135deg, #F16529, #E34F26);
+        }
+        .xp-hud__txt { display: flex; flex-direction: column; line-height: 1.15; text-align: left; }
+        .xp-hud__txt b { font-size: .78rem; }
+        .xp-hud__txt small { font-size: .7rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+        .xp-hud__bar { width: 54px; height: 6px; border-radius: 999px; background: var(--border); overflow: hidden; }
+        .xp-hud__bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #F16529, #E34F26); transition: width .5s ease; }
+        .xp-float { position: fixed; left: 1.2rem; bottom: 4.4rem; z-index: 201; pointer-events: none; }
+        .xp-float span {
+            display: block; padding: .25rem .7rem; border-radius: 999px;
+            font-weight: 800; font-size: .9rem; color: #fff;
+            background: linear-gradient(135deg, #F16529, #E34F26);
+            box-shadow: 0 6px 18px rgba(227, 79, 38, .4);
+            animation: xpRise 1.5s ease-out forwards;
+        }
+        @keyframes xpRise {
+            0%   { opacity: 0; transform: translateY(10px) scale(.9); }
+            15%  { opacity: 1; transform: translateY(0) scale(1.05); }
+            80%  { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-34px); }
+        }
+
+        /* Aviso de subida de nivel */
+        .xp-levelup {
+            position: fixed; top: 1.2rem; left: 50%; z-index: 3000;
+            width: min(92vw, 380px); transform: translateX(-50%);
+            padding: 1.1rem 1.2rem; text-align: center; cursor: pointer;
+            background: var(--bg-elevated); color: var(--text);
+            border: 2px solid #E34F26; border-radius: 18px;
+            box-shadow: 0 0 0 6px rgba(227, 79, 38, .15), var(--shadow-lg);
+            animation: lvlPop .5s cubic-bezier(.2, 1.4, .4, 1) both;
+        }
+        .xp-levelup.is-out { opacity: 0; transform: translate(-50%, -14px); transition: opacity .4s, transform .4s; }
+        .xp-levelup__ico { font-size: 2.6rem; line-height: 1.1; }
+        .xp-levelup__t { font-size: 1.25rem; font-weight: 800; margin: .2rem 0; color: #E34F26; }
+        .xp-levelup__s { font-size: .9rem; color: var(--text-2); }
+        @keyframes lvlPop { from { opacity: 0; transform: translate(-50%, -24px) scale(.85); } to { opacity: 1; transform: translate(-50%, 0) scale(1); } }
+        @media (max-width: 640px) { .xp-hud__bar { display: none; } .xp__badges { grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); } }
+        @media print { .xp-hud, .xp-float, .xp-levelup { display: none !important; } }
+        @media (prefers-reduced-motion: reduce) { .xp-float span, .xp-levelup { animation-duration: .01s; } }
+
+        /* ============================================================
+           ACENTOS POR TEMA · tema 1 en negro (blanco en oscuro), del 2 en adelante naranja HTML
+           (afecta a la barra junto a los títulos, las viñetas, el código en línea, enlaces, avisos…)
+           ============================================================ */
+        .section {
+            --primary: #E34F26;
+            --primary-2: #C73F1A;
+            --primary-3: #F16529;
+            --primary-soft: rgba(227, 79, 38, .12);
+            --code-inline-bg: #FFF1EC;
+            --code-inline-text: #B93815;
+        }
+        html.dark .section {
+            --primary: #F16529;
+            --primary-2: #E34F26;
+            --primary-3: #FF8A5C;
+            --primary-soft: rgba(241, 101, 41, .16);
+            --code-inline-bg: rgba(227, 79, 38, .18);
+            --code-inline-text: #FFB59B;
+        }
+        #tema1 {
+            --primary: #000;
+            --primary-2: #222;
+            --primary-3: #555;
+            --primary-soft: rgba(0, 0, 0, .07);
+            --code-inline-bg: #ECEFF3;
+            --code-inline-text: #111;
+        }
+        html.dark #tema1 {
+            --primary: #fff;
+            --primary-2: #E5E7EB;
+            --primary-3: #CBD5E1;
+            --primary-soft: rgba(255, 255, 255, .10);
+            --code-inline-bg: rgba(255, 255, 255, .12);
+            --code-inline-text: #fff;
+        }
+        html.dark #tema1 thead th { color: #000; }
+    .home-link{display:block;width:fit-content;margin:0 auto 1rem;padding:.35rem .85rem;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:rgba(255,255,255,.14);color:#fff;font:600 .85rem/1.2 inherit;text-decoration:none}.home-link:hover,.home-link:focus-visible{background:rgba(255,255,255,.28);outline:2px solid #fff;outline-offset:2px}@media print{.home-link{display:none}}
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><div class="progress__bar" id="progressBar"></div></div>
+
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+
+    <!-- ================= HERO ================= -->
+    <header class="hero" id="inicio">
+
+        <div class="hero__tech" aria-hidden="true">
+            <svg class="t-html" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 4h44l-4 47-18 8-18-8z" fill="#E34F26"/>
+                <path d="M32 8v48l14-6 3-42z" fill="#F16529"/>
+                <text x="32" y="45" font-family="sans-serif" font-size="26" font-weight="900" fill="#fff" text-anchor="middle">5</text>
+            </svg>
+            <svg class="t-css" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 4h44l-4 47-18 8-18-8z" fill="#1572B6"/>
+                <path d="M32 8v48l14-6 3-42z" fill="#2965F1"/>
+                <text x="32" y="45" font-family="sans-serif" font-size="26" font-weight="900" fill="#fff" text-anchor="middle">3</text>
+            </svg>
+            <svg class="t-js" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="56" height="56" rx="8" fill="#F7DF1E"/>
+                <text x="32" y="44" font-family="sans-serif" font-size="22" font-weight="900" fill="#323330" text-anchor="middle">JS</text>
+            </svg>
+        </div>
+
+        <div class="hero__content">
+            <a class="home-link" href="index.html">← Inicio</a>
+    <span class="hero__badge">
+                <span class="hero__badge-dot" aria-hidden="true"></span>
+                Compendio · Guía completa
+            </span>
+
+            <h1 class="hero__title">Introducción al Lenguaje de Marcas y HTML</h1>
+            <p class="hero__subtitle">Guía de referencia sobre estructura, etiquetas, formularios y buenas prácticas del desarrollo web moderno.</p>
+
+            <div class="hero__stats">
+                <span class="stat">
+                    <span class="stat__icon" aria-hidden="true">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    </span>
+                    <strong>8</strong> capítulos
+                </span>
+                <span class="stat">
+                    <span class="stat__icon" aria-hidden="true">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </span>
+                    <strong>60+</strong> conceptos
+                </span>
+                <span class="stat">
+                    <span class="stat__icon" aria-hidden="true">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </span>
+                    <strong>~15</strong> min lectura
+                </span>
+            </div>
+
+            <div class="hero__tools">
+                <label class="search">
+                    <svg class="search__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="search" id="searchInput" placeholder="Buscar y resaltar en el texto…" aria-label="Buscar contenido" autocomplete="off">
+                    <kbd class="search__kbd" aria-hidden="true">⌘ K</kbd>
+                </label>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">
+                    <svg class="icon-sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                    </svg>
+                    <svg class="icon-moon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <p class="hero__status" id="searchStatus" aria-live="polite"></p>
+        </div>
+    </header>
+
+    <!-- ================= TOC ================= -->
+    <nav class="toc" aria-label="Índice de contenidos">
+        <div class="toc__inner" id="toc">
+            <a href="#tema1" data-section="tema1">1. Lenguaje de Marcas</a>
+            <a href="#tema2" data-section="tema2">2. Estructura</a>
+            <a href="#tema3" data-section="tema3">3. Texto y Formateo</a>
+            <a href="#tema4" data-section="tema4">4. Semántica</a>
+            <a href="#tema5" data-section="tema5">5. Listas y Enlaces</a>
+            <a href="#tema6" data-section="tema6">6. Multimedia y Tablas</a>
+            <a href="#tema7" data-section="tema7">7. Formularios</a>
+            <a href="#tema8" data-section="tema8">8. Práctica</a>
+        </div>
+    </nav>
+
+    <!-- ================= CONTENIDO ================= -->
+    <main class="content" id="main">
+
+        <!-- ---------- TEMA 1 ---------- -->
+        <article class="section" id="tema1">
+            <header class="section__header">
+                <span class="section__badge" aria-hidden="true">01</span>
+                <h2 class="section__title">Introducción al Lenguaje de Marcas y Desarrollo Web</h2>
+            </header>
+
+            <p>
+                Un <strong>lenguaje de marcas</strong> es un sistema de codificación que combina texto con etiquetas o anotaciones para definir la estructura, la presentación o la información de un documento. A diferencia de los lenguajes de programación tradicionales, los documentos estructurados en HTML no son compilados, sino que son interpretados directamente por los navegadores web en cualquier sistema operativo.
+            </p>
+
+            <p>El desarrollo web se sustenta sobre tres tecnologías fundamentales:</p>
+
+            <div class="tarjetas">
+                <div class="tarjeta tarjeta--html">
+                    <div class="tarjeta__icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 4h44l-4 47-18 8-18-8z" fill="#E34F26"/>
+                            <path d="M32 8v48l14-6 3-42z" fill="#F16529"/>
+                            <text x="32" y="45" font-family="sans-serif" font-size="26" font-weight="900" fill="#fff" text-anchor="middle">5</text>
+                        </svg>
+                    </div>
+                    <div class="tarjeta__body">
+                        <h4>HTML</h4>
+                        <p><em>HyperText Markup Language</em>. Es el esqueleto del sitio web: aporta la estructura lógica del contenido y los cimientos sobre los que se construye la web.</p>
+                    </div>
+                </div>
+
+                <div class="tarjeta tarjeta--css">
+                    <div class="tarjeta__icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 4h44l-4 47-18 8-18-8z" fill="#1572B6"/>
+                            <path d="M32 8v48l14-6 3-42z" fill="#2965F1"/>
+                            <text x="32" y="45" font-family="sans-serif" font-size="26" font-weight="900" fill="#fff" text-anchor="middle">3</text>
+                        </svg>
+                    </div>
+                    <div class="tarjeta__body">
+                        <h4>CSS</h4>
+                        <p><em>Cascading Style Sheets</em>. Representa la apariencia visual o «piel»: aplica estilos y adapta la maqueta a diferentes pantallas (<em>responsive</em>).</p>
+                    </div>
+                </div>
+
+                <div class="tarjeta tarjeta--js">
+                    <div class="tarjeta__icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="4" width="56" height="56" rx="8" fill="#F7DF1E"/>
+                            <text x="32" y="44" font-family="sans-serif" font-size="22" font-weight="900" fill="#323330" text-anchor="middle">JS</text>
+                        </svg>
+                    </div>
+                    <div class="tarjeta__body">
+                        <h4>JavaScript</h4>
+                        <p>Es el «cerebro»: aporta interactividad y dinamismo mediante código ejecutado en el navegador o en el servidor con Node.js.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Tipos de páginas web y perfiles profesionales</h3>
+            <p>
+                Las páginas web pueden ser <strong>estáticas</strong> (archivos HTML, CSS y JS fijos que muestran siempre el mismo contenido sin base de datos) o <strong>dinámicas</strong> (disponen de motores de base de datos, lógica de servidor y sesiones de usuario únicas).
+            </p>
+            <p>
+                El conocimiento profundo de HTML es indispensable para múltiples perfiles profesionales del sector digital, como maquetadores, desarrolladores <em>Frontend</em>, <em>Backend</em> y <em>FullStack</em>, así como para especialistas en SEO, analistas web, diseñadores UI/UX y expertos en accesibilidad.
+            </p>
+        </article>
+
+        <!-- ---------- TEMA 2 ---------- -->
+        <article class="section" id="tema2">
+            <header class="section__header">
+                <span class="section__badge" aria-hidden="true">02</span>
+                <h2 class="section__title">Estructura Básica y Metadatos de un Documento HTML</h2>
+            </header>
+
+            <h3>Esqueleto estándar HTML5</h3>
+            <p>
+                Todo documento web debe cumplir con las reglas sintácticas del lenguaje: anidamiento correcto de elementos, cierre de etiquetas y estructuración del documento. El esqueleto fundamental es:
+            </p>
+
+<pre data-lang="html"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Mi primera página web&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Aquí se incluye el contenido visible --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+            <ul class="lista">
+                <li><code>&lt;!DOCTYPE html&gt;</code>: declaración obligatoria en la primera línea que especifica el estándar HTML5 y evita el modo no estándar del navegador.</li>
+                <li><code>&lt;html&gt;</code>: elemento raíz que delimita todo el documento y establece el idioma mediante el atributo <code>lang</code>.</li>
+                <li><code>&lt;head&gt;</code>: cabecera técnica con metadatos e información interna no visible en pantalla.</li>
+                <li><code>&lt;body&gt;</code>: cuerpo del documento que alberga todos los elementos visibles (texto, imágenes, tablas).</li>
+            </ul>
+
+            <h3>Metadatos clave en <code>&lt;head&gt;</code></h3>
+            <p>Dentro de la etiqueta <code>&lt;head&gt;</code> se configuran parámetros críticos para buscadores y navegadores:</p>
+            <ul class="lista">
+                <li><code>&lt;title&gt;</code>: define el título que aparece en la pestaña del navegador y es decisivo para la indexación en motores de búsqueda (SEO).</li>
+                <li><code>&lt;meta charset="UTF-8"&gt;</code>: establece la tabla de codificación universal para representar correctamente tildes y caracteres especiales.</li>
+                <li><code>&lt;meta name="viewport"&gt;</code>: ajusta escala y dimensiones para garantizar la adaptabilidad en dispositivos móviles.</li>
+                <li><strong>Etiquetas adicionales:</strong> permiten indicar descripciones (<code>description</code>), palabras clave (<code>keywords</code>), autoría (<code>author</code>), icono de pestaña (<code>&lt;link rel="icon"&gt;</code>) y color de la interfaz móvil (<code>theme-color</code>).</li>
+                <li><strong>HTML5 Boilerplate:</strong> plantilla de inicio estándar recomendada para estructurar carpetas de proyecto y organizar recursos (<em>assets</em>) como imágenes, archivos CSS y scripts JS.</li>
+            </ul>
+        </article>
+
+        <!-- ---------- TEMA 3 ---------- -->
+        <article class="section" id="tema3">
+            <header class="section__header">
+                <span class="section__badge" aria-hidden="true">03</span>
+                <h2 class="section__title">Etiquetas de Texto, Formateo y Espaciado</h2>
+            </header>
+
+            <h3>Jerarquía de encabezados <code>&lt;hx&gt;</code></h3>
+            <p>
+                Las etiquetas de encabezado van desde <code>&lt;h1&gt;</code> hasta <code>&lt;h6&gt;</code> y establecen el nivel de importancia jerárquica del contenido:
+            </p>
+            <ul class="lista">
+                <li><code>&lt;h1&gt;</code>: título principal del documento, el texto más relevante. Debe incluirse únicamente uno por página para optimización SEO.</li>
+                <li><code>&lt;h2&gt;</code> a <code>&lt;h6&gt;</code>: estructuran temas, secciones, apartados y subapartados de forma lógica sin saltarse niveles de la jerarquía.</li>
+            </ul>
+
+            <h3>Formateo de texto y citas</h3>
+            <p>El marcado textual ofrece distintas etiquetas semánticas y de estilo:</p>
+            <ul class="lista">
+                <li><strong>Párrafos (<code>&lt;p&gt;</code>):</strong> elementos de bloque que delimitan fragmentos de texto agregando márgenes superiores e inferiores por defecto.</li>
+                <li><strong>Énfasis:</strong> <code>&lt;strong&gt;</code> para denotar importancia o peso semántico (negrita) y <code>&lt;em&gt;</code> para énfasis tónico (cursiva).</li>
+                <li><strong>Estilos tradicionales:</strong> <code>&lt;b&gt;</code> (negrita), <code>&lt;i&gt;</code> (cursiva), <code>&lt;tt&gt;</code> (mecanografía), <code>&lt;sup&gt;</code> (superíndice), <code>&lt;sub&gt;</code> (subíndice), <code>&lt;big&gt;</code> e <code>&lt;small&gt;</code>.</li>
+                <li><strong>Bloques de código y citas:</strong> <code>&lt;blockquote&gt;</code> para citas textuales en bloque, <code>&lt;cite&gt;</code> para referenciar obras creativas y <code>&lt;code&gt;</code> para presentar código con tipografía monoespaciada.</li>
+            </ul>
+
+            <h3>Manejo de espacios en blanco</h3>
+            <p>
+                HTML comprime automáticamente múltiples espacios consecutivos o saltos de línea del código en un solo espacio. Para controlar el flujo se utilizan:
+            </p>
+            <ul class="lista">
+                <li><code>&lt;br /&gt;</code>: etiqueta vacía para forzar un salto de línea manual.</li>
+                <li><code>&lt;wbr /&gt;</code>: oportunidad de salto de línea opcional dentro de palabras extensas.</li>
+                <li><code>&lt;pre&gt;</code>: bloque preformateado que respeta los espacios en blanco e indentaciones originales del código.</li>
+            </ul>
+        </article>
+
+        <!-- ---------- TEMA 4 ---------- -->
+        <article class="section" id="tema4">
+            <header class="section__header">
+                <span class="section__badge" aria-hidden="true">04</span>
+                <h2 class="section__title">Etiquetas Semánticas de Estructura y Agrupación</h2>
+            </header>
+
+            <h3>Uso de etiquetas semánticas en HTML5</h3>
+            <p>
+                En versiones anteriores se abusaba del uso genérico de la etiqueta <code>&lt;div&gt;</code> («divitis»). HTML5 introdujo etiquetas semánticas que aportan significado estructural, mejorando notablemente el SEO y la accesibilidad para lectores de pantalla y bots de búsqueda.
+            </p>
+
+<pre data-lang="layout" class="diagram"><code>+-------------------------------------------------------+
+|                       &lt;header&gt;                        |
+|                         &lt;nav&gt;                         |
++-------------------------------------------------------+
+|           &lt;main&gt;            |         &lt;aside&gt;         |
+|  &lt;section&gt;     &lt;article&gt;    |                         |
++-----------------------------+-------------------------+
+|                       &lt;footer&gt;                        |
++-------------------------------------------------------+</code></pre>
+
+            <ul class="lista">
+                <li><code>&lt;header&gt;</code>: cabecera superior que suele contener el logotipo y elementos comunes de presentación.</li>
+                <li><code>&lt;nav&gt;</code>: sección que engloba el menú o enlaces principales de navegación del sitio web.</li>
+                <li><code>&lt;main&gt;</code>: contenedor del contenido principal y único del documento web.</li>
+                <li><code>&lt;section&gt;</code>: agrupa contenidos temáticos relacionados que habitualmente llevan su propio encabezado.</li>
+                <li><code>&lt;article&gt;</code>: representa una entidad de contenido independiente y autónoma (entradas de blog, noticias, productos).</li>
+                <li><code>&lt;aside&gt;</code>: alberga información secundaria, bloques laterales, enlaces relacionados o publicidad.</li>
+                <li><code>&lt;footer&gt;</code>: pie de página destinado a avisos legales, datos de copyright y navegación secundaria.</li>
+            </ul>
+
+            <h3>Elementos de agrupación genéricos y líneas separadoras</h3>
+            <ul class="lista">
+                <li><code>&lt;div&gt;</code>: etiqueta de bloque genérica utilizada para agrupar elementos visuales sin aportar valor semántico directo.</li>
+                <li><code>&lt;span&gt;</code>: etiqueta de línea genérica empleada para aislar fragmentos de texto e identificar partes a las que aplicar estilos CSS o interactividad JS sin alterar el flujo.</li>
+                <li><strong>Regla de contenido:</strong> una etiqueta de línea puede contener otras etiquetas de línea, pero <strong>nunca</strong> puede encerrar etiquetas de bloque.</li>
+                <li><code>&lt;hr&gt;</code>: elemento de bloque que representa una separación temática o regla horizontal entre contenidos.</li>
+            </ul>
+
+            <div class="callout callout--tip">
+                <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg>
+                <div><strong>Recuerda:</strong> usar etiquetas semánticas mejora el SEO, la accesibilidad y el mantenimiento del código frente al abuso de <code>&lt;div&gt;</code>.</div>
+            </div>
+        </article>
+
+        <!-- ---------- TEMA 5 ---------- -->
+        <article class="section" id="tema5">
+            <header class="section__header">
+                <span class="section__badge" aria-hidden="true">05</span>
+                <h2 class="section__title">Listas e Hipervínculos</h2>
+            </header>
+
+            <h3>Tipos de listas</h3>
+            <p>Organizan la información en formatos estructurados:</p>
+            <ol class="lista">
+                <li><strong>Listas No Ordenadas (<code>&lt;ul&gt;</code>):</strong> para elementos donde el orden no es relevante (ej. ingredientes, características).</li>
+                <li><strong>Listas Ordenadas (<code>&lt;ol&gt;</code>):</strong> para secuencias jerárquicas o procesos paso a paso.
+                    <ul class="lista">
+                        <li>Los elementos individuales de ambas listas se definen con la etiqueta <code>&lt;li&gt;</code>.</li>
+                    </ul>
+                </li>
+                <li><strong>Listas de Definición (<code>&lt;dl&gt;</code>):</strong> para glosarios o diccionarios, asociando términos (<code>&lt;dt&gt;</code>) con sus definiciones (<code>&lt;dd&gt;</code>).</li>
+                <li><strong>Listas Anidadas:</strong> permiten incluir una lista dentro de otra, colocándose siempre dentro de un elemento <code>&lt;li&gt;</code>.</li>
+            </ol>
+
+            <h3>Hipervínculos (<code>&lt;a&gt;</code>)</h3>
+            <p>
+                Los enlaces permiten la navegación entre documentos o secciones mediante la etiqueta <code>&lt;a&gt;</code>. Sus atributos clave incluyen:
+            </p>
+            <ul class="lista">
+                <li><code>href</code>: URL de destino, ruta local, sección interna (<code>#id</code>) o dirección de correo (<code>mailto:</code>). Debe escribirse con sintaxis limpia, sin espacios ni caracteres especiales.</li>
+                <li><code>target</code>: dónde se abrirá el enlace; <code>_blank</code> en una nueva pestaña y <code>_self</code> en la pestaña actual.</li>
+                <li><code>download</code>: fuerza la descarga del recurso vinculado (requiere estar alojado en un servidor).</li>
+                <li><code>hreflang</code>: especifica el código de idioma del documento enlazado.</li>
+            </ul>
+        </article>
+
+        <!-- ---------- TEMA 6 ---------- -->
+        <article class="section" id="tema6">
+            <header class="section__header">
+                <span class="section__badge" aria-hidden="true">06</span>
+                <h2 class="section__title">Elementos Multimedia y Tablas</h2>
+            </header>
+
+            <h3>Inserción de imágenes</h3>
+            <p>
+                Las imágenes se integran mediante la etiqueta <code>&lt;img src="ruta_imagen" /&gt;</code> en formatos livianos como PNG, JPEG o GIF. Es posible convertir imágenes en enlaces envolviéndolas en etiquetas <code>&lt;a&gt;</code>. Para agrupar imágenes de forma semántica se utiliza la etiqueta <code>&lt;figure&gt;</code> en combinación con un pie descriptivo <code>&lt;figcaption&gt;</code>.
+            </p>
+
+            <h3>Tablas HTML</h3>
+            <p>Permiten estructurar información en cuadrículas de filas y columnas:</p>
+            <ul class="lista">
+                <li><code>&lt;table&gt;</code>: contenedor general de la tabla.</li>
+                <li><code>&lt;tr&gt;</code>: define cada una de las filas de la tabla.</li>
+                <li><code>&lt;th&gt;</code>: encabezado de columna con texto resaltado y centrado por defecto.</li>
+                <li><code>&lt;td&gt;</code>: celda estándar de datos dentro de una fila.</li>
+                <li><strong>Fusión de celdas:</strong> se gestiona mediante los atributos <code>colspan="n"</code> (combinar columnas horizontalmente) y <code>rowspan="n"</code> (combinar filas verticalmente).</li>
+            </ul>
+        </article>
+
+        <!-- ---------- TEMA 7 ---------- -->
+        <article class="section" id="tema7">
+            <header class="section__header">
+                <span class="section__badge" aria-hidden="true">07</span>
+                <h2 class="section__title">Formularios e Interacción con el Usuario</h2>
+            </header>
+
+            <p>
+                Los <strong>formularios</strong> (<code>&lt;form&gt;</code>) son mecanismos esenciales que permiten capturar información introducida por el usuario y enviarla a un servidor backend para su procesamiento.
+            </p>
+
+            <h3>Atributos principales de <code>&lt;form&gt;</code></h3>
+            <ul class="lista">
+                <li><code>action</code>: URL del servidor o destino que procesará los datos enviando el formulario.</li>
+                <li><code>method</code>: especifica el método HTTP de transferencia de datos (<code>GET</code> o <code>POST</code>).</li>
+                <li><code>enctype</code>: define el tipo de codificación (necesario <code>multipart/form-data</code> para adjuntar archivos).</li>
+                <li><strong>Otros atributos:</strong> <code>target</code>, <code>autocomplete</code>, <code>novalidate</code> y <code>accept-charset</code>.</li>
+            </ul>
+
+            <h3>Comparativa: métodos HTTP GET vs. POST</h3>
+            <div class="tabla-contenedor">
+                <table>
+                    <caption>Diferencias entre GET y POST</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Característica</th>
+                            <th scope="col">Método GET</th>
+                            <th scope="col">Método POST</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Envío de datos</th>
+                            <td>Concatena los datos visibles en la URL tras el símbolo <code>?</code> separados por <code>&amp;</code>.</td>
+                            <td>Envía la información de forma oculta en el cuerpo de la petición.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Capacidad</th>
+                            <td>Limitado (aproximadamente 500 bytes).</td>
+                            <td>Permite grandes volúmenes de información.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Archivos adjuntos</th>
+                            <td>No permite adjuntar ficheros.</td>
+                            <td>Sí admite el envío de documentos o archivos adjuntos.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Uso principal</th>
+                            <td>Formularios de consulta o búsqueda (ej. Google).</td>
+                            <td>Creación, edición, borrado o envío de datos sensibles (CRUD).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Controles de entrada (<code>&lt;input&gt;</code> y otros)</h3>
+            <p>La etiqueta <code>&lt;input&gt;</code> ajusta su comportamiento según el atributo <code>type</code>:</p>
+            <ul class="lista">
+                <li><strong>Texto y contraseña:</strong> <code>type="text"</code> (cajas de texto corto) y <code>type="password"</code> (oculta los caracteres).</li>
+                <li><strong>Selección única:</strong> <code>type="radio"</code> (requiere que los elementos del grupo compartan el mismo atributo <code>name</code>).</li>
+                <li><strong>Selección múltiple:</strong> <code>type="checkbox"</code> (permite marcar varias opciones simultáneamente).</li>
+                <li><strong>Nuevos controles HTML5:</strong> <code>type="number"</code>, <code>type="range"</code>, <code>type="date"</code>, <code>type="color"</code>, <code>type="file"</code>, <code>type="email"</code>.</li>
+                <li><strong>Otros elementos:</strong> <code>&lt;textarea&gt;</code> para textos largos, <code>&lt;select&gt;</code> para menús desplegables, <code>&lt;datalist&gt;</code> para autocompletado y botones <code>&lt;button&gt;</code> de envío (<code>submit</code>) o reinicio (<code>reset</code>).</li>
+            </ul>
+
+            <div class="callout callout--warn">
+                <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                <div><strong>Consejo:</strong> utiliza siempre <code>POST</code> con <code>enctype="multipart/form-data"</code> cuando el formulario incluya subida de archivos, y valida los datos tanto en cliente como en servidor.</div>
+            </div>
+        </article>
+
+
+        <!-- ---------- TEMA 8 · PRÁCTICA ---------- -->
+        <article class="section section--lab" id="tema8">
+            <header class="section__header">
+                <span class="section__badge section__badge--accent" aria-hidden="true">08</span>
+                <h2 class="section__title">Práctica: Simulador, Minijuegos y Herramientas de Estudio</h2>
+            </header>
+
+            <p class="lab__intro">
+                Pon a prueba lo que has leído en los siete temas anteriores. Todas las preguntas salen de la teoría de este compendio, y tu progreso (aciertos, rachas, tarjetas y capítulos leídos) se guarda en este navegador.
+            </p>
+
+            <section class="xp" aria-label="Experiencia, nivel e insignias">
+                <div id="xpPanel" aria-live="polite"></div>
+                <details class="xp__rules">
+                    <summary>¿Cómo gano XP?</summary>
+                    <ul>
+                        <li>Cada acierto da XP según su dificultad: <strong>fácil 10</strong> · <strong>media 15</strong> · <strong>difícil 25</strong> (los atributos y los temas 6 y 7 son más difíciles).</li>
+                        <li>Escribir la etiqueta vale más que elegirla (×1,5, y más si juegas con tiempo). Detectar errores, ordenar el esqueleto y el Playground también puntúan.</li>
+                        <li>Cada <strong>pista</strong> te quita un 25 % del XP de esa pregunta.</li>
+                        <li><strong>Saltar</strong> solo da 1 XP; fallar o agotar el tiempo, 0.</li>
+                        <li>Las flashcards (te evalúas tú) dan un 60 % del XP.</li>
+                        <li>Cada vez que subes de nivel desbloqueas una <strong>insignia</strong> nueva.</li>
+                    </ul>
+                </details>
+            </section>
+
+            <div class="lab__stats" id="labStats" aria-live="polite"></div>
+
+            <div class="lab__tabs" role="tablist" aria-label="Modos de práctica" id="labTabs">
+                <button class="lab__tab" role="tab" data-tab="sim"   aria-selected="true">🎯 Simulador</button>
+                <button class="lab__tab" role="tab" data-tab="type"  aria-selected="false">⌨️ Escribe la etiqueta</button>
+                <button class="lab__tab" role="tab" data-tab="flash" aria-selected="false">🃏 Flashcards</button>
+                <button class="lab__tab" role="tab" data-tab="quiz"  aria-selected="false">📝 Test por temas</button>
+                <button class="lab__tab" role="tab" data-tab="bug"   aria-selected="false">🐞 Detecta el error</button>
+                <button class="lab__tab" role="tab" data-tab="sort"  aria-selected="false">🧩 Ordena el esqueleto</button>
+                <button class="lab__tab" role="tab" data-tab="match" aria-selected="false">🔗 Relacionar</button>
+                <button class="lab__tab" role="tab" data-tab="play"  aria-selected="false">🛠️ Playground</button>
+                <button class="lab__tab" role="tab" data-tab="gloss" aria-selected="false">📚 Glosario</button>
+            </div>
+
+            <div class="lab__panel" id="panel-sim" role="tabpanel">
+                <div class="game" id="simGame"></div>
+            </div>
+            <div class="lab__panel" id="panel-type" role="tabpanel" hidden>
+                <div class="game" id="typeGame"></div>
+            </div>
+            <div class="lab__panel" id="panel-flash" role="tabpanel" hidden>
+                <div class="game" id="flashGame"></div>
+            </div>
+            <div class="lab__panel" id="panel-quiz" role="tabpanel" hidden>
+                <div class="game" id="quizGame"></div>
+            </div>
+            <div class="lab__panel" id="panel-bug" role="tabpanel" hidden>
+                <div class="game" id="bugGame"></div>
+            </div>
+            <div class="lab__panel" id="panel-sort" role="tabpanel" hidden>
+                <div class="game" id="sortGame"></div>
+            </div>
+            <div class="lab__panel" id="panel-match" role="tabpanel" hidden>
+                <div class="game" id="matchGame"></div>
+            </div>
+            <div class="lab__panel" id="panel-play" role="tabpanel" hidden>
+                <div class="game" id="playGame"></div>
+            </div>
+            <div class="lab__panel" id="panel-gloss" role="tabpanel" hidden>
+                <div class="game" id="glossGame"></div>
+            </div>
+
+            <div class="callout callout--tip">
+                <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg>
+                <div><strong>Método recomendado:</strong> lee un tema, haz el test de ese tema, repasa los fallos con las flashcards y termina con el simulador en modo difícil (escribir la etiqueta con tiempo).</div>
+            </div>
+
+            <button class="btn btn--ghost" id="resetProgress" type="button">Reiniciar todo mi progreso</button>
+        </article>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <h3>Compendio · HTML &amp; Desarrollo Web</h3>
+                <p>Guía de referencia educativa sobre el lenguaje de marcas, la estructura HTML5 y las bases del desarrollo web moderno.</p>
+            </div>
+            <div class="footer__col">
+                <h4>Contenido</h4>
+                <ul>
+                    <li><a href="#tema1">Introducción</a></li>
+                    <li><a href="#tema2">Estructura y metadatos</a></li>
+                    <li><a href="#tema4">Semántica</a></li>
+                    <li><a href="#tema7">Formularios</a></li>
+                    <li><a href="#tema8">Práctica y minijuegos</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4>Recursos</h4>
+                <ul>
+                    <li><a href="https://developer.mozilla.org/es/docs/Web/HTML" target="_blank" rel="noopener noreferrer">MDN · HTML</a></li>
+                    <li><a href="https://html.spec.whatwg.org/" target="_blank" rel="noopener noreferrer">WHATWG · Standard</a></li>
+                    <li><a href="https://html5boilerplate.com/" target="_blank" rel="noopener noreferrer">HTML5 Boilerplate</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <span>© <span id="year">2025</span> · Compendio educativo · Uso libre</span>
+            <a href="#inicio">Volver al inicio ↑</a>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Volver arriba" title="Volver arriba">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ============================================================
+           1) TEMA CLARO / OSCURO (con clase .dark en <html>)
+           ============================================================ */
+        var root = document.documentElement;
+        var themeToggle = document.getElementById('themeToggle');
+        var themeMeta = document.querySelector('meta[name="theme-color"]');
+
+        function setThemeLabel() {
+            var isDark = root.classList.contains('dark');
+            themeToggle.setAttribute('aria-label', isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+            themeToggle.setAttribute('title',       isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+            if (themeMeta) themeMeta.setAttribute('content', isDark ? '#05090f' : '#0a0f1f');
+        }
+        setThemeLabel();
+
+        themeToggle.addEventListener('click', function () {
+            var isDark = root.classList.toggle('dark');
+            try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
+            setThemeLabel();
+            // Micro "pop"
+            if (themeToggle.animate) {
+                themeToggle.animate(
+                    [{ transform: 'scale(1)' }, { transform: 'scale(.82)' }, { transform: 'scale(1)' }],
+                    { duration: 340, easing: 'cubic-bezier(.2,.7,.3,1)' }
+                );
+            }
+        });
+
+        /* ============================================================
+           2) BARRA DE PROGRESO
+           ============================================================ */
+        var progressBar = document.getElementById('progressBar');
+        var progressTick = false;
+        function updateProgress() {
+            var h = document.documentElement.scrollHeight - window.innerHeight;
+            var pct = h > 0 ? Math.min(100, (window.scrollY / h) * 100) : 0;
+            progressBar.style.width = pct + '%';
+            progressTick = false;
+        }
+        window.addEventListener('scroll', function () {
+            if (!progressTick) { requestAnimationFrame(updateProgress); progressTick = true; }
+        }, { passive: true });
+        updateProgress();
+
+        /* ============================================================
+           3) BOTÓN VOLVER ARRIBA
+           ============================================================ */
+        var backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function () {
+            backToTop.classList.toggle('visible', window.scrollY > 500);
+        }, { passive: true });
+        backToTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* ============================================================
+           4) SCROLL SPY (resalta enlace activo del TOC)
+           ============================================================ */
+        var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc__inner a[data-section]'));
+        var sections = Array.prototype.slice.call(document.querySelectorAll('.section:not(.section--lab)'));
+
+        var spy = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var id = entry.target.id;
+                    tocLinks.forEach(function (link) {
+                        link.classList.toggle('active', link.dataset.section === id);
+                    });
+                }
+            });
+        }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+        sections.forEach(function (s) { spy.observe(s); });
+        spy.observe(document.getElementById('tema8'));
+
+        /* ============================================================
+           5) BUSCADOR CON RESALTADO TIPO FOSFORITO
+           ============================================================ */
+        var searchInput  = document.getElementById('searchInput');
+        var searchStatus = document.getElementById('searchStatus');
+        var contentRoot  = document.getElementById('main');
+
+        function escapeRegex(s) {
+            return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function clearHighlights() {
+            var marks = contentRoot.querySelectorAll('mark.highlight');
+            if (!marks.length) return;
+            marks.forEach(function (mark) {
+                var parent = mark.parentNode;
+                if (!parent) return;
+                parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                if (parent.normalize) parent.normalize();
+            });
+        }
+
+        function highlightIn(container, term) {
+            if (!term) return 0;
+            var regex = new RegExp(escapeRegex(term), 'gi');
+            var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
+                acceptNode: function (node) {
+                    if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+                    var p = node.parentElement;
+                    if (!p) return NodeFilter.FILTER_REJECT;
+                    var tag = p.tagName;
+                    if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'MARK') return NodeFilter.FILTER_REJECT;
+                    if (p.closest('.copy-btn')) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+
+            var nodes = [];
+            var n;
+            while ((n = walker.nextNode())) nodes.push(n);
+
+            var count = 0;
+            nodes.forEach(function (textNode) {
+                var text = textNode.nodeValue;
+                regex.lastIndex = 0;
+                if (!regex.test(text)) return;
+                regex.lastIndex = 0;
+
+                var frag = document.createDocumentFragment();
+                var last = 0;
+                var match;
+                while ((match = regex.exec(text)) !== null) {
+                    if (match.index > last) {
+                        frag.appendChild(document.createTextNode(text.slice(last, match.index)));
+                    }
+                    var mark = document.createElement('mark');
+                    mark.className = 'highlight';
+                    mark.textContent = match[0];
+                    frag.appendChild(mark);
+                    last = match.index + match[0].length;
+                    count++;
+                }
+                if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+                textNode.parentNode.replaceChild(frag, textNode);
+            });
+            return count;
+        }
+
+        function runSearch(rawQuery) {
+            var q = rawQuery.trim();
+            clearHighlights();
+
+            if (!q) {
+                sections.forEach(function (s) { s.hidden = false; });
+                searchStatus.textContent = '';
+                searchStatus.style.color = '';
+                return;
+            }
+
+            var qLower = q.toLowerCase();
+            var visibleCount = 0;
+            sections.forEach(function (section) {
+                var match = section.textContent.toLowerCase().indexOf(qLower) !== -1;
+                section.hidden = !match;
+                if (match) visibleCount++;
+            });
+
+            var totalMarks = 0;
+            sections.forEach(function (section) {
+                if (!section.hidden) totalMarks += highlightIn(section, q);
+            });
+
+            if (visibleCount === 0) {
+                searchStatus.textContent = '❌ Sin coincidencias para «' + q + '»';
+                searchStatus.style.color = '#fca5a5';
+            } else {
+                searchStatus.textContent =
+                    '✓ ' + visibleCount + ' de ' + sections.length + ' temas · ' +
+                    totalMarks + ' coincidencia' + (totalMarks === 1 ? '' : 's') +
+                    ' para «' + q + '»';
+                searchStatus.style.color = 'rgba(255,255,255,.95)';
+            }
+        }
+
+        searchInput.addEventListener('input', function () { runSearch(searchInput.value); });
+
+        searchInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                var first = sections.find(function (s) { return !s.hidden; });
+                if (first) first.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            if (e.key === 'Escape') {
+                searchInput.value = '';
+                runSearch('');
+                searchInput.blur();
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                searchInput.focus();
+                searchInput.select();
+            }
+        });
+
+        /* ============================================================
+           6) BOTONES "COPIAR" EN BLOQUES <pre>
+           ============================================================ */
+        var copyIcon  = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+        var checkIcon = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+
+        document.querySelectorAll('pre').forEach(function (pre) {
+            pre.classList.add('has-copy');
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'copy-btn';
+            btn.innerHTML = copyIcon + '<span>Copiar</span>';
+
+            btn.addEventListener('click', async function () {
+                var codeEl = pre.querySelector('code') || pre;
+                var text = codeEl.textContent;
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(text);
+                    } else {
+                        var ta = document.createElement('textarea');
+                        ta.value = text;
+                        ta.style.position = 'fixed';
+                        ta.style.opacity = '0';
+                        document.body.appendChild(ta);
+                        ta.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(ta);
+                    }
+                    btn.classList.add('copied');
+                    btn.innerHTML = checkIcon + '<span>¡Copiado!</span>';
+                    setTimeout(function () {
+                        btn.classList.remove('copied');
+                        btn.innerHTML = copyIcon + '<span>Copiar</span>';
+                    }, 1600);
+                } catch (err) {
+                    btn.innerHTML = '⚠️ Error';
+                    setTimeout(function () { btn.innerHTML = copyIcon + '<span>Copiar</span>'; }, 1600);
+                }
+            });
+
+            pre.appendChild(btn);
+        });
+
+        /* ============================================================
+           7) AÑO ACTUAL EN EL FOOTER
+           ============================================================ */
+        var yearEl = document.getElementById('year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+        /* ============================================================
+           8) SMOOTH SCROLL INTERNO
+           ============================================================ */
+        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+            a.addEventListener('click', function (e) {
+                var id = a.getAttribute('href').slice(1);
+                if (!id) return;
+                var target = document.getElementById(id);
+                if (!target) return;
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                history.replaceState(null, '', '#' + id);
+            });
+        });
+
+    })();
+    </script>
+<script>
+(function () {
+'use strict';
+/* ============================================================
+   BANCO DE DATOS 1 · Etiquetas y atributos (según la teoría)
+   c: e = elemento, a = atributo · g: grupo · a: respuestas extra
+   ============================================================ */
+var TAGS = [
+    // --- Tema 2 · Estructura y metadatos
+    { t: '!DOCTYPE html', c: 'e', g: 'estructura', d: 'Declaración obligatoria en la primera línea que especifica el estándar HTML5 y evita el modo no estándar del navegador.', a: ['!doctype', 'doctype'] },
+    { t: 'html', c: 'e', g: 'estructura', d: 'Elemento raíz que delimita todo el documento y establece el idioma mediante el atributo lang.' },
+    { t: 'head', c: 'e', g: 'estructura', d: 'Cabecera técnica con metadatos e información interna no visible en pantalla.' },
+    { t: 'body', c: 'e', g: 'estructura', d: 'Cuerpo del documento que alberga todos los elementos visibles (texto, imágenes, tablas).' },
+    { t: 'title', c: 'e', g: 'estructura', d: 'Define el texto de la pestaña del navegador y es decisivo para la indexación en buscadores (SEO).' },
+    { t: 'meta charset', c: 'e', g: 'estructura', d: 'Establece la tabla de codificación universal (UTF-8) para representar bien tildes y caracteres especiales.', a: ['charset', 'meta charset="utf-8"'] },
+    { t: 'meta viewport', c: 'e', g: 'estructura', d: 'Ajusta escala y dimensiones para garantizar la adaptabilidad en dispositivos móviles.', a: ['viewport', 'meta name="viewport"'] },
+    { t: 'link rel="icon"', c: 'e', g: 'estructura', d: 'Indica el icono que se muestra en la pestaña del navegador.', a: ['link', 'icon'] },
+
+    // --- Tema 3 · Texto
+    { t: 'h1', c: 'e', g: 'texto', d: 'Título principal del documento, el texto más relevante. Debe haber solo uno por página para optimizar el SEO.' },
+    { t: 'h2', c: 'e', g: 'texto', d: 'Encabezado de segundo nivel: estructura temas y secciones sin saltarse niveles de la jerarquía.', a: ['h3', 'h4', 'h5', 'h6', 'hx'] },
+    { t: 'p', c: 'e', g: 'texto', d: 'Elemento de bloque que delimita fragmentos de texto agregando márgenes superior e inferior por defecto.' },
+    { t: 'strong', c: 'e', g: 'texto', d: 'Denota importancia o peso semántico del texto (se ve en negrita).' },
+    { t: 'em', c: 'e', g: 'texto', d: 'Aplica énfasis tónico al texto (se ve en cursiva).' },
+    { t: 'b', c: 'e', g: 'texto', d: 'Estilo tradicional de negrita, sin valor semántico.' },
+    { t: 'i', c: 'e', g: 'texto', d: 'Estilo tradicional de cursiva, sin valor semántico.' },
+    { t: 'sup', c: 'e', g: 'texto', d: 'Muestra el texto como superíndice (por ejemplo, el 2 de m²).' },
+    { t: 'sub', c: 'e', g: 'texto', d: 'Muestra el texto como subíndice (por ejemplo, el 2 de H₂O).' },
+    { t: 'blockquote', c: 'e', g: 'texto', d: 'Encierra citas textuales en bloque.' },
+    { t: 'cite', c: 'e', g: 'texto', d: 'Sirve para referenciar el título de una obra creativa.' },
+    { t: 'code', c: 'e', g: 'texto', d: 'Presenta fragmentos de código con tipografía monoespaciada.' },
+    { t: 'br', c: 'e', g: 'texto', d: 'Etiqueta vacía que fuerza un salto de línea manual.' },
+    { t: 'wbr', c: 'e', g: 'texto', d: 'Marca una oportunidad de salto de línea opcional dentro de palabras muy extensas.' },
+    { t: 'pre', c: 'e', g: 'texto', d: 'Bloque preformateado que respeta los espacios en blanco y las indentaciones originales.' },
+
+    // --- Tema 4 · Semántica
+    { t: 'header', c: 'e', g: 'semantica', d: 'Cabecera superior de la página, que suele contener el logotipo y elementos comunes de presentación.' },
+    { t: 'nav', c: 'e', g: 'semantica', d: 'Sección que engloba el menú o los enlaces principales de navegación del sitio.' },
+    { t: 'main', c: 'e', g: 'semantica', d: 'Contenedor del contenido principal y único del documento web.' },
+    { t: 'section', c: 'e', g: 'semantica', d: 'Agrupa contenidos temáticos relacionados que habitualmente llevan su propio encabezado.' },
+    { t: 'article', c: 'e', g: 'semantica', d: 'Entidad de contenido independiente y autónoma, como una entrada de blog, una noticia o un producto.' },
+    { t: 'aside', c: 'e', g: 'semantica', d: 'Alberga información secundaria: bloques laterales, enlaces relacionados o publicidad.' },
+    { t: 'footer', c: 'e', g: 'semantica', d: 'Pie de página destinado a avisos legales, copyright y navegación secundaria.' },
+    { t: 'div', c: 'e', g: 'semantica', d: 'Etiqueta de bloque genérica que agrupa elementos visuales sin aportar valor semántico.' },
+    { t: 'span', c: 'e', g: 'semantica', d: 'Etiqueta de línea genérica que aísla fragmentos de texto para aplicarles estilos o interactividad sin alterar el flujo.' },
+    { t: 'hr', c: 'e', g: 'semantica', d: 'Elemento de bloque que representa una separación temática o regla horizontal entre contenidos.' },
+
+    // --- Tema 5 · Listas y enlaces
+    { t: 'ul', c: 'e', g: 'listas', d: 'Lista no ordenada: se usa cuando el orden de los elementos no es relevante (ingredientes, características).' },
+    { t: 'ol', c: 'e', g: 'listas', d: 'Lista ordenada: se usa para secuencias jerárquicas o procesos paso a paso.' },
+    { t: 'li', c: 'e', g: 'listas', d: 'Define cada elemento individual de una lista ordenada o no ordenada.' },
+    { t: 'dl', c: 'e', g: 'listas', d: 'Lista de definición para glosarios o diccionarios.' },
+    { t: 'dt', c: 'e', g: 'listas', d: 'Dentro de una lista de definición, marca el término que se define.' },
+    { t: 'dd', c: 'e', g: 'listas', d: 'Dentro de una lista de definición, contiene la definición asociada al término.' },
+    { t: 'a', c: 'e', g: 'listas', d: 'Crea un hipervínculo para navegar entre documentos, secciones o enviar un correo.' },
+    { t: 'href', c: 'a', g: 'listas', d: 'Atributo de los enlaces que indica la URL de destino, ruta local, sección interna (#id) o correo (mailto:).' },
+    { t: 'target', c: 'a', g: 'listas', d: 'Atributo de los enlaces que decide dónde se abre el destino (_blank o _self).' },
+    { t: 'download', c: 'a', g: 'listas', d: 'Atributo del enlace que fuerza la descarga del recurso vinculado (requiere servidor).' },
+    { t: 'hreflang', c: 'a', g: 'listas', d: 'Atributo del enlace que especifica el código de idioma del documento enlazado.' },
+
+    // --- Tema 6 · Multimedia y tablas
+    { t: 'img', c: 'e', g: 'multimedia', d: 'Inserta una imagen mediante su ruta en el atributo src (PNG, JPEG, GIF...).' },
+    { t: 'figure', c: 'e', g: 'multimedia', d: 'Agrupa de forma semántica una imagen u otro contenido junto a su pie descriptivo.' },
+    { t: 'figcaption', c: 'e', g: 'multimedia', d: 'Pie descriptivo asociado al contenido agrupado en su contenedor semántico de imagen.' },
+    { t: 'table', c: 'e', g: 'tablas', d: 'Contenedor general de una tabla de filas y columnas.' },
+    { t: 'tr', c: 'e', g: 'tablas', d: 'Define cada una de las filas de una tabla.' },
+    { t: 'th', c: 'e', g: 'tablas', d: 'Celda de encabezado de columna, con texto resaltado y centrado por defecto.' },
+    { t: 'td', c: 'e', g: 'tablas', d: 'Celda estándar de datos dentro de una fila de la tabla.' },
+    { t: 'colspan', c: 'a', g: 'tablas', d: 'Atributo que combina celdas horizontalmente (varias columnas en una).' },
+    { t: 'rowspan', c: 'a', g: 'tablas', d: 'Atributo que combina celdas verticalmente (varias filas en una).' },
+
+    // --- Tema 7 · Formularios
+    { t: 'form', c: 'e', g: 'formularios', d: 'Mecanismo que captura la información introducida por el usuario y la envía a un servidor para procesarla.' },
+    { t: 'action', c: 'a', g: 'formularios', d: 'Atributo del formulario con la URL del destino que procesará los datos enviados.' },
+    { t: 'method', c: 'a', g: 'formularios', d: 'Atributo del formulario que especifica el método HTTP de envío (GET o POST).' },
+    { t: 'enctype', c: 'a', g: 'formularios', d: 'Atributo del formulario que define la codificación; necesita multipart/form-data para adjuntar archivos.' },
+    { t: 'input', c: 'e', g: 'formularios', d: 'Control de entrada cuyo comportamiento cambia según su atributo type.' },
+    { t: 'input type="password"', c: 'e', g: 'formularios', d: 'Campo de entrada que oculta los caracteres que se escriben.', a: ['password', 'type="password"'] },
+    { t: 'input type="radio"', c: 'e', g: 'formularios', d: 'Selección única: los elementos del grupo deben compartir el mismo atributo name.', a: ['radio', 'type="radio"'] },
+    { t: 'input type="checkbox"', c: 'e', g: 'formularios', d: 'Selección múltiple: permite marcar varias opciones simultáneamente.', a: ['checkbox', 'type="checkbox"'] },
+    { t: 'input type="file"', c: 'e', g: 'formularios', d: 'Control HTML5 que permite elegir un archivo del equipo para adjuntarlo.', a: ['file', 'type="file"'] },
+    { t: 'textarea', c: 'e', g: 'formularios', d: 'Caja para introducir textos largos de varias líneas.' },
+    { t: 'select', c: 'e', g: 'formularios', d: 'Menú desplegable para elegir entre varias opciones.' },
+    { t: 'datalist', c: 'e', g: 'formularios', d: 'Ofrece una lista de sugerencias de autocompletado para un campo de entrada.' },
+    { t: 'button', c: 'e', g: 'formularios', d: 'Botón de envío (submit) o de reinicio (reset) de un formulario.' }
+];
+
+var GROUPS = {
+    estructura: { n: 'Estructura', tema: 2 },
+    texto: { n: 'Texto', tema: 3 },
+    semantica: { n: 'Semántica', tema: 4 },
+    listas: { n: 'Listas y enlaces', tema: 5 },
+    multimedia: { n: 'Multimedia', tema: 6 },
+    tablas: { n: 'Tablas', tema: 6 },
+    formularios: { n: 'Formularios', tema: 7 }
+};
+
+/* ============================================================
+   BANCO DE DATOS 2 · Test, errores, esqueletos y ejercicios
+   ============================================================ */
+var QUIZ = [
+    // Tema 1
+    { tema: 1, q: '¿Qué aporta HTML dentro del desarrollo web?', o: ['La estructura lógica del contenido (el esqueleto)', 'La interactividad y el dinamismo', 'La adaptación a distintas pantallas', 'El acceso a la base de datos'], a: 0, e: 'HTML es el esqueleto: estructura el contenido. CSS es la piel y JavaScript el cerebro.' },
+    { tema: 1, q: '¿Qué tecnología se encarga de la apariencia visual y de que la maqueta sea responsive?', o: ['HTML', 'CSS', 'JavaScript', 'Node.js'], a: 1, e: 'CSS (Cascading Style Sheets) aplica estilos y adapta la maqueta a diferentes pantallas.' },
+    { tema: 1, q: 'Una página web dinámica se caracteriza por…', o: ['Mostrar siempre el mismo contenido', 'Tener solo archivos HTML fijos', 'Disponer de base de datos, lógica de servidor y sesiones de usuario', 'No usar JavaScript'], a: 2, e: 'Las páginas dinámicas usan motores de base de datos, lógica de servidor y sesiones de usuario únicas.' },
+    { tema: 1, q: 'Los documentos HTML, a diferencia de otros lenguajes de programación…', o: ['Se compilan antes de usarse', 'Son interpretados directamente por el navegador', 'Solo funcionan en Windows', 'Requieren un servidor siempre'], a: 1, e: 'HTML no se compila: lo interpreta el navegador en cualquier sistema operativo.' },
+
+    // Tema 2
+    { tema: 2, q: '¿Cuál debe ser la primera línea de un documento HTML5?', o: ['<html lang="es">', '<head>', '<!DOCTYPE html>', '<meta charset="UTF-8">'], a: 2, e: 'El DOCTYPE va en la primera línea y evita el modo no estándar del navegador.' },
+    { tema: 2, q: '¿Qué hace <meta charset="UTF-8">?', o: ['Define el título de la pestaña', 'Establece la codificación para representar tildes y caracteres especiales', 'Cambia el color de la interfaz móvil', 'Ajusta la escala en móviles'], a: 1, e: 'UTF-8 es la tabla de codificación universal.' },
+    { tema: 2, q: '¿Qué etiqueta es decisiva para el SEO y aparece en la pestaña del navegador?', o: ['<body>', '<title>', '<html>', '<link>'], a: 1, e: '<title> define el título de la pestaña y es clave en la indexación.' },
+    { tema: 2, q: '¿Dónde se escriben los elementos visibles (texto, imágenes, tablas)?', o: ['En <head>', 'En <html> fuera de body', 'En <body>', 'En <meta>'], a: 2, e: '<body> es el cuerpo del documento y aloja todo lo visible.' },
+
+    // Tema 3
+    { tema: 3, q: '¿Cuántos <h1> debe tener una página para optimizar el SEO?', o: ['Ninguno', 'Únicamente uno', 'Tantos como secciones', 'Al menos tres'], a: 1, e: 'El <h1> es el título principal y debe ser único por página.' },
+    { tema: 3, q: '¿Qué etiqueta denota importancia semántica (negrita)?', o: ['<b>', '<strong>', '<em>', '<big>'], a: 1, e: '<strong> aporta peso semántico; <b> es solo estilo tradicional.' },
+    { tema: 3, q: '¿Qué etiqueta respeta los espacios e indentaciones del código?', o: ['<br />', '<wbr />', '<pre>', '<p>'], a: 2, e: '<pre> es un bloque preformateado.' },
+    { tema: 3, q: 'HTML comprime varios espacios o saltos de línea consecutivos en…', o: ['Ninguno', 'Un solo espacio', 'Dos espacios', 'Un párrafo nuevo'], a: 1, e: 'Para controlar el flujo se usan <br />, <wbr /> y <pre>.' },
+
+    // Tema 4
+    { tema: 4, q: '¿Qué significa «divitis»?', o: ['Abusar de la etiqueta <div> genérica en lugar de etiquetas semánticas', 'Usar demasiados estilos CSS', 'Escribir etiquetas sin cerrar', 'Duplicar el <h1>'], a: 0, e: 'HTML5 introdujo etiquetas semánticas para evitar el abuso de <div>.' },
+    { tema: 4, q: '¿Qué etiqueta representa contenido independiente y autónomo, como una noticia?', o: ['<section>', '<aside>', '<article>', '<main>'], a: 2, e: '<article> es una entidad independiente: entradas de blog, noticias, productos.' },
+    { tema: 4, q: 'Una etiqueta de línea (como <span>) puede contener…', o: ['Etiquetas de bloque', 'Solo otras etiquetas de línea', 'Cualquier etiqueta', 'Únicamente texto'], a: 1, e: 'Una etiqueta de línea nunca puede encerrar etiquetas de bloque.' },
+    { tema: 4, q: '¿Dónde irían los avisos legales y el copyright?', o: ['<header>', '<aside>', '<nav>', '<footer>'], a: 3, e: '<footer> es el pie de página: avisos legales, copyright y navegación secundaria.' },
+
+    // Tema 5
+    { tema: 5, q: '¿Qué lista usarías para los pasos de una receta?', o: ['<ul>', '<ol>', '<dl>', '<dt>'], a: 1, e: '<ol> es para secuencias o procesos paso a paso.' },
+    { tema: 5, q: 'En una lista de definición, el término se marca con…', o: ['<dd>', '<li>', '<dt>', '<dl>'], a: 2, e: '<dt> es el término y <dd> su definición.' },
+    { tema: 5, q: '¿Qué valor de target abre el enlace en una nueva pestaña?', o: ['_self', '_blank', '_new', '_tab'], a: 1, e: '_blank abre en nueva pestaña y _self en la actual.' },
+    { tema: 5, q: 'Una lista anidada se coloca siempre…', o: ['Fuera de la lista padre', 'Dentro de un elemento <li>', 'Dentro de <ul> directamente', 'Dentro de <dl>'], a: 1, e: 'Las listas anidadas van dentro de un <li>.' },
+
+    // Tema 6
+    { tema: 6, q: '¿Qué atributo indica la ruta de una imagen en <img>?', o: ['href', 'src', 'path', 'link'], a: 1, e: '<img src="ruta_imagen" /> integra la imagen.' },
+    { tema: 6, q: '¿Con qué etiqueta se añade un pie descriptivo a una imagen agrupada en <figure>?', o: ['<caption>', '<figcaption>', '<legend>', '<cite>'], a: 1, e: '<figure> se combina con <figcaption>.' },
+    { tema: 6, q: '¿Qué atributo combina celdas horizontalmente?', o: ['rowspan', 'colspan', 'merge', 'span'], a: 1, e: 'colspan="n" une columnas; rowspan="n" une filas.' },
+    { tema: 6, q: '¿Qué etiqueta define una celda de encabezado de columna?', o: ['<td>', '<tr>', '<th>', '<table>'], a: 2, e: '<th> es el encabezado, resaltado y centrado por defecto.' },
+
+    // Tema 7
+    { tema: 7, q: 'Para adjuntar archivos, el formulario necesita…', o: ['method="get"', 'enctype="multipart/form-data" con method="post"', 'action="#"', 'novalidate'], a: 1, e: 'GET no permite adjuntar ficheros; POST con multipart/form-data sí.' },
+    { tema: 7, q: '¿Qué método concatena los datos visibles en la URL tras el símbolo ?', o: ['POST', 'GET', 'PUT', 'CRUD'], a: 1, e: 'GET muestra los datos en la URL separados por &, y está limitado en capacidad.' },
+    { tema: 7, q: 'Para que varios radio funcionen como selección única deben compartir…', o: ['El mismo id', 'El mismo value', 'El mismo atributo name', 'La misma clase'], a: 2, e: 'El grupo de radios se define con un name común.' },
+    { tema: 7, q: '¿Qué elemento ofrece autocompletado con una lista de sugerencias?', o: ['<select>', '<datalist>', '<textarea>', '<option>'], a: 1, e: '<datalist> sugiere opciones mientras el usuario escribe.' }
+];
+
+var BUGS = [
+    { t: 'Etiqueta sin cerrar', code: ['<body>', '  <h1>Mi web</h1>', '  <p>Bienvenido a mi página', '  <p>Segundo párrafo</p>', '</body>'], bad: 2, why: 'El primer <p> no está cerrado: todo documento debe cerrar sus etiquetas y anidarlas correctamente.' },
+    { t: 'Bloque dentro de línea', code: ['<main>', '  <span>', '    <div>Texto</div>', '  </span>', '</main>'], bad: 2, why: 'Una etiqueta de línea (<span>) nunca puede encerrar una etiqueta de bloque (<div>).' },
+    { t: 'Dos títulos principales', code: ['<body>', '  <h1>Compendio HTML</h1>', '  <h2>Introducción</h2>', '  <h1>Estructura</h1>', '</body>'], bad: 3, why: 'Solo debe haber un <h1> por página. Los apartados usan <h2> a <h6>.' },
+    { t: 'Salto de nivel en encabezados', code: ['<body>', '  <h1>Formularios</h1>', '  <h2>Atributos</h2>', '  <h4>Detalle de action</h4>', '</body>'], bad: 3, why: 'Los encabezados no deben saltarse niveles de la jerarquía: tras <h2> toca <h3>.' },
+    { t: 'DOCTYPE mal colocado', code: ['<html lang="es">', '<!DOCTYPE html>', '<head>', '  <title>Hola</title>', '</head>'], bad: 1, why: 'El DOCTYPE es obligatorio en la primera línea del documento.' },
+    { t: 'Metadato fuera de head', code: ['<html lang="es">', '<head><title>Demo</title></head>', '<body>', '  <meta charset="UTF-8">', '</body>'], bad: 3, why: 'Los metadatos van en <head>, la cabecera técnica no visible del documento.' },
+    { t: 'Lista anidada incorrecta', code: ['<ul>', '  <li>Frutas</li>', '  <ul>', '    <li>Manzana</li>', '  </ul>', '</ul>'], bad: 2, why: 'Una lista anidada debe colocarse siempre dentro de un elemento <li>.' },
+    { t: 'Celda fuera de fila', code: ['<table>', '  <tr><th>Nombre</th></tr>', '  <td>Ana</td>', '</table>'], bad: 2, why: 'Las celdas <td> deben ir dentro de una fila <tr>.' },
+    { t: 'Radios sin grupo', code: ['<form>', '  <input type="radio" name="color"> Rojo', '  <input type="radio" name="tono"> Azul', '</form>'], bad: 2, why: 'Para selección única los radios del grupo deben compartir el mismo atributo name.' },
+    { t: 'Subida de archivos imposible', code: ['<form action="/subir" method="get">', '  <input type="file" name="doc">', '  <button type="submit">Enviar</button>', '</form>'], bad: 0, why: 'GET no permite adjuntar ficheros: hace falta method="post" y enctype="multipart/form-data".' }
+];
+
+var SORTS = [
+    { t: 'Esqueleto HTML5 básico', lines: ['<!DOCTYPE html>', '<html lang="es">', '<head>', '  <meta charset="UTF-8">', '  <title>Mi primera página web</title>', '</head>', '<body>', '  <h1>Hola</h1>', '</body>', '</html>'] },
+    { t: 'Maquetación semántica', lines: ['<header>', '  <nav>Menú</nav>', '</header>', '<main>', '  <article>Noticia</article>', '</main>', '<aside>Publicidad</aside>', '<footer>© 2025</footer>'] },
+    { t: 'Tabla con encabezado', lines: ['<table>', '  <tr>', '    <th>Método</th>', '  </tr>', '  <tr>', '    <td>GET</td>', '  </tr>', '</table>'] },
+    { t: 'Formulario de registro', lines: ['<form action="/registro" method="post">', '  <input type="text" name="usuario">', '  <input type="password" name="clave">', '  <button type="submit">Enviar</button>', '</form>'] },
+    { t: 'Lista anidada correcta', lines: ['<ul>', '  <li>Frontend', '    <ul>', '      <li>Maquetador</li>', '    </ul>', '  </li>', '  <li>Backend</li>', '</ul>'] }
+];
+
+var PLAY = [
+    {
+        t: 'Tabla con encabezado', task: 'Crea una <table> con una fila de encabezado (<th>) y una fila de datos con 2 celdas (<td>).',
+        start: '<table>\n  \n</table>',
+        checks: [
+            ['Hay una tabla', function (d) { return d.querySelector('table'); }],
+            ['Tiene al menos un <th>', function (d) { return d.querySelectorAll('th').length >= 1; }],
+            ['Tiene al menos 2 <td>', function (d) { return d.querySelectorAll('td').length >= 2; }],
+            ['Todas las celdas están dentro de <tr>', function (d) { var c = d.querySelectorAll('th,td'); return c.length > 0 && Array.prototype.every.call(c, function (x) { return x.parentElement.tagName === 'TR'; }); }]
+        ]
+    },
+    {
+        t: 'Fusión de celdas', task: 'Crea una tabla donde una celda ocupe 2 columnas usando colspan="2".',
+        start: '<table>\n  <tr>\n    \n  </tr>\n  <tr>\n    <td>A</td>\n    <td>B</td>\n  </tr>\n</table>',
+        checks: [
+            ['Existe una celda con colspan="2"', function (d) { return d.querySelector('[colspan="2"]'); }],
+            ['La celda fusionada es th o td', function (d) { var x = d.querySelector('[colspan="2"]'); return x && /^(TH|TD)$/.test(x.tagName); }]
+        ]
+    },
+    {
+        t: 'Lista ordenada', task: 'Escribe una lista ordenada (<ol>) con 3 elementos <li> que expliquen los pasos para crear una web.',
+        start: '',
+        checks: [
+            ['Hay un <ol>', function (d) { return d.querySelector('ol'); }],
+            ['Tiene 3 o más <li>', function (d) { return d.querySelectorAll('ol > li').length >= 3; }]
+        ]
+    },
+    {
+        t: 'Enlace externo', task: 'Crea un enlace a https://developer.mozilla.org que se abra en una nueva pestaña.',
+        start: '',
+        checks: [
+            ['Hay una etiqueta <a>', function (d) { return d.querySelector('a'); }],
+            ['href apunta a developer.mozilla.org', function (d) { var a = d.querySelector('a'); return a && /developer\.mozilla\.org/.test(a.getAttribute('href') || ''); }],
+            ['target="_blank"', function (d) { var a = d.querySelector('a'); return a && a.getAttribute('target') === '_blank'; }]
+        ]
+    },
+    {
+        t: 'Formulario con POST', task: 'Crea un <form> con method="post", un campo type="email" y un botón de envío (submit).',
+        start: '<form>\n  \n</form>',
+        checks: [
+            ['Hay un <form>', function (d) { return d.querySelector('form'); }],
+            ['method="post"', function (d) { var f = d.querySelector('form'); return f && (f.getAttribute('method') || '').toLowerCase() === 'post'; }],
+            ['Hay un input type="email"', function (d) { return d.querySelector('input[type="email"]'); }],
+            ['Hay un botón submit', function (d) { return d.querySelector('button[type="submit"], button:not([type]), input[type="submit"]'); }]
+        ]
+    },
+    {
+        t: 'Estructura semántica', task: 'Monta una página con <header> (que contenga un <nav>), <main> con un <article>, y un <footer>. Evita usar <div>.',
+        start: '',
+        checks: [
+            ['<header> con <nav> dentro', function (d) { return d.querySelector('header nav'); }],
+            ['<main> con <article> dentro', function (d) { return d.querySelector('main article'); }],
+            ['Hay un <footer>', function (d) { return d.querySelector('footer'); }],
+            ['No usa <div>', function (d) { return !d.querySelector('div'); }]
+        ]
+    }
+];
+
+/* ============================================================
+   MOTOR · utilidades, estado guardado y estadísticas
+   ============================================================ */
+var KEY = 'lm_lab_v1';
+function defState() { return { xp: 0, lvl: 1, ok: 0, ko: 0, best: 0, read: {}, notes: {}, quiz: {}, leit: {}, done: { sort: 0, bug: 0, match: 0, play: 0 } }; }
+var S = (function () {
+    try {
+        var r = JSON.parse(localStorage.getItem(KEY));
+        if (r && typeof r === 'object') { var d = defState(); for (var k in r) d[k] = r[k]; if (!d.done) d.done = defState().done; return d; }
+    } catch (e) {}
+    return defState();
+})();
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+var streak = 0;
+function $(id) { return document.getElementById(id); }
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+}
+function disp(it) { return it.c === 'e' ? '<' + it.t + '>' : it.t; }
+function norm(s) {
+    return String(s).toLowerCase().replace(/[<>\/]/g, '').replace(/["'“”‘’]/g, '').replace(/\s*=\s*/g, '=').replace(/\s+/g, ' ').trim();
+}
+function accepted(it) { return [norm(it.t)].concat((it.a || []).map(norm)); }
+function temaOf(it) { return GROUPS[it.g].tema; }
+function poolFor(tema) {
+    return tema === 'all' ? TAGS : TAGS.filter(function (x) { return String(temaOf(x)) === String(tema); });
+}
+function temaOptions() {
+    var h = '<option value="all">Todos los temas</option>';
+    var names = { 2: 'Estructura y metadatos', 3: 'Texto y formateo', 4: 'Semántica', 5: 'Listas y enlaces', 6: 'Multimedia y tablas', 7: 'Formularios' };
+    for (var k = 2; k <= 7; k++) h += '<option value="' + k + '">Tema ' + k + ' · ' + names[k] + '</option>';
+    return h;
+}
+function today() { return new Date().toISOString().slice(0, 10); }
+
+/* Registrar acierto/fallo global */
+/* ============================================================
+   XP · NIVELES · INSIGNIAS
+   ============================================================ */
+var BADGES = [
+    { n: 'Novato', i: '🌱' },
+    { n: 'Aprendiz de etiquetas', i: '🏷️' },
+    { n: 'Maquetador junior', i: '🧱' },
+    { n: 'Cazador de bugs', i: '🐞' },
+    { n: 'Mente semántica', i: '🧠' },
+    { n: 'Maestro de formularios', i: '📝' },
+    { n: 'Arquitecto HTML', i: '🏗️' },
+    { n: 'Maestro del marcado', i: '🎓' },
+    { n: 'Sensei de la web', i: '🥋' },
+    { n: 'Leyenda HTML5', i: '👑' }
+];
+var MAXLVL = BADGES.length;
+function lvlStart(L) { return L <= 1 ? 0 : 25 * (L - 1) * (L + 2); }   /* 0, 100, 250, 450, 700, 1000… */
+function levelOf(xp) { var L = 1; while (L < MAXLVL && xp >= lvlStart(L + 1)) L++; return L; }
+function diffOf(it) {
+    var b = { estructura: 1, texto: 1, semantica: 2, listas: 2, multimedia: 2, tablas: 3, formularios: 3 }[it.g] || 1;
+    return Math.min(3, b + (it.c === 'a' ? 1 : 0));
+}
+function quizDiff(t) { return t <= 3 ? 1 : t <= 5 ? 2 : 3; }
+function xpCalc(correct, o) {
+    o = o || {};
+    if (!correct) return o.skip ? 1 : 0;                         /* saltar: 1 XP · fallar: 0 */
+    var base = [0, 10, 15, 25][o.d || 1];                        /* fácil · media · difícil */
+    var hintF = 1 - 0.25 * Math.min(o.hints || 0, 3);            /* −25 % por pista */
+    return Math.max(2, Math.round(base * (o.m || 1) * hintF));
+}
+function xpTag(x) { return x ? ' <span class="xp-tag">+' + x + ' XP</span>' : ''; }
+
+function ensureHud() {
+    if ($('xpHud')) return;
+    var b = document.createElement('button');
+    b.type = 'button'; b.id = 'xpHud'; b.className = 'xp-hud'; b.title = 'Ver mi nivel e insignias';
+    b.innerHTML = '<span class="xp-hud__lvl" id="xpHudLvl">1</span><span class="xp-hud__txt"><b id="xpHudName">Nv 1</b><small id="xpHudXp">0 XP</small></span><span class="xp-hud__bar"><i id="xpHudBar"></i></span>';
+    b.addEventListener('click', function () { var t = $('tema8'); if (t) t.scrollIntoView({ behavior: 'smooth' }); });
+    document.body.appendChild(b);
+    var f = document.createElement('div'); f.id = 'xpFloat'; f.className = 'xp-float'; f.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(f);
+}
+function renderXp() {
+    var L = levelOf(S.xp), a = lvlStart(L), b = L >= MAXLVL ? a : lvlStart(L + 1);
+    var pct = L >= MAXLVL ? 100 : Math.round((S.xp - a) / (b - a) * 100);
+    var panel = $('xpPanel');
+    if (panel) {
+        var h = '<div class="xp__head"><div class="xp__lvl" aria-hidden="true">' + L + '</div><div class="xp__info">' +
+            '<div class="xp__title">Nivel ' + L + ' · ' + esc(BADGES[L - 1].n) + '</div>' +
+            '<div class="xp__sub">' + (L >= MAXLVL ? '¡Nivel máximo! ' + S.xp + ' XP' : S.xp + ' XP · faltan ' + (b - S.xp) + ' XP para el nivel ' + (L + 1)) + '</div>' +
+            '<div class="xp__bar" role="progressbar" aria-label="Progreso al siguiente nivel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><span style="width:' + pct + '%"></span></div>' +
+            '</div></div><div class="xp__badges">';
+        BADGES.forEach(function (bd, k) {
+            var on = k + 1 <= L;
+            h += '<div class="xp__badge' + (on ? ' on' : '') + '" title="' + (on ? 'Insignia desbloqueada' : 'Se desbloquea al llegar al nivel ' + (k + 1)) + '">' +
+                '<span class="xp__ico" aria-hidden="true">' + (on ? bd.i : '🔒') + '</span><span class="xp__bn">' + esc(bd.n) + '</span><span class="xp__bl">Nivel ' + (k + 1) + '</span></div>';
+        });
+        panel.innerHTML = h + '</div>';
+    }
+    ensureHud();
+    $('xpHudLvl').textContent = L; $('xpHudName').textContent = 'Nv ' + L; $('xpHudXp').textContent = S.xp + ' XP';
+    $('xpHudBar').style.width = pct + '%';
+}
+function xpToast(x) {
+    ensureHud();
+    var s = document.createElement('span'); s.textContent = '+' + x + ' XP';
+    var f = $('xpFloat'); f.appendChild(s);
+    setTimeout(function () { if (s.parentNode) s.parentNode.removeChild(s); }, 1600);
+}
+function levelUp(from, to) {
+    var old = document.querySelector('.xp-levelup'); if (old) old.remove();
+    var got = [];
+    for (var k = from + 1; k <= to; k++) got.push(BADGES[k - 1].i + ' ' + BADGES[k - 1].n);
+    var c = document.createElement('div');
+    c.className = 'xp-levelup'; c.setAttribute('role', 'status');
+    c.innerHTML = '<div class="xp-levelup__ico" aria-hidden="true">' + BADGES[to - 1].i + '</div>' +
+        '<div class="xp-levelup__t">¡Nivel ' + to + ' alcanzado!</div>' +
+        '<div class="xp-levelup__s">Insignia' + (got.length > 1 ? 's desbloqueadas' : ' desbloqueada') + ': <strong>' + esc(got.join(' · ')) + '</strong></div>';
+    function close() { c.classList.add('is-out'); setTimeout(function () { if (c.parentNode) c.parentNode.removeChild(c); }, 450); }
+    c.addEventListener('click', close);
+    document.body.appendChild(c);
+    setTimeout(close, 5200);
+}
+function gainXp(x) {
+    S.xp += x; xpToast(x);
+    var nl = levelOf(S.xp), from = S.lvl || 1;
+    if (nl > from) { S.lvl = nl; levelUp(from, nl); }
+}
+
+/* Registrar acierto/fallo global (+ XP). o = { d: dificultad 1-3, hints, skip, m: multiplicador, noXp } */
+function record(correct, o) {
+    if (correct) { S.ok++; streak++; if (streak > S.best) S.best = streak; }
+    else { S.ko++; streak = 0; }
+    var gain = (o && o.noXp) ? 0 : xpCalc(correct, o);
+    if (gain) gainXp(gain);
+    save(); renderStats();
+    return gain;
+}
+
+function renderStats() {
+    renderXp();
+    var tot = S.ok + S.ko;
+    var acc = tot ? Math.round(S.ok / tot * 100) : 0;
+    var read = Object.keys(S.read).filter(function (k) { return S.read[k]; }).length;
+    var mastered = TAGS.filter(function (it) { return (S.leit[it.t] || 1) >= 3; }).length;
+    var passed = Object.keys(S.quiz).filter(function (k) { return S.quiz[k] >= 75; }).length;
+    function kpi(l, v, pct) {
+        return '<div class="kpi"><div class="kpi__label">' + l + '</div><div class="kpi__value">' + v + '</div>' +
+            (pct === undefined ? '' : '<div class="kpi__bar"><span style="width:' + Math.min(100, pct) + '%"></span></div>') + '</div>';
+    }
+    $('labStats').innerHTML =
+        kpi('Aciertos', S.ok + ' <small style="font-size:.9rem;color:var(--text-muted)">/ ' + tot + '</small>') +
+        kpi('Precisión', acc + '%', acc) +
+        kpi('Mejor racha 🔥', S.best) +
+        kpi('Capítulos leídos', read + ' / 7', read / 7 * 100) +
+        kpi('Tarjetas dominadas', mastered + ' / ' + TAGS.length, mastered / TAGS.length * 100) +
+        kpi('Temas aprobados', passed + ' / 7', passed / 7 * 100);
+    // Marcas en el índice
+    document.querySelectorAll('.toc__inner a[data-section]').forEach(function (a) {
+        a.classList.toggle('is-read', !!S.read[a.dataset.section]);
+    });
+}
+
+/* Pantalla de resultados reutilizable */
+function resultHtml(score, max, wrong, againId, extra) {
+    var pct = max ? Math.round(score / max * 100) : 0;
+    var msg = pct >= 90 ? '¡Excelente! Dominas este bloque.' : pct >= 70 ? 'Muy bien, casi lo tienes.' : pct >= 50 ? 'Vas por buen camino. Repasa los fallos.' : 'Toca repasar la teoría y volver a intentarlo.';
+    var h = '<div class="result"><div class="result__score">' + score + ' / ' + max + '</div>' +
+        '<p class="result__msg"><strong>' + pct + '%</strong> · ' + msg + '</p>' + (extra || '');
+    if (wrong && wrong.length) {
+        h += '<h4 style="text-align:left">Para repasar</h4><ul class="review-list">';
+        wrong.forEach(function (w) { h += '<li>' + w + '</li>'; });
+        h += '</ul>';
+    }
+    h += '<div class="btn--row" style="justify-content:center"><button class="btn btn--primary" id="' + againId + '" type="button">Jugar de nuevo</button></div></div>';
+    return h;
+}
+
+/* ============================================================
+   PESTAÑAS
+   ============================================================ */
+var activeTab = 'sim';
+function showTab(name) {
+    activeTab = name;
+    document.querySelectorAll('#labTabs .lab__tab').forEach(function (b) {
+        b.setAttribute('aria-selected', b.dataset.tab === name ? 'true' : 'false');
+    });
+    document.querySelectorAll('.lab__panel').forEach(function (p) { p.hidden = p.id !== 'panel-' + name; });
+    stopTimer();
+    if (name === 'gloss') renderGloss();
+    if (name === 'flash') renderFlash();
+}
+$('labTabs').addEventListener('click', function (e) {
+    var b = e.target.closest('.lab__tab');
+    if (b) showTab(b.dataset.tab);
+});
+
+/* ============================================================
+   1) SIMULADOR · adivina la etiqueta (opción múltiple)
+   ============================================================ */
+var sim = null;
+
+function simStart() {
+    sim = {
+        mode: $('simMode').value, tema: $('simTema').value, n: parseInt($('simN').value, 10),
+        i: 0, score: 0, ok: 0, wrong: [], q: null, answered: false
+    };
+    var pool = poolFor(sim.tema);
+    sim.deck = shuffle(pool).slice(0, Math.min(sim.n, pool.length));
+    sim.n = sim.deck.length;
+    simNext();
+}
+function simConfig() {
+    sim = null;
+    $('simGame').innerHTML =
+        '<h3 style="margin-top:0">🎯 Simulador: ¿con qué etiqueta se hace?</h3>' +
+        '<p>Te muestro una descripción (o una etiqueta) y tienes que elegir la respuesta correcta. Las preguntas salen de la teoría del compendio.</p>' +
+        '<div class="answer-row" style="margin-bottom:.8rem">' +
+        '<select class="answer-input" id="simMode" style="font-family:inherit"><option value="d2t">Descripción → etiqueta</option><option value="t2d">Etiqueta → para qué sirve</option><option value="mixed">Modo mixto</option></select>' +
+        '<select class="answer-input" id="simTema" style="font-family:inherit">' + temaOptions() + '</select>' +
+        '<select class="answer-input" id="simN" style="font-family:inherit"><option value="10">10 preguntas</option><option value="20">20 preguntas</option><option value="999">Todas</option></select></div>' +
+        '<button class="btn btn--primary" id="simGo" type="button">Empezar</button>';
+}
+function simNext() {
+    if (sim.i >= sim.n) { simEnd(); return; }
+    var it = sim.deck[sim.i];
+    var m = sim.mode === 'mixed' ? (Math.random() < 0.5 ? 'd2t' : 't2d') : sim.mode;
+    var cands = TAGS.filter(function (x) { return x !== it && x.c === it.c && disp(x) !== disp(it) && accepted(it).indexOf(norm(x.t)) < 0; });
+    var same = shuffle(cands.filter(function (x) { return x.g === it.g; }));
+    var rest = shuffle(cands.filter(function (x) { return x.g !== it.g; }));
+    var opts = shuffle([it].concat(same.concat(rest).slice(0, 3)));
+    sim.q = { it: it, m: m, opts: opts };
+    sim.answered = false;
+    var h = '<div class="game__top"><span class="chip">Pregunta ' + (sim.i + 1) + ' / ' + sim.n + '</span>' +
+        '<span class="chip">⭐ ' + sim.score + ' pts</span><span class="chip chip--hot">🔥 Racha ' + streak + '</span></div>';
+    if (m === 'd2t') {
+        h += '<p class="game__prompt"><small>¿Con qué etiqueta o atributo se hace?</small>' + esc(it.d) + '</p><div class="options">';
+        opts.forEach(function (o, k) { h += '<button class="option" type="button" data-k="' + k + '">' + (k + 1) + '. ' + esc(disp(o)) + '</button>'; });
+    } else {
+        h += '<p class="game__prompt"><small>¿Para qué sirve?</small><code>' + esc(disp(it)) + '</code></p><div class="options" style="grid-template-columns:1fr">';
+        opts.forEach(function (o, k) { h += '<button class="option option--text" type="button" data-k="' + k + '">' + (k + 1) + '. ' + esc(o.d) + '</button>'; });
+    }
+    h += '</div><div class="feedback" id="simFb" aria-live="polite"></div><div class="btn--row"><button class="btn btn--primary" id="simNextBtn" type="button" hidden>Siguiente →</button></div>';
+    $('simGame').innerHTML = h;
+}
+function simAnswer(k) {
+    if (!sim || sim.answered) return;
+    sim.answered = true;
+    var q = sim.q, chosen = q.opts[k], right = chosen === q.it;
+    var btns = $('simGame').querySelectorAll('.option');
+    btns.forEach(function (b, idx) {
+        b.disabled = true;
+        if (q.opts[idx] === q.it) b.classList.add('ok');
+        else if (idx === k) b.classList.add('bad');
+    });
+    var gx = record(right, { d: diffOf(q.it) });
+    var fb = $('simFb');
+    if (right) {
+        var pts = 10 + Math.min(streak - 1, 5) * 2;
+        sim.score += pts; sim.ok++;
+        fb.className = 'feedback ok'; fb.innerHTML = '✅ ¡Correcto! +' + pts + ' puntos.' + xpTag(gx);
+    } else {
+        sim.wrong.push('<code>' + esc(disp(q.it)) + '</code> — ' + esc(q.it.d));
+        fb.className = 'feedback bad'; fb.innerHTML = '❌ Era <code>' + esc(disp(q.it)) + '</code>: ' + esc(q.it.d);
+    }
+    var nb = $('simNextBtn'); nb.hidden = false; nb.textContent = sim.i + 1 >= sim.n ? 'Ver resultado' : 'Siguiente →'; nb.focus();
+}
+function simEnd() {
+    $('simGame').innerHTML = resultHtml(sim.ok, sim.n, sim.wrong, 'simAgain', '<p class="result__msg">Puntos: <strong>' + sim.score + '</strong></p>');
+}
+$('simGame').addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.closest('#simGo')) simStart();
+    else if (t.closest('#simNextBtn')) { sim.i++; simNext(); }
+    else if (t.closest('#simAgain')) simConfig();
+    else if (t.closest('.option')) simAnswer(parseInt(t.closest('.option').dataset.k, 10));
+});
+
+/* ============================================================
+   2) MINIJUEGO · escribe la etiqueta (con tiempo y pistas)
+   ============================================================ */
+var typ = null, timerId = null;
+function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
+
+function typeConfig() {
+    stopTimer(); typ = null;
+    $('typeGame').innerHTML =
+        '<h3 style="margin-top:0">⌨️ Escribe la etiqueta</h3>' +
+        '<p>Te pido algo y tú escribes la etiqueta (o atributo) que lo hace. Da igual si pones los símbolos <code>&lt; &gt;</code> o no: <code>article</code> y <code>&lt;article&gt;</code> valen igual. Con tiempo y pistas que restan puntos.</p>' +
+        '<div class="answer-row" style="margin-bottom:.8rem">' +
+        '<select class="answer-input" id="typeDiff" style="font-family:inherit"><option value="0">Relajado (sin tiempo)</option><option value="25">Normal (25 s)</option><option value="12">Experto (12 s)</option></select>' +
+        '<select class="answer-input" id="typeTema" style="font-family:inherit">' + temaOptions() + '</select></div>' +
+        '<button class="btn btn--primary" id="typeGo" type="button">Empezar (10 rondas)</button>';
+}
+function typeStart() {
+    var pool = poolFor($('typeTema').value);
+    typ = { limit: parseInt($('typeDiff').value, 10), deck: shuffle(pool).slice(0, Math.min(10, pool.length)), i: 0, score: 0, ok: 0, wrong: [], hints: 0, left: 0, answered: false };
+    typeNext();
+}
+function typeNext() {
+    stopTimer();
+    if (typ.i >= typ.deck.length) { typeEnd(); return; }
+    var it = typ.deck[typ.i];
+    typ.hints = 0; typ.answered = false; typ.left = typ.limit;
+    $('typeGame').innerHTML =
+        '<div class="game__top"><span class="chip">Ronda ' + (typ.i + 1) + ' / ' + typ.deck.length + '</span><span class="chip">⭐ ' + typ.score + ' pts</span>' +
+        '<span class="chip chip--hot">🔥 ' + streak + '</span>' + (typ.limit ? '<span class="chip chip--time" id="typeTime">⏱ ' + typ.limit + ' s</span>' : '') + '</div>' +
+        '<p class="game__prompt"><small>Escribe la etiqueta o atributo que…</small>' + esc(it.d) + '</p>' +
+        '<div class="answer-row"><input class="answer-input" id="typeInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="p. ej. article" aria-label="Tu respuesta">' +
+        '<button class="btn btn--primary" id="typeCheck" type="button">Comprobar</button></div>' +
+        '<div class="btn--row"><button class="btn btn--ghost" id="typeHint" type="button">💡 Pista (−3 pts · −25 % XP)</button><button class="btn btn--ghost" id="typeSkip" type="button">Saltar</button></div>' +
+        '<div class="feedback" id="typeFb" aria-live="polite"></div>';
+    $('typeInput').focus();
+    if (typ.limit) {
+        timerId = setInterval(function () {
+            typ.left--;
+            var t = $('typeTime');
+            if (t) { t.textContent = '⏱ ' + Math.max(typ.left, 0) + ' s'; t.classList.toggle('low', typ.left <= 5); }
+            if (typ.left <= 0) { stopTimer(); typeResolve(false, true); }
+        }, 1000);
+    }
+}
+function typeHint() {
+    if (!typ || typ.answered) return;
+    var it = typ.deck[typ.i], ans = it.c === 'e' ? it.t : it.t;
+    typ.hints++;
+    var shown;
+    if (typ.hints === 1) shown = ans.replace(/[A-Za-z0-9]/g, '_');
+    else shown = ans.split('').map(function (ch, idx) { return idx < 2 ? ch : (/[A-Za-z0-9]/.test(ch) ? '_' : ch); }).join('');
+    $('typeFb').className = 'feedback';
+    $('typeFb').innerHTML = '💡 Pista ' + Math.min(typ.hints, 2) + ': <code>' + esc(shown) + '</code>' + (typ.hints === 1 ? ' (' + ans.replace(/[^A-Za-z0-9]/g, '').length + ' letras/números)' : '');
+}
+function typeCheck() {
+    if (!typ || typ.answered) return;
+    var v = norm($('typeInput').value);
+    if (!v) return;
+    typeResolve(accepted(typ.deck[typ.i]).indexOf(v) >= 0, false);
+}
+function typeResolve(right, timeout, skipped) {
+    if (typ.answered) return;
+    typ.answered = true; stopTimer();
+    var it = typ.deck[typ.i], inp = $('typeInput'), fb = $('typeFb');
+    inp.disabled = true; $('typeCheck').disabled = true; $('typeHint').disabled = true; $('typeSkip').disabled = true;
+    var gx = record(right, { d: diffOf(it), hints: typ.hints, skip: !!skipped, m: 1.5 + (typ.limit ? (typ.limit <= 12 ? 0.5 : 0.25) : 0) });
+    if (right) {
+        var bonus = typ.limit ? Math.ceil(typ.left / typ.limit * 5) : 0;
+        var pts = Math.max(3, 10 + bonus - typ.hints * 3 + Math.min(streak - 1, 5));
+        typ.score += pts; typ.ok++;
+        inp.classList.add('ok'); fb.className = 'feedback ok';
+        fb.innerHTML = '✅ ¡Correcto! <code>' + esc(disp(it)) + '</code> · +' + pts + ' puntos' + (bonus ? ' (incluye bonus de velocidad)' : '') + '.' + xpTag(gx);
+    } else {
+        typ.wrong.push('<code>' + esc(disp(it)) + '</code> — ' + esc(it.d));
+        inp.classList.add('bad'); fb.className = 'feedback bad';
+        fb.innerHTML = (timeout ? '⏰ ¡Se acabó el tiempo! ' : '❌ No era esa. ') + 'La respuesta es <code>' + esc(disp(it)) + '</code>.' + xpTag(gx);
+    }
+    var row = fb.parentNode.querySelector('.btn--row');
+    row.innerHTML = '<button class="btn btn--primary" id="typeNext" type="button">' + (typ.i + 1 >= typ.deck.length ? 'Ver resultado' : 'Siguiente →') + '</button>';
+    $('typeNext').focus();
+}
+function typeEnd() {
+    $('typeGame').innerHTML = resultHtml(typ.ok, typ.deck.length, typ.wrong, 'typeAgain', '<p class="result__msg">Puntos: <strong>' + typ.score + '</strong></p>');
+}
+$('typeGame').addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.closest('#typeGo')) typeStart();
+    else if (t.closest('#typeCheck')) typeCheck();
+    else if (t.closest('#typeHint')) typeHint();
+    else if (t.closest('#typeSkip')) typeResolve(false, false, true);
+    else if (t.closest('#typeNext')) { typ.i++; typeNext(); }
+    else if (t.closest('#typeAgain')) typeConfig();
+});
+$('typeGame').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && e.target.id === 'typeInput') { e.preventDefault(); typeCheck(); }
+});
+
+/* ============================================================
+   3) FLASHCARDS · sistema Leitner (3 cajas)
+   ============================================================ */
+var fl = { dir: 'd2t', tema: 'all', cur: null, flipped: false };
+function boxOf(it) { return S.leit[it.t] || 1; }
+function flashPick() {
+    var pool = poolFor(fl.tema), W = { 1: 5, 2: 2, 3: 1 }, bag = [];
+    pool.forEach(function (it) {
+        if (pool.length > 1 && it === fl.cur) return;
+        for (var k = 0; k < W[boxOf(it)]; k++) bag.push(it);
+    });
+    fl.cur = bag[Math.floor(Math.random() * bag.length)];
+    fl.flipped = false;
+}
+function renderFlash() {
+    if (!fl.cur || poolFor(fl.tema).indexOf(fl.cur) < 0) flashPick();
+    var it = fl.cur, pool = poolFor(fl.tema), c = { 1: 0, 2: 0, 3: 0 };
+    pool.forEach(function (x) { c[boxOf(x)]++; });
+    var front, back;
+    if (fl.dir === 'd2t') {
+        front = '<span class="flash__label">Definición</span><span class="flash__text">' + esc(it.d) + '</span><span class="flash__hint">Toca la tarjeta para ver la etiqueta</span>';
+        back = '<span class="flash__label">Etiqueta</span><span class="flash__big">' + esc(disp(it)) + '</span>';
+    } else {
+        front = '<span class="flash__label">Etiqueta</span><span class="flash__big">' + esc(disp(it)) + '</span><span class="flash__hint">Toca la tarjeta para ver su función</span>';
+        back = '<span class="flash__label">Función</span><span class="flash__text">' + esc(it.d) + '</span>';
+    }
+    $('flashGame').innerHTML =
+        '<h3 style="margin-top:0">🃏 Flashcards con repetición espaciada</h3>' +
+        '<p>Las que fallas vuelven antes; las que aciertas se espacian. Caja 1 = nueva/difícil, caja 3 = dominada.</p>' +
+        '<div class="answer-row" style="margin-bottom:1rem">' +
+        '<select class="answer-input" id="flTema" style="font-family:inherit">' + temaOptions() + '</select>' +
+        '<button class="btn" id="flDir" type="button">⇄ ' + (fl.dir === 'd2t' ? 'Definición → etiqueta' : 'Etiqueta → función') + '</button></div>' +
+        '<div class="flash-wrap"><button class="flash' + (fl.flipped ? ' flipped' : '') + '" id="flCard" type="button" aria-label="Voltear tarjeta">' +
+        '<span class="flash__face">' + front + '</span><span class="flash__face flash__face--back">' + back + '</span></button></div>' +
+        '<div class="btn--row" style="justify-content:center">' +
+        '<button class="btn" id="flNo" type="button"' + (fl.flipped ? '' : ' disabled') + '>😕 No la sabía</button>' +
+        '<button class="btn btn--primary" id="flYes" type="button"' + (fl.flipped ? '' : ' disabled') + '>✅ La sabía</button></div>' +
+        '<div class="leitner"><span class="chip">Caja 1: <strong>' + c[1] + '</strong></span><span class="chip">Caja 2: <strong>' + c[2] + '</strong></span><span class="chip">Caja 3: <strong>' + c[3] + '</strong></span>' +
+        '<span class="chip">Esta tarjeta: caja <strong>' + boxOf(it) + '</strong></span></div>';
+    $('flTema').value = fl.tema;
+}
+function flashRate(yes) {
+    if (!fl.flipped) return;
+    S.leit[fl.cur.t] = yes ? Math.min(3, boxOf(fl.cur) + 1) : 1;
+    record(yes, { d: diffOf(fl.cur), m: 0.6 });
+    flashPick(); renderFlash();
+}
+$('flashGame').addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.closest('#flCard')) { fl.flipped = !fl.flipped; $('flCard').classList.toggle('flipped', fl.flipped); $('flNo').disabled = $('flYes').disabled = !fl.flipped; }
+    else if (t.closest('#flYes')) flashRate(true);
+    else if (t.closest('#flNo')) flashRate(false);
+    else if (t.closest('#flDir')) { fl.dir = fl.dir === 'd2t' ? 't2d' : 'd2t'; fl.flipped = false; renderFlash(); }
+});
+$('flashGame').addEventListener('change', function (e) {
+    if (e.target.id === 'flTema') { fl.tema = e.target.value; fl.cur = null; renderFlash(); }
+});
+
+/* ============================================================
+   4) TEST POR TEMAS (con modo examen y repaso de fallos)
+   ============================================================ */
+var qz = null;
+if (!S.qfail) S.qfail = {};
+function quizConfig() {
+    qz = null;
+    var h = '<h3 style="margin-top:0">📝 Test por temas</h3><p>Elige un tema, un test mixto o repasa solo las preguntas que has fallado. Apruebas un tema con un 75 % o más.</p>' +
+        '<div class="answer-row" style="margin-bottom:.8rem"><select class="answer-input" id="qzTema" style="font-family:inherit">';
+    for (var k = 1; k <= 7; k++) h += '<option value="' + k + '">Tema ' + k + (S.quiz[k] !== undefined ? ' · mejor: ' + S.quiz[k] + '%' : '') + '</option>';
+    var nf = Object.keys(S.qfail).filter(function (x) { return S.qfail[x]; }).length;
+    h += '<option value="all">Mixto (10 al azar)</option><option value="fails">Repaso de fallos (' + nf + ')</option></select></div>' +
+        '<label style="display:flex;gap:.5rem;align-items:center;margin-bottom:1rem;font-size:.9rem;color:var(--text-2)"><input type="checkbox" id="qzExam"> Modo examen (la corrección se muestra al final)</label>' +
+        '<button class="btn btn--primary" id="qzGo" type="button">Empezar test</button>';
+    $('quizGame').innerHTML = h;
+}
+function quizStart() {
+    var sel = $('qzTema').value, exam = $('qzExam').checked, idx = [];
+    QUIZ.forEach(function (q, i) {
+        if (sel === 'all' || sel === 'fails' ? true : String(q.tema) === sel) idx.push(i);
+    });
+    if (sel === 'fails') idx = idx.filter(function (i) { return S.qfail[i]; });
+    if (!idx.length) { $('quizGame').insertAdjacentHTML('beforeend', '<div class="feedback">No tienes preguntas falladas guardadas. ¡Buen trabajo!</div>'); return; }
+    idx = shuffle(idx); if (sel === 'all') idx = idx.slice(0, 10);
+    qz = { sel: sel, exam: exam, list: idx, i: 0, ok: 0, wrong: [], answered: false };
+    quizNext();
+}
+function quizNext() {
+    if (qz.i >= qz.list.length) { quizEnd(); return; }
+    var q = QUIZ[qz.list[qz.i]];
+    qz.opts = shuffle(q.o.map(function (t, k) { return { t: t, right: k === q.a }; }));
+    qz.answered = false;
+    var h = '<div class="game__top"><span class="chip">Pregunta ' + (qz.i + 1) + ' / ' + qz.list.length + '</span><span class="chip">Tema ' + q.tema + '</span>' + (qz.exam ? '<span class="chip">Modo examen</span>' : '') + '</div>' +
+        '<p class="game__prompt">' + esc(q.q) + '</p><div class="options" style="grid-template-columns:1fr">';
+    qz.opts.forEach(function (o, k) { h += '<button class="option option--text" type="button" data-k="' + k + '">' + String.fromCharCode(65 + k) + '. ' + esc(o.t) + '</button>'; });
+    h += '</div><div class="feedback" id="qzFb" aria-live="polite"></div><div class="btn--row"><button class="btn btn--primary" id="qzNext" type="button" hidden>Siguiente →</button></div>';
+    $('quizGame').innerHTML = h;
+}
+function quizAnswer(k) {
+    if (!qz || qz.answered) return;
+    qz.answered = true;
+    var qi = qz.list[qz.i], q = QUIZ[qi], right = qz.opts[k].right;
+    var gx = record(right, { d: quizDiff(q.tema), m: qz.exam ? 1.25 : 1 });
+    if (right) { qz.ok++; delete S.qfail[qi]; }
+    else { S.qfail[qi] = true; qz.wrong.push('<strong>' + esc(q.q) + '</strong><br>Respuesta: ' + esc(q.o[q.a]) + '. ' + esc(q.e)); }
+    save();
+    if (qz.exam) { qz.i++; quizNext(); return; }
+    $('quizGame').querySelectorAll('.option').forEach(function (b, idx) {
+        b.disabled = true;
+        if (qz.opts[idx].right) b.classList.add('ok'); else if (idx === k) b.classList.add('bad');
+    });
+    var fb = $('qzFb'); fb.className = 'feedback ' + (right ? 'ok' : 'bad');
+    fb.innerHTML = (right ? '✅ ¡Correcto! ' : '❌ Incorrecto. ') + esc(q.e) + xpTag(gx);
+    var nb = $('qzNext'); nb.hidden = false; nb.textContent = qz.i + 1 >= qz.list.length ? 'Ver resultado' : 'Siguiente →'; nb.focus();
+}
+function quizEnd() {
+    var pct = Math.round(qz.ok / qz.list.length * 100), extra = '';
+    if (/^[1-7]$/.test(qz.sel)) {
+        if (S.quiz[qz.sel] === undefined || pct > S.quiz[qz.sel]) S.quiz[qz.sel] = pct;
+        save(); renderStats();
+        extra = '<p class="result__msg">' + (pct >= 75 ? '🏅 ¡Tema ' + qz.sel + ' aprobado!' : 'Necesitas 75 % para aprobar el tema ' + qz.sel + '.') + '</p>';
+    }
+    $('quizGame').innerHTML = resultHtml(qz.ok, qz.list.length, qz.wrong, 'qzAgain', extra);
+}
+$('quizGame').addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.closest('#qzGo')) quizStart();
+    else if (t.closest('#qzNext')) { qz.i++; quizNext(); }
+    else if (t.closest('#qzAgain')) quizConfig();
+    else if (t.closest('.option')) quizAnswer(parseInt(t.closest('.option').dataset.k, 10));
+});
+
+/* ============================================================
+   5) DETECTA EL ERROR · clic en la línea incorrecta
+   ============================================================ */
+var bg = null;
+function bugConfig() {
+    bg = null;
+    $('bugGame').innerHTML = '<h3 style="margin-top:0">🐞 Detecta el error</h3>' +
+        '<p>Cada fragmento de HTML contiene <strong>un fallo</strong> relacionado con la teoría (anidamiento, jerarquía, formularios…). Haz clic en la línea incorrecta.</p>' +
+        '<button class="btn btn--primary" id="bgGo" type="button">Empezar (' + BUGS.length + ' casos)</button>';
+}
+function bugNext() {
+    if (bg.i >= bg.deck.length) {
+        $('bugGame').innerHTML = resultHtml(bg.ok, bg.deck.length, bg.wrong, 'bgAgain'); return;
+    }
+    var b = bg.deck[bg.i]; bg.answered = false;
+    var h = '<div class="game__top"><span class="chip">Caso ' + (bg.i + 1) + ' / ' + bg.deck.length + '</span><span class="chip chip--hot">🔥 ' + streak + '</span></div>' +
+        '<p class="game__prompt"><small>Encuentra el error</small>¿Qué línea está mal?</p><div class="code-lines">';
+    b.code.forEach(function (ln, k) {
+        h += '<button class="code-line" type="button" data-k="' + k + '"><span class="ln">' + (k + 1) + '</span><span>' + esc(ln) + '</span></button>';
+    });
+    h += '</div><div class="feedback" id="bgFb" aria-live="polite"></div><div class="btn--row"><button class="btn btn--primary" id="bgNext" type="button" hidden>Siguiente →</button></div>';
+    $('bugGame').innerHTML = h;
+}
+function bugAnswer(k) {
+    if (!bg || bg.answered) return; bg.answered = true;
+    var b = bg.deck[bg.i], right = k === b.bad;
+    $('bugGame').querySelectorAll('.code-line').forEach(function (l, idx) {
+        l.disabled = true;
+        if (idx === b.bad) l.classList.add('ok'); else if (idx === k) l.classList.add('bad');
+    });
+    var gx = record(right, { d: 2 });
+    var fb = $('bgFb'); fb.className = 'feedback ' + (right ? 'ok' : 'bad');
+    if (right) { bg.ok++; S.done.bug++; save(); fb.innerHTML = '✅ ¡Bien visto! ' + esc(b.why) + xpTag(gx); }
+    else { bg.wrong.push('<strong>' + esc(b.t) + '</strong>: ' + esc(b.why)); fb.innerHTML = '❌ El error estaba en la línea ' + (b.bad + 1) + '. ' + esc(b.why); }
+    var nb = $('bgNext'); nb.hidden = false; nb.textContent = bg.i + 1 >= bg.deck.length ? 'Ver resultado' : 'Siguiente →'; nb.focus();
+}
+$('bugGame').addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.closest('#bgGo')) { bg = { deck: shuffle(BUGS), i: 0, ok: 0, wrong: [], answered: false }; bugNext(); }
+    else if (t.closest('#bgNext')) { bg.i++; bugNext(); }
+    else if (t.closest('#bgAgain')) bugConfig();
+    else if (t.closest('.code-line')) bugAnswer(parseInt(t.closest('.code-line').dataset.k, 10));
+});
+
+/* ============================================================
+   6) ORDENA EL ESQUELETO · arrastrar y soltar (o ▲▼)
+   ============================================================ */
+var so = { n: 0, order: [], checked: false };
+function sortConfig() {
+    so.n = 0; sortLoad();
+}
+function sortLoad() {
+    var ex = SORTS[so.n], idx = ex.lines.map(function (_, i) { return i; }), ord = idx, tries = 0;
+    do { ord = shuffle(idx); tries++; } while (tries < 20 && ord.every(function (v, i) { return ex.lines[v] === ex.lines[i]; }));
+    so.order = ord; so.checked = false; so.paid = false; sortRender();
+}
+function sortRender(marks) {
+    var ex = SORTS[so.n];
+    var h = '<h3 style="margin-top:0">🧩 Ordena el esqueleto</h3>' +
+        '<p>Ejercicio ' + (so.n + 1) + ' / ' + SORTS.length + ': <strong>' + esc(ex.t) + '</strong>. Arrastra las líneas (o usa ▲ ▼) hasta formar el código correcto.</p><ul class="sortlist" id="sortList">';
+    so.order.forEach(function (li, pos) {
+        var cls = marks ? (marks[pos] ? ' ok' : ' bad') : '';
+        h += '<li class="sortitem' + cls + '" draggable="true" data-pos="' + pos + '"><span class="sortitem__grip" aria-hidden="true">⠿</span>' +
+            '<span class="sortitem__txt">' + esc(ex.lines[li]) + '</span><span class="sortitem__btns">' +
+            '<button class="mini" type="button" data-mv="-1" aria-label="Subir">▲</button><button class="mini" type="button" data-mv="1" aria-label="Bajar">▼</button></span></li>';
+    });
+    h += '</ul><div class="feedback" id="soFb" aria-live="polite"></div><div class="btn--row">' +
+        '<button class="btn btn--primary" id="soCheck" type="button">Comprobar</button>' +
+        '<button class="btn" id="soShuffle" type="button">Mezclar</button>' +
+        '<button class="btn btn--ghost" id="soNext" type="button">Otro ejercicio →</button></div>';
+    $('sortGame').innerHTML = h;
+}
+function sortMove(from, to) {
+    if (to < 0 || to >= so.order.length || from === to) return;
+    var v = so.order.splice(from, 1)[0]; so.order.splice(to, 0, v);
+    sortRender();
+}
+function sortCheck() {
+    var ex = SORTS[so.n];
+    var marks = so.order.map(function (li, pos) { return ex.lines[li] === ex.lines[pos]; });
+    var all = marks.every(Boolean);
+    sortRender(marks);
+    var fb = $('soFb');
+    var first = all && !so.paid;
+    var gx = record(all, { d: 3, noXp: all && !first });
+    if (all) { so.paid = true; if (first) S.done.sort++; save(); renderStats(); fb.className = 'feedback ok'; fb.innerHTML = '✅ ¡Perfecto! El orden es correcto.' + xpTag(gx); }
+    else { fb.className = 'feedback bad'; fb.textContent = '❌ Hay ' + marks.filter(function (m) { return !m; }).length + ' línea(s) fuera de lugar (en rojo). Revisa el anidamiento y el orden.'; }
+}
+var dragPos = null;
+$('sortGame').addEventListener('dragstart', function (e) {
+    var it = e.target.closest('.sortitem'); if (!it) return;
+    dragPos = parseInt(it.dataset.pos, 10); it.classList.add('dragging');
+    try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', String(dragPos)); } catch (er) {}
+});
+$('sortGame').addEventListener('dragover', function (e) {
+    var it = e.target.closest('.sortitem'); if (!it || dragPos === null) return;
+    e.preventDefault();
+    $('sortGame').querySelectorAll('.sortitem.over').forEach(function (x) { x.classList.remove('over'); });
+    it.classList.add('over');
+});
+$('sortGame').addEventListener('drop', function (e) {
+    var it = e.target.closest('.sortitem'); if (!it || dragPos === null) return;
+    e.preventDefault();
+    var to = parseInt(it.dataset.pos, 10), from = dragPos; dragPos = null;
+    sortMove(from, to);
+});
+$('sortGame').addEventListener('dragend', function () {
+    dragPos = null;
+    $('sortGame').querySelectorAll('.sortitem').forEach(function (x) { x.classList.remove('dragging', 'over'); });
+});
+$('sortGame').addEventListener('click', function (e) {
+    var t = e.target, mv = t.closest('[data-mv]');
+    if (mv) { var p = parseInt(mv.closest('.sortitem').dataset.pos, 10); sortMove(p, p + parseInt(mv.dataset.mv, 10)); }
+    else if (t.closest('#soCheck')) sortCheck();
+    else if (t.closest('#soShuffle')) sortLoad();
+    else if (t.closest('#soNext')) { so.n = (so.n + 1) % SORTS.length; sortLoad(); }
+});
+
+/* ============================================================
+   7) RELACIONAR COLUMNAS · etiqueta ↔ función
+   ============================================================ */
+var mt = null;
+function matchConfig() { matchStart(); }
+function matchStart() {
+    var gs = ['estructura', 'texto', 'semantica', 'listas', 'tablas', 'formularios'];
+    var g = gs[Math.floor(Math.random() * gs.length)];
+    var pool = shuffle(TAGS.filter(function (x) { return x.g === g; })).slice(0, 5);
+    mt = { g: g, items: pool, left: shuffle(pool), right: shuffle(pool), sel: null, done: {}, errors: 0 };
+    matchRender();
+}
+function matchRender() {
+    var h = '<h3 style="margin-top:0">🔗 Relacionar columnas</h3>' +
+        '<p>Bloque: <strong>' + esc(GROUPS[mt.g].n) + '</strong>. Pulsa una etiqueta y después su función.</p><div class="match"><div class="match__col">';
+    mt.left.forEach(function (it, k) {
+        h += '<button class="match__item match__item--tag' + (mt.done[it.t] ? ' done' : '') + (mt.sel === it ? ' sel' : '') + '" type="button" data-side="l" data-k="' + k + '"' + (mt.done[it.t] ? ' disabled' : '') + '>' + esc(disp(it)) + '</button>';
+    });
+    h += '</div><div class="match__col">';
+    mt.right.forEach(function (it, k) {
+        h += '<button class="match__item' + (mt.done[it.t] ? ' done' : '') + '" type="button" data-side="r" data-k="' + k + '"' + (mt.done[it.t] ? ' disabled' : '') + '>' + esc(it.d) + '</button>';
+    });
+    var fin = Object.keys(mt.done).length === mt.items.length;
+    h += '</div></div><div class="feedback' + (fin ? ' ok' : '') + '" id="mtFb" aria-live="polite">' +
+        (fin ? '🎉 ¡Completado con ' + mt.errors + ' error(es)!' : '') + '</div><div class="btn--row"><button class="btn ' + (fin ? 'btn--primary' : '') + '" id="mtNew" type="button">Otra ronda</button></div>';
+    $('matchGame').innerHTML = h;
+}
+$('matchGame').addEventListener('click', function (e) {
+    var b = e.target.closest('.match__item'), t = e.target;
+    if (t.closest('#mtNew')) { matchStart(); return; }
+    if (!b || b.disabled) return;
+    var k = parseInt(b.dataset.k, 10);
+    if (b.dataset.side === 'l') { mt.sel = mt.left[k]; matchRender(); return; }
+    if (!mt.sel) { $('mtFb').textContent = 'Primero elige una etiqueta de la columna izquierda.'; return; }
+    var it = mt.right[k];
+    if (it === mt.sel) {
+        mt.done[it.t] = true; mt.sel = null; record(true, { d: diffOf(it) });
+        if (Object.keys(mt.done).length === mt.items.length) { S.done.match++; save(); }
+        matchRender();
+    } else {
+        mt.errors++; record(false);
+        b.classList.add('bad');
+        $('mtFb').className = 'feedback bad'; $('mtFb').textContent = '❌ Esa función no corresponde. Inténtalo otra vez.';
+        setTimeout(function () { b.classList.remove('bad'); }, 400);
+    }
+});
+
+/* ============================================================
+   8) PLAYGROUND · editor en vivo con ejercicios validados
+   ============================================================ */
+var pl = { n: 0 }, plTimer = null;
+if (!S.pd) S.pd = {};
+function playConfig() { playRender(); }
+function playRender() {
+    var ex = PLAY[pl.n], h = '<h3 style="margin-top:0">🛠️ Playground HTML</h3>' +
+        '<p>Escribe HTML a la izquierda y mira el resultado a la derecha. Cada ejercicio se valida automáticamente.</p>' +
+        '<div class="answer-row" style="margin-bottom:.8rem"><select class="answer-input" id="plSel" style="font-family:inherit">';
+    PLAY.forEach(function (p, i) { h += '<option value="' + i + '"' + (i === pl.n ? ' selected' : '') + '>' + (S.pd[i] ? '✓ ' : '') + (i + 1) + '. ' + esc(p.t) + '</option>'; });
+    h += '</select><button class="btn" id="plReset" type="button">Restablecer</button></div>' +
+        '<div class="play__task"><strong>Reto:</strong> ' + esc(ex.task) + '</div>' +
+        '<div class="play"><textarea class="play__editor" id="plEditor" spellcheck="false" aria-label="Editor de HTML"></textarea>' +
+        '<iframe class="play__preview" id="plPreview" sandbox="" title="Vista previa"></iframe></div>' +
+        '<ul class="checklist" id="plChecks"></ul><div class="feedback" id="plFb" aria-live="polite"></div>';
+    $('playGame').innerHTML = h;
+    $('plEditor').value = ex.start;
+    playUpdate();
+}
+function playUpdate() {
+    var ex = PLAY[pl.n], code = $('plEditor').value;
+    $('plPreview').srcdoc = '<!doctype html><meta charset="utf-8"><style>body{font:15px/1.5 system-ui,sans-serif;padding:12px;color:#111}table,th,td{border:1px solid #888;border-collapse:collapse;padding:6px 10px}th{background:#eef}header,footer,main,article,nav,aside,section{display:block;border:1px dashed #aaa;margin:4px 0;padding:6px}</style>' + code;
+    var doc = new DOMParser().parseFromString(code, 'text/html'), all = true, h = '';
+    ex.checks.forEach(function (c) {
+        var ok = false; try { ok = !!c[1](doc); } catch (e) {}
+        if (!ok) all = false;
+        h += '<li class="' + (ok ? 'ok' : '') + '">' + esc(c[0]) + '</li>';
+    });
+    $('plChecks').innerHTML = h;
+    var fb = $('plFb');
+    if (all && code.trim()) {
+        fb.className = 'feedback ok'; fb.textContent = '🎉 ¡Ejercicio superado!';
+        if (!S.pd[pl.n]) { S.pd[pl.n] = true; S.done.play = Object.keys(S.pd).length; save(); record(true, { d: 3, m: 1.5 }); }
+    } else { fb.className = 'feedback'; fb.textContent = ''; }
+}
+$('playGame').addEventListener('input', function (e) {
+    if (e.target.id !== 'plEditor') return;
+    clearTimeout(plTimer); plTimer = setTimeout(playUpdate, 250);
+});
+$('playGame').addEventListener('change', function (e) {
+    if (e.target.id === 'plSel') { pl.n = parseInt(e.target.value, 10); playRender(); }
+});
+$('playGame').addEventListener('click', function (e) {
+    if (e.target.closest('#plReset')) playRender();
+});
+$('playGame').addEventListener('keydown', function (e) {
+    if (e.target.id === 'plEditor' && e.key === 'Tab') {
+        e.preventDefault();
+        var ta = e.target, s = ta.selectionStart;
+        ta.value = ta.value.slice(0, s) + '  ' + ta.value.slice(ta.selectionEnd);
+        ta.selectionStart = ta.selectionEnd = s + 2;
+    }
+});
+
+/* ============================================================
+   9) GLOSARIO · búsqueda y filtros
+   ============================================================ */
+var gl = { q: '', g: 'all', built: false };
+function renderGloss() {
+    if (!gl.built) {
+        var h = '<h3 style="margin-top:0">📚 Glosario de etiquetas y atributos</h3>' +
+            '<input class="gloss-search" id="glQ" type="search" placeholder="Buscar etiqueta o función…" aria-label="Buscar en el glosario" autocomplete="off">' +
+            '<div class="gloss-filters" id="glF"><button class="chip" type="button" data-g="all" aria-pressed="true">Todos</button>';
+        for (var g in GROUPS) h += '<button class="chip" type="button" data-g="' + g + '" aria-pressed="false">' + GROUPS[g].n + '</button>';
+        h += '</div><div class="gloss-grid" id="glGrid"></div>';
+        $('glossGame').innerHTML = h; gl.built = true;
+    }
+    var q = gl.q.trim().toLowerCase();
+    var list = TAGS.filter(function (it) {
+        return (gl.g === 'all' || it.g === gl.g) && (!q || (disp(it) + ' ' + it.d).toLowerCase().indexOf(q) >= 0);
+    });
+    $('glGrid').innerHTML = list.length ? list.map(function (it) {
+        return '<div class="gloss-item"><code>' + esc(disp(it)) + '</code> <small>' + (it.c === 'a' ? 'atributo' : 'elemento') + ' · <a href="#tema' + temaOf(it) + '">tema ' + temaOf(it) + '</a></small><p>' + esc(it.d) + '</p></div>';
+    }).join('') : '<p>Sin resultados.</p>';
+}
+$('glossGame').addEventListener('input', function (e) { if (e.target.id === 'glQ') { gl.q = e.target.value; renderGloss(); } });
+$('glossGame').addEventListener('click', function (e) {
+    var c = e.target.closest('#glF .chip'); if (!c) return;
+    gl.g = c.dataset.g;
+    document.querySelectorAll('#glF .chip').forEach(function (x) { x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); });
+    renderGloss();
+});
+
+/* ============================================================
+   HERRAMIENTAS EN CADA TEMA · marcar como leído + notas
+   ============================================================ */
+var noteTimer = null;
+function buildSectionTools() {
+    for (var n = 1; n <= 7; n++) {
+        (function (id) {
+            var sec = $(id); if (!sec || sec.querySelector('.read-toggle')) return;
+            var b = document.createElement('button');
+            b.type = 'button'; b.className = 'read-toggle'; b.dataset.sec = id;
+            var ta = document.createElement('textarea');
+            ta.className = 'note'; ta.dataset.sec = id; ta.placeholder = '📝 Mis notas de este tema (se guardan en tu navegador)…'; ta.setAttribute('aria-label', 'Notas personales del tema');
+            sec.appendChild(b); sec.appendChild(ta);
+        })('tema' + n);
+    }
+    syncSectionTools();
+}
+function syncSectionTools() {
+    document.querySelectorAll('.read-toggle').forEach(function (b) {
+        var on = !!S.read[b.dataset.sec];
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        b.textContent = on ? '✓ Tema leído' : '○ Marcar tema como leído';
+    });
+    document.querySelectorAll('textarea.note').forEach(function (t) { t.value = S.notes[t.dataset.sec] || ''; });
+}
+document.addEventListener('click', function (e) {
+    var b = e.target.closest('.read-toggle'); if (!b) return;
+    S.read[b.dataset.sec] = !S.read[b.dataset.sec]; save(); syncSectionTools(); renderStats();
+});
+document.addEventListener('input', function (e) {
+    var t = e.target; if (!t.classList || !t.classList.contains('note')) return;
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(function () { S.notes[t.dataset.sec] = t.value; save(); }, 400);
+});
+
+/* ============================================================
+   ATAJOS, BÚSQUEDA GLOBAL, REINICIO E INICIALIZACIÓN
+   ============================================================ */
+function labVisible() {
+    var r = $('tema8').getBoundingClientRect();
+    return r.top < window.innerHeight * 0.7 && r.bottom > 100;
+}
+document.addEventListener('keydown', function (e) {
+    var tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || tag === 'select' || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (!labVisible()) return;
+    if (activeTab === 'sim' && sim && sim.q && /^[1-4]$/.test(e.key)) simAnswer(parseInt(e.key, 10) - 1);
+    if (activeTab === 'flash' && fl.cur) {
+        if (e.key === ' ' && tag !== 'button') { e.preventDefault(); $('flCard').click(); }
+        else if (fl.flipped && e.key === '1') flashRate(false);
+        else if (fl.flipped && e.key === '2') flashRate(true);
+    }
+});
+(function () {
+    var si = $('searchInput');
+    si.addEventListener('input', function () { $('tema8').hidden = !!si.value.trim(); });
+    si.addEventListener('keydown', function (e) { if (e.key === 'Escape') $('tema8').hidden = false; });
+})();
+$('resetProgress').addEventListener('click', function () {
+    if (!window.confirm('¿Seguro que quieres borrar todo tu progreso, notas y marcas de lectura?')) return;
+    S = defState(); S.qfail = {}; S.pd = {}; streak = 0; save();
+    fl.cur = null; gl.built = false;
+    syncSectionTools(); renderStats(); simConfig(); typeConfig(); quizConfig(); bugConfig(); sortConfig(); matchConfig(); playConfig();
+    showTab('sim');
+});
+
+buildSectionTools();
+renderStats(); simConfig(); typeConfig(); quizConfig(); bugConfig(); sortConfig(); matchConfig(); playConfig();
+
+})();
+</script>
+</body>
+</html>
