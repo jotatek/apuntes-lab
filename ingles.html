@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#012169">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23012169'/%3E%3Cpath d='M0 0l64 64M64 0L0 64' stroke='%23fff' stroke-width='8'/%3E%3Cpath d='M0 0l64 64M64 0L0 64' stroke='%23C8102E' stroke-width='3.5'/%3E%3Cpath d='M32 0v64M0 32h64' stroke='%23fff' stroke-width='15'/%3E%3Cpath d='M32 0v64M0 32h64' stroke='%23C8102E' stroke-width='8'/%3E%3C/svg%3E">
+<script>(function(){try{var s=localStorage.getItem('theme')||'auto';var d=s==='dark'||(s==='auto'&&matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.classList.toggle('dark',d);}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Inglés · Units 10 y 11 · Apuntes</title>
+<style>
+:root{
+  --uk-navy:#012169;
+  --uk-navy-dark:#00113d;
+  --uk-navy-soft:#4a69bd;
+  --uk-red:#C8102E;
+  --uk-red-dark:#8b0b20;
+  --uk-white:#ffffff;
+  --bg:#fafaf7;
+  --surface:#ffffff;
+  --surface-2:#f4f4ee;
+  --border:#e5e5dc;
+  --border-strong:#c9c9bc;
+  --text:#1a1a1a;
+  --text-soft:#454542;
+  --text-muted:#767670;
+  --example-bg:#fdf8e9;
+  --example-border:#e8d9a8;
+  --tip-bg:#eaf3ea;
+  --tip-border:#b8d4b8;
+  --warn-bg:#fdecec;
+  --warn-border:#f0b8b8;
+  --code-bg:#f2f2ee;
+  --code-text:#333;
+  --ok:#3d8b5e;
+  --bad:var(--uk-red);
+  --shadow-sm:0 1px 2px rgba(1,33,105,0.06);
+  --shadow-md:0 2px 8px rgba(1,33,105,0.08);
+  --radius:10px;
+  --radius-lg:14px;
+}
+html.dark{
+  --bg:#15171a;
+  --surface:#1d2025;
+  --surface-2:#23272d;
+  --border:#2d3238;
+  --border-strong:#3d434a;
+  --text:#e8eaec;
+  --text-soft:#c7cbd0;
+  --text-muted:#8a9199;
+  --uk-navy:#4a69bd;
+  --uk-navy-dark:#012169;
+  --uk-navy-soft:#93b4f5;
+  --uk-red:#f87171;
+  --uk-red-dark:#e57373;
+  --example-bg:#2a2820;
+  --example-border:#4a4530;
+  --tip-bg:#1c2a1f;
+  --tip-border:#2e4a33;
+  --warn-bg:#2a1e1e;
+  --warn-border:#4a2e2e;
+  --code-bg:#26292e;
+  --code-text:#d8dbde;
+  --ok:#7bc99a;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:130px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:"Inter",system-ui,-apple-system,sans-serif;
+  font-size:17px;
+  line-height:1.75;
+  color:var(--text);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:rgba(200,16,46,0.2)}
+a{color:var(--uk-navy);text-decoration:none;border-bottom:1px solid transparent;transition:all .15s}
+a:hover{border-bottom-color:currentColor}
+:focus-visible{outline:2px solid var(--uk-red);outline-offset:3px;border-radius:3px}
+button{font:inherit;color:inherit;cursor:pointer}
+
+.skip{position:absolute;left:-999px;top:8px;background:var(--surface);color:var(--text);padding:.6rem 1rem;border-radius:8px;z-index:100;font-weight:600}
+.skip:focus{left:8px}
+.bar{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;pointer-events:none}
+.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--uk-navy),var(--uk-red));transition:width .1s linear}
+
+/* ===== TOPBAR ===== */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+}
+/* franja inferior: NAVY + ROJO (dos tonos, sin blanco => NO es bandera francesa) */
+.topbar::after{
+  content:"";
+  display:block;
+  height:3px;
+  background:linear-gradient(90deg,
+    var(--uk-navy) 0%,
+    var(--uk-navy) 62%,
+    var(--uk-red) 62%,
+    var(--uk-red) 100%);
+}
+.topbar__inner{
+  max-width:860px;margin:0 auto;
+  padding:.7rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.brand{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--text);border:none;font-size:.95rem}
+.brand__flag{width:28px;height:18px;border-radius:2px;overflow:hidden;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.topbar__tools{display:flex;gap:.5rem;align-items:center}
+.search{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.35rem .7rem .35rem .8rem;
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  min-width:220px;
+}
+.search svg{color:var(--text-muted);flex-shrink:0}
+.search input{
+  border:none;background:transparent;color:var(--text);
+  font:inherit;font-size:.9rem;outline:none;width:100%;
+  padding:.15rem 0;
+}
+.theme-btn{
+  width:38px;height:38px;border-radius:8px;
+  border:1px solid var(--border);background:var(--surface-2);
+  color:var(--text-soft);
+  display:flex;align-items:center;justify-content:center;
+}
+.theme-btn:hover{background:var(--surface);border-color:var(--border-strong)}
+.theme-btn .moon{display:none}
+html.dark .theme-btn .sun{display:none}
+html.dark .theme-btn .moon{display:block}
+
+/* ===== TOC ===== */
+.toc{
+  position:sticky;top:66px;z-index:35;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+}
+.toc__inner{
+  max-width:860px;margin:0 auto;
+  padding:.45rem 1.5rem;
+  display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none;
+}
+.toc__inner::-webkit-scrollbar{display:none}
+.toc a{
+  flex-shrink:0;
+  padding:.35rem .8rem;
+  border-radius:6px;
+  font-size:.85rem;font-weight:500;
+  color:var(--text-muted);
+  border:none;
+  transition:all .15s;
+}
+.toc a:hover{background:var(--surface-2);color:var(--uk-navy)}
+.toc a.active{background:var(--uk-navy);color:#fff}
+.toc a.read::before{content:"✓ ";color:var(--ok);font-weight:700}
+html.dark .toc a.active{color:#15171a}
+
+/* ===== HERO con Union Jack + iconos flotando ===== */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:3.5rem 1.5rem 3rem;
+  text-align:center;
+  background:var(--uk-navy);
+  color:#fff;
+  isolation:isolate;
+}
+.hero__flag{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.9}
+.hero__flag::before,
+.hero__flag::after{content:"";position:absolute;inset:-25%}
+/* Diagonales (St Andrew blanco + St Patrick rojo) */
+.hero__flag::before{
+  background:
+    linear-gradient(45deg, transparent 46%, #fff 46%, #fff 48%, var(--uk-red) 48%, var(--uk-red) 52%, #fff 52%, #fff 54%, transparent 54%),
+    linear-gradient(-45deg, transparent 46%, #fff 46%, #fff 48%, var(--uk-red) 48%, var(--uk-red) 52%, #fff 52%, #fff 54%, transparent 54%);
+}
+/* Cruz central (St George blanco + rojo) */
+.hero__flag::after{
+  background:
+    linear-gradient(90deg, transparent 43%, #fff 43%, #fff 45%, var(--uk-red) 45%, var(--uk-red) 55%, #fff 55%, #fff 57%, transparent 57%),
+    linear-gradient(0deg, transparent 43%, #fff 43%, #fff 45%, var(--uk-red) 45%, var(--uk-red) 55%, #fff 55%, #fff 57%, transparent 57%);
+}
+.hero__overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg, rgba(1,17,61,.55) 0%, rgba(1,17,61,.75) 60%, rgba(1,17,61,.92) 100%);
+  pointer-events:none;
+}
+/* iconos flotando */
+.hero__deco{
+  position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;
+}
+.hero__deco svg{
+  position:absolute;
+  color:#fff;
+  opacity:.22;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.35));
+  animation:floatD 12s ease-in-out infinite;
+}
+.d1{top:12%;left:6%;width:64px;animation-delay:-1s}
+.d2{top:20%;right:8%;width:54px;animation-delay:-4s}
+.d3{bottom:16%;left:10%;width:58px;animation-delay:-7s}
+.d4{bottom:12%;right:12%;width:52px;animation-delay:-2.5s}
+@keyframes floatD{
+  0%,100%{transform:translateY(0) rotate(-4deg)}
+  50%{transform:translateY(-16px) rotate(5deg)}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero__deco svg{animation:none}
+}
+
+.hero__inner{position:relative;max-width:720px;margin:0 auto;z-index:3}
+.hero__eyebrow{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.35rem .9rem;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:999px;
+  font-size:.75rem;font-weight:600;
+  color:#fff;
+  letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:1.3rem;
+  backdrop-filter:blur(6px);
+}
+/* mini Union Jack real (inline SVG), NO gradiente francés */
+.hero__mini{width:22px;height:14px;border-radius:1px;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,.35)}
+.hero h1{
+  margin:0 0 1rem;
+  font-family:"Lora",Georgia,serif;
+  font-size:clamp(2rem,5vw,2.9rem);
+  font-weight:700;
+  letter-spacing:-.02em;
+  line-height:1.15;
+  color:#fff;
+  text-shadow:0 2px 20px rgba(0,0,0,.35);
+}
+.hero p{
+  margin:0 auto;
+  max-width:560px;
+  font-size:1.05rem;
+  color:rgba(255,255,255,.92);
+}
+.hero__meta{
+  display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;
+  margin-top:1.75rem;
+  font-size:.85rem;
+  color:#fff;
+}
+.hero__meta span{
+  padding:.35rem .9rem;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+  backdrop-filter:blur(6px);
+}
+
+/* ===== CONTENIDO ===== */
+main{
+  max-width:860px;
+  margin:0 auto;
+  padding:2.5rem 1.5rem 4rem;
+}
+.section{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:2.2rem 2rem;
+  margin-bottom:1.5rem;
+  box-shadow:var(--shadow-sm);
+  position:relative;
+  overflow:hidden;
+}
+/* franja superior: NAVY + ROJO (dos tonos) */
+.section::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:4px;
+  background:linear-gradient(90deg,
+    var(--uk-navy) 0%,
+    var(--uk-navy) 55%,
+    var(--uk-red) 55%,
+    var(--uk-red) 100%);
+}
+.section__header{
+  display:flex;align-items:flex-start;gap:1rem;
+  margin-bottom:1.5rem;
+  padding-bottom:1.2rem;
+  border-bottom:2px solid var(--surface-2);
+}
+.section__num{
+  flex-shrink:0;
+  width:46px;height:46px;
+  border-radius:10px;
+  background:var(--uk-navy);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Lora",Georgia,serif;
+  font-weight:700;
+  font-size:1.15rem;
+  letter-spacing:.02em;
+  position:relative;
+  box-shadow:0 2px 6px rgba(1,33,105,.25);
+}
+.section__num::after{
+  content:"";
+  position:absolute;
+  bottom:6px;right:6px;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--uk-red);
+}
+.section h2{
+  margin:0;
+  font-family:"Lora",Georgia,serif;
+  font-size:1.5rem;
+  font-weight:700;
+  letter-spacing:-.015em;
+  line-height:1.3;
+  color:var(--text);
+  flex:1;
+  align-self:center;
+}
+.section__read{
+  flex-shrink:0;
+  width:36px;height:36px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--surface-2);
+  color:var(--text-muted);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;
+  align-self:center;
+}
+.section__read.on{background:var(--ok);color:#fff;border-color:var(--ok)}
+
+/* ===== TIPOGRAFÍA ===== */
+h3{
+  font-family:"Lora",Georgia,serif;
+  font-size:1.3rem;
+  font-weight:600;
+  color:var(--uk-navy);
+  margin:2.2rem 0 1rem;
+  padding-bottom:.5rem;
+  border-bottom:2px solid var(--surface-2);
+  letter-spacing:-.01em;
+  position:relative;
+  padding-left:1rem;
+}
+h3::before{
+  content:"";
+  position:absolute;
+  left:0;top:.35em;
+  width:4px;height:.9em;
+  border-radius:2px;
+  background:linear-gradient(180deg,var(--uk-navy) 0%,var(--uk-navy) 60%,var(--uk-red) 60%,var(--uk-red) 100%);
+}
+h3:first-of-type{margin-top:.5rem}
+html.dark h3{color:var(--uk-navy-soft)}
+h4{
+  font-size:1.05rem;
+  font-weight:700;
+  color:var(--text);
+  margin:1.4rem 0 .6rem;
+}
+p{margin:0 0 1.1rem;color:var(--text-soft)}
+p:last-child{margin-bottom:0}
+strong{color:var(--text);font-weight:600}
+em{font-style:italic}
+ul,ol{padding-left:1.5rem;margin:0 0 1.2rem;color:var(--text-soft)}
+li{margin-bottom:.55rem}
+li::marker{color:var(--uk-red);font-weight:700}
+
+/* ===== CODE ===== */
+code{
+  font-family:"JetBrains Mono",monospace;
+  font-size:.87em;
+  background:var(--code-bg);
+  color:var(--code-text);
+  padding:.12em .4em;
+  border-radius:4px;
+  border:1px solid var(--border);
+  font-weight:500;
+  word-break:break-word;
+}
+pre{
+  position:relative;
+  background:var(--code-bg);
+  color:var(--code-text);
+  padding:1.5rem 1.2rem 1.2rem;
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  border-left:3px solid var(--uk-navy);
+  overflow-x:auto;
+  font-family:"JetBrains Mono",monospace;
+  font-size:.88rem;
+  line-height:1.7;
+  margin:1.2rem 0;
+}
+pre::before{
+  content:attr(data-lang);
+  position:absolute;
+  top:.5rem;right:.8rem;
+  font-size:.68rem;
+  font-weight:700;
+  color:var(--uk-red);
+  letter-spacing:.08em;
+}
+pre code{background:none;border:none;padding:0;color:inherit;font-size:1em}
+
+/* ===== EJEMPLO ===== */
+.example{
+  background:var(--example-bg);
+  border:1px solid var(--example-border);
+  border-left:3px solid var(--uk-red);
+  border-radius:var(--radius);
+  padding:1.2rem 1.4rem;
+  margin:1.2rem 0;
+  color:var(--text-soft);
+  font-size:.97rem;
+}
+.example::before{
+  content:"Ejemplo";
+  display:block;
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--uk-red);
+  margin-bottom:.5rem;
+}
+.example p{margin:0 0 .6rem;color:var(--text-soft)}
+.example p:last-child{margin:0}
+.example strong{color:var(--text)}
+
+/* ===== CALLOUTS ===== */
+.callout{
+  display:flex;
+  gap:.9rem;
+  padding:1rem 1.2rem;
+  border-radius:var(--radius);
+  margin:1.2rem 0;
+  font-size:.95rem;
+  line-height:1.6;
+  border:1px solid;
+}
+.callout__icon{flex-shrink:0;font-size:1.15rem;line-height:1.4}
+.callout__body{flex:1}
+.callout__body strong{font-weight:700}
+.callout--tip{background:var(--tip-bg);border-color:var(--tip-border);color:var(--text-soft);border-left:3px solid var(--ok)}
+.callout--tip .callout__body strong{color:var(--ok)}
+.callout--warn{background:var(--warn-bg);border-color:var(--warn-border);color:var(--text-soft);border-left:3px solid var(--uk-red)}
+.callout--warn .callout__body strong{color:var(--uk-red)}
+
+/* ===== TABLAS ===== */
+.table-wrap{
+  margin:1.2rem 0;
+  overflow-x:auto;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.94rem;
+  min-width:480px;
+  background:var(--surface);
+}
+th,td{
+  padding:.75rem 1rem;
+  text-align:left;
+  vertical-align:top;
+  border-bottom:1px solid var(--border);
+  color:var(--text-soft);
+}
+th{
+  background:var(--uk-navy);
+  color:#fff;
+  font-weight:600;
+  font-size:.87rem;
+  letter-spacing:.01em;
+  border-bottom:2px solid var(--uk-red);
+}
+html.dark th{background:var(--uk-navy-dark)}
+tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--surface-2)}
+tbody tr:hover{background:rgba(1,33,105,.04)}
+html.dark tbody tr:hover{background:rgba(74,105,189,.08)}
+
+/* ===== CARDS ===== */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.85rem;
+  margin:1.2rem 0;
+}
+.card{
+  padding:1rem 1.1rem;
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  font-size:.92rem;
+  position:relative;
+  overflow:hidden;
+}
+/* franja: NAVY + ROJO (dos tonos) */
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:3px;
+  background:linear-gradient(90deg,
+    var(--uk-navy) 0%,
+    var(--uk-navy) 70%,
+    var(--uk-red) 70%,
+    var(--uk-red) 100%);
+}
+.card h5{
+  margin:0 0 .35rem;
+  font-size:.98rem;
+  font-weight:700;
+  color:var(--uk-navy);
+  font-family:"Lora",Georgia,serif;
+}
+html.dark .card h5{color:var(--uk-navy-soft)}
+.card p{margin:0;font-size:.88rem;color:var(--text-muted);line-height:1.5}
+
+/* ===== ACTIONS ===== */
+.actions{
+  display:flex;
+  gap:.6rem;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  margin-top:1.8rem;
+  padding-top:1.4rem;
+  border-top:1px dashed var(--border);
+}
+.btn-read{
+  padding:.55rem 1.1rem;
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  color:var(--text-soft);
+  border-radius:8px;
+  font-size:.88rem;
+  font-weight:600;
+  font-family:inherit;
+  transition:all .15s;
+}
+.btn-read:hover{border-color:var(--uk-navy);color:var(--uk-navy)}
+.btn-read.on{background:var(--ok);color:#fff;border-color:var(--ok)}
+.notes{flex:1;min-width:200px}
+.notes summary{
+  cursor:pointer;
+  font-size:.88rem;
+  font-weight:600;
+  color:var(--text-muted);
+  padding:.5rem 0;
+  user-select:none;
+}
+.notes summary:hover{color:var(--uk-navy)}
+.notes textarea{
+  width:100%;
+  min-height:80px;
+  margin-top:.4rem;
+  padding:.7rem .9rem;
+  font-family:inherit;
+  font-size:.9rem;
+  color:var(--text);
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  resize:vertical;
+  outline:none;
+}
+.notes textarea:focus{border-color:var(--uk-red)}
+
+mark{
+  background:#fef3a3;
+  color:var(--text);
+  padding:.05em .2em;
+  border-radius:3px;
+  font-weight:600;
+}
+html.dark mark{background:#5a4a1a;color:#fff}
+
+/* ===== FOOTER ===== */
+footer{
+  background:var(--uk-navy);
+  color:rgba(255,255,255,.88);
+  padding:2rem 1.5rem;
+  font-size:.88rem;
+  border-top:4px solid var(--uk-red);
+}
+footer .footer__inner{
+  max-width:860px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:1rem;
+  align-items:center;
+}
+footer a{color:#fff;text-decoration:none;font-weight:500;border-bottom:1px solid transparent}
+footer a:hover{border-bottom-color:var(--uk-red)}
+.footer__flag{display:inline-flex;align-items:center;gap:.55rem}
+.footer__mini{width:22px;height:14px;border-radius:1px;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,.3)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:700px){
+  .topbar__inner{padding:.6rem 1rem}
+  .search{min-width:0;width:100%;flex:1}
+  .toc{top:62px}
+  .toc__inner{padding:.4rem 1rem}
+  .hero{padding:2.5rem 1rem 2rem}
+  .hero__deco svg{opacity:.14}
+  .d1,.d2,.d3,.d4{width:42px!important}
+  main{padding:1.5rem 1rem 3rem}
+  .section{padding:1.5rem 1.2rem}
+  .section__num{width:40px;height:40px;font-size:1rem}
+  .section h2{font-size:1.25rem}
+  h3{font-size:1.15rem}
+  body{font-size:16px}
+  footer .footer__inner{flex-direction:column;gap:.6rem;text-align:center}
+}
+
+/* ===== PRINT ===== */
+@media print{
+  .topbar,.toc,.bar,.section__read,.actions,.hero__meta,.skip,.hero__deco{display:none!important}
+  body{background:#fff;color:#000;font-size:12pt}
+  .hero{background:#fff!important;color:#000!important;padding:1rem 0!important}
+  .hero__flag,.hero__overlay{display:none!important}
+  .hero h1{color:#000!important;text-shadow:none!important}
+  .hero p{color:#333!important}
+  .hero__eyebrow{background:#eee!important;color:#000!important;border-color:#ccc!important}
+  .hero__meta span{background:#eee!important;color:#000!important;border-color:#ccc!important}
+  .section{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;padding:1rem}
+  .section::before{display:none}
+  .section__num{background:#000!important;color:#fff!important}
+  .section__num::after{display:none}
+  pre{background:#f5f5f5;border:1px solid #ccc;border-left:3px solid #000}
+  pre::before{display:none}
+  a{color:#000;text-decoration:underline}
+  .example{background:#fafafa;border:1px solid #ccc;border-left:3px solid #000}
+  th{background:#333!important;color:#fff!important;border-bottom-color:#000!important}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.backlink{padding:.4rem .75rem;border:1px solid var(--border);border-radius:8px;background:var(--surface-2);color:var(--text-soft);font-size:.85rem;font-weight:600;white-space:nowrap}
+.backlink:hover{border-color:var(--border-strong);background:var(--surface)}
+@media(max-width:640px){.backlink{display:none}}
+
+/* ===== PRÁCTICA (juegos) ===== */
+.gm-stats{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;padding:.9rem 1.1rem;margin:1rem 0 1.2rem;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius)}
+.gm-stats b{font-size:1.05rem}.gm-stats .gm-lv{font-weight:700;color:var(--uk-navy)}
+.gm-stats .gm-bar{flex:1;min-width:140px;height:8px;border-radius:99px;background:var(--border);overflow:hidden}
+.gm-stats .gm-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--uk-navy),var(--uk-red));transition:width .5s}
+.gm-stats small{color:var(--text-muted);font-weight:600}
+.gm-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.gm-tab{padding:.5rem .9rem;border:1px solid var(--border);border-radius:99px;background:var(--surface);font-weight:600;font-size:.9rem;color:var(--text-soft)}
+.gm-tab:hover{border-color:var(--border-strong)}
+.gm-tab[aria-selected="true"]{background:var(--uk-navy);border-color:var(--uk-navy);color:#fff}
+html.dark .gm-tab[aria-selected="true"]{color:#15171a}
+.gm-stage{min-height:260px;padding:1.3rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
+.gm-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;font-size:.85rem;color:var(--text-muted);font-weight:600}
+.gm-prog{height:5px;border-radius:99px;background:var(--border);overflow:hidden;margin-bottom:1.1rem}.gm-prog i{display:block;height:100%;background:var(--uk-navy);transition:width .3s}
+.gm-q{font-size:1.25rem;font-weight:700;line-height:1.4;margin:0 0 1rem;font-family:"Lora",Georgia,serif}
+.gm-opts{display:grid;gap:.55rem}
+.gm-opt{text-align:left;padding:.75rem 1rem;border:1.5px solid var(--border);border-radius:10px;background:var(--surface);font-size:1rem}
+.gm-opt:hover:not(:disabled){border-color:var(--uk-navy);background:var(--surface-2)}
+.gm-opt.ok{border-color:var(--ok);background:var(--tip-bg)}.gm-opt.bad{border-color:var(--uk-red);background:var(--warn-bg)}
+.gm-opt:disabled{cursor:default}
+.gm-fb{margin-top:.9rem;padding:.7rem .9rem;border-radius:10px;background:var(--surface-2);border-left:3px solid var(--uk-navy);font-size:.95rem}
+.gm-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.1rem;border:none;border-radius:10px;background:var(--uk-navy);color:#fff;font-weight:700;margin-top:1rem}
+html.dark .gm-btn{color:#15171a}
+.gm-btn.sec{background:var(--surface-2);color:var(--text);border:1px solid var(--border)}
+.gm-row{display:flex;flex-wrap:wrap;gap:.6rem}
+.gm-card{perspective:900px;margin:.5rem 0 0}
+.gm-card button{display:grid;place-items:center;width:100%;min-height:190px;padding:1.5rem;border:2px solid var(--border);border-radius:var(--radius-lg);background:var(--surface-2);text-align:center;font-size:1.6rem;font-weight:700;font-family:"Lora",Georgia,serif}
+.gm-card button.back{border-color:var(--uk-navy);background:var(--tip-bg)}
+.gm-card small{display:block;margin-top:.5rem;font:500 .8rem "Inter",sans-serif;color:var(--text-muted)}
+.gm-match{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 1rem}
+.gm-m{padding:.7rem .8rem;border:1.5px solid var(--border);border-radius:10px;background:var(--surface);font-size:.95rem;text-align:center}
+.gm-m.sel{border-color:var(--uk-navy);background:var(--surface-2);box-shadow:0 0 0 2px var(--uk-navy-soft)}
+.gm-m.done{border-color:var(--ok);background:var(--tip-bg);opacity:.65;cursor:default}
+.gm-m.err{animation:gmshake .35s;border-color:var(--uk-red)}
+@keyframes gmshake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.gm-slot{display:flex;flex-wrap:wrap;gap:.45rem;min-height:56px;padding:.7rem;border:2px dashed var(--border-strong);border-radius:10px;margin-bottom:.8rem}
+.gm-w{padding:.4rem .75rem;border:1.5px solid var(--border-strong);border-radius:8px;background:var(--surface);font-weight:600}
+.gm-w:hover{border-color:var(--uk-navy)}
+.gm-end{text-align:center;padding:1.2rem 0}.gm-end .big{font-size:2.6rem;font-weight:800;color:var(--uk-navy)}
+.gm-end p{margin:.3rem 0;color:var(--text-soft)}
+@media(max-width:560px){.gm-match{grid-template-columns:1fr}.gm-stage{padding:1rem}}
+@media(prefers-reduced-motion:reduce){.gm-m.err{animation:none}}
+</style>
+</head>
+<body>
+
+<div class="bar"><div id="barFill"></div></div>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" href="index.html" title="Volver a las asignaturas">
+      <!-- Union Jack SVG real (no bandera francesa) -->
+      <svg class="brand__flag" viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="60" height="40" fill="#012169"/>
+        <path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="8"/>
+        <path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="3.5"/>
+        <path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="14"/>
+        <path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="8"/>
+      </svg>
+      Inglés · Units 10–11
+    </a>
+    <div class="topbar__tools">
+      <a class="backlink" href="index.html" aria-label="Volver al índice de asignaturas">← Asignaturas</a>
+      <label class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="search" id="searchInput" placeholder="Buscar…" autocomplete="off">
+      </label>
+      <button class="theme-btn" id="themeBtn" aria-label="Cambiar tema">
+        <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Índice">
+  <div class="toc__inner" id="toc">
+    <a href="#tema1" data-section="tema1">1. Emailing I</a>
+    <a href="#tema2" data-section="tema2">2. Emailing II</a>
+    <a href="#tema3" data-section="tema3">3. Internet</a>
+    <a href="#tema4" data-section="tema4">4. Gramática Internet</a>
+    <a href="#tema5" data-section="tema5">5. Business</a>
+    <a href="#tema6" data-section="tema6">6. Software</a>
+    <a href="#tema7" data-section="tema7">7. Conditionals</a>
+    <a href="#tema8" data-section="tema8">8. Mediación</a>
+    <a href="#practica" data-section="practica">🎮 Práctica</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero__flag" aria-hidden="true"></div>
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  <!-- iconos flotando -->
+  <div class="hero__deco" aria-hidden="true">
+    <svg class="d1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="4" width="20" height="16" rx="2"/>
+      <path d="m22 6-10 7L2 6"/>
+    </svg>
+    <svg class="d2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/>
+      <path d="m21 21-4.35-4.35"/>
+    </svg>
+    <svg class="d3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    <svg class="d4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+    </svg>
+  </div>
+
+  <div class="hero__inner">
+    <span class="hero__eyebrow">
+      <svg class="hero__mini" viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="60" height="40" fill="#012169"/>
+        <path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="8"/>
+        <path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="3.5"/>
+        <path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="14"/>
+        <path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="8"/>
+      </svg>
+      Units 10 y 11
+    </span>
+    <h1>English for IT</h1>
+    <p>Emailing, Internet Searching, Business Skills y Software. Vocabulario, gramática, lectura y condicionales explicados en español.</p>
+    <div class="hero__meta">
+      <span>📖 8 bloques</span>
+      <span>🇬🇧 Units 10–11</span>
+      <span>🗣️ Explicado en español</span>
+      <span>🎮 11 modos de práctica</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<article class="section" id="tema1" data-topic="tema1">
+  <header class="section__header">
+    <span class="section__num">01</span>
+    <h2>Emailing · Vocabulario y conceptos</h2>
+    <button class="section__read" data-read="tema1" aria-label="Marcar leído">✓</button>
+  </header>
+  <p>El correo electrónico es una de las herramientas de comunicación más usadas en el trabajo. En inglés necesitas conocer <strong>las partes de un email</strong>, el <strong>vocabulario de acciones</strong> y los <strong>términos de seguridad</strong> (phishing, spam, malware…).</p>
+
+  <h3>Partes de un email</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Término</th><th>Español</th><th>Explicación</th></tr></thead>
+    <tbody>
+      <tr><td><strong>To</strong></td><td>Para</td><td>Destinatario principal.</td></tr>
+      <tr><td><strong>From</strong></td><td>De</td><td>Remitente.</td></tr>
+      <tr><td><strong>Subject</strong></td><td>Asunto</td><td>Tema del email; breve y claro.</td></tr>
+      <tr><td><strong>Cc</strong> (carbon copy)</td><td>Con copia (CC)</td><td>Copias visibles para los demás.</td></tr>
+      <tr><td><strong>Bcc</strong> (blind carbon copy)</td><td>Copia oculta (CCO)</td><td>Copias que no ven los demás destinatarios.</td></tr>
+      <tr><td><strong>Attachment</strong></td><td>Archivo adjunto</td><td>Documento, imagen o archivo adjunto.</td></tr>
+      <tr><td><strong>Signature</strong></td><td>Firma</td><td>Nombre, cargo y datos de contacto.</td></tr>
+      <tr><td><strong>Body</strong></td><td>Cuerpo</td><td>Texto principal del mensaje.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Acciones del día a día</h3>
+  <div class="cards">
+    <div class="card"><h5>Forward</h5><p>Reenviar un email recibido a otra persona.</p></div>
+    <div class="card"><h5>Reply / Reply all</h5><p>Responder al remitente o a todos.</p></div>
+    <div class="card"><h5>Save draft</h5><p>Guardar un borrador en la carpeta Drafts.</p></div>
+    <div class="card"><h5>Mark as read</h5><p>Marcar como leído (o no leído).</p></div>
+    <div class="card"><h5>Filter</h5><p>Regla automática que mueve o clasifica correos.</p></div>
+    <div class="card"><h5>Embed</h5><p>Insertar o incrustar contenido.</p></div>
+    <div class="card"><h5>View</h5><p>Ver el contenido.</p></div>
+    <div class="card"><h5>Delete / Junk</h5><p>Borrar o marcar como no deseado.</p></div>
+  </div>
+
+  <h3>Carpetas típicas</h3>
+  <ul>
+    <li><strong>Inbox</strong> — bandeja de entrada.</li>
+    <li><strong>Sent</strong> — enviados.</li>
+    <li><strong>Drafts</strong> — borradores.</li>
+    <li><strong>Junk</strong> — correo basura / no deseado.</li>
+    <li><strong>Starred</strong> — destacados.</li>
+    <li><strong>Trash</strong> — papelera.</li>
+  </ul>
+
+  <h3>Correo malicioso</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Término</th><th>Español</th><th>Qué es</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Spam</strong></td><td>Correo basura</td><td>Correo masivo no deseado, normalmente publicitario.</td></tr>
+      <tr><td><strong>Phishing</strong></td><td>Phishing</td><td>Suplantación de identidad para robar datos.</td></tr>
+      <tr><td><strong>Malware</strong></td><td>Software malicioso</td><td>Virus, troyanos… que se ejecutan al abrir un archivo.</td></tr>
+      <tr><td><strong>Unknown sender</strong></td><td>Remitente desconocido</td><td>Dirección que no reconoces.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout callout--warn">
+    <span class="callout__icon">⚠️</span>
+    <div class="callout__body"><strong>No abras adjuntos ni enlaces</strong> de remitentes desconocidos. Reporta el correo con el botón <code>Report phishing</code>.</div>
+  </div>
+
+  <h3>Vocabulario completo</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>English</th><th>Español</th></tr></thead>
+    <tbody>
+      <tr><td>attachment</td><td>archivo adjunto</td></tr>
+      <tr><td>blind carbon copy (bcc)</td><td>copia oculta (CCO)</td></tr>
+      <tr><td>carbon copy (Cc)</td><td>con copia (CC)</td></tr>
+      <tr><td>email client</td><td>cliente / gestor de correo</td></tr>
+      <tr><td>embed</td><td>insertar, incrustar</td></tr>
+      <tr><td>filter</td><td>filtro / filtrar</td></tr>
+      <tr><td>folder</td><td>carpeta</td></tr>
+      <tr><td>forward</td><td>reenviar</td></tr>
+      <tr><td>HTML format</td><td>formato HTML</td></tr>
+      <tr><td>inbox</td><td>bandeja de entrada</td></tr>
+      <tr><td>junk</td><td>correo basura</td></tr>
+      <tr><td>malware</td><td>software malicioso</td></tr>
+      <tr><td>mark as read</td><td>marcar como leído</td></tr>
+      <tr><td>phishing</td><td>phishing</td></tr>
+      <tr><td>save draft</td><td>guardar borrador</td></tr>
+      <tr><td>signature</td><td>firma</td></tr>
+      <tr><td>spam</td><td>correo masivo no deseado</td></tr>
+      <tr><td>starred</td><td>destacado/a</td></tr>
+      <tr><td>subject</td><td>asunto</td></tr>
+      <tr><td>unknown sender</td><td>remitente desconocido</td></tr>
+      <tr><td>username</td><td>nombre de usuario</td></tr>
+      <tr><td>view</td><td>ver</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="actions">
+    <button class="btn-read" data-read="tema1">Marcar como leído</button>
+    <details class="notes"><summary>📝 Mis notas</summary><textarea data-note="tema1" placeholder="Tus notas…"></textarea></details>
+  </div>
+</article>
+
+<article class="section" id="tema2" data-topic="tema2">
+  <header class="section__header">
+    <span class="section__num">02</span>
+    <h2>Emailing · Futuro y escritura</h2>
+    <button class="section__read" data-read="tema2" aria-label="Marcar leído">✓</button>
+  </header>
+  <p>En inglés hay <strong>tres formas principales de hablar del futuro</strong>. La elección depende de si hablas de un <strong>plan</strong>, de una <strong>cita ya organizada</strong> o de una <strong>decisión espontánea</strong>.</p>
+
+  <h3>A) Be going to + infinitivo</h3>
+  <p>Para <strong>planes e intenciones</strong> que ya tienes en la cabeza antes de hablar.</p>
+  <pre data-lang="EN"><code>sujeto + am/is/are + going to + verbo en infinitivo
+
+I'm going to take part in a convention next month.
+→ Voy a participar en una convención el mes que viene.
+
+She is going to call the IT department.
+→ Va a llamar al departamento de IT.</code></pre>
+  <ul>
+    <li><strong>Negativa:</strong> I'm not going to open that email.</li>
+    <li><strong>Pregunta:</strong> Are you going to reply?</li>
+  </ul>
+
+  <h3>B) Present Continuous con valor de futuro</h3>
+  <p>Para <strong>planes ya organizados</strong>, con hora, día o persona concreta (una cita, una reunión…).</p>
+  <pre data-lang="EN"><code>sujeto + am/is/are + verbo con -ing
+
+We're having a meeting in the afternoon.
+→ Tenemos una reunión por la tarde (ya está fijada).
+
+I'm meeting the client at 5.
+→ He quedado con el cliente a las 5.</code></pre>
+
+  <div class="callout callout--tip">
+    <span class="callout__icon">💡</span>
+    <div class="callout__body"><strong>Truco:</strong> <em>be going to</em> = intención. <em>Present Continuous</em> = ya está organizado (hay hora, lugar, gente).</div>
+  </div>
+
+  <h3>C) Will + infinitivo</h3>
+  <p>Para <strong>decisiones espontáneas</strong>, <strong>promesas</strong> y <strong>ofertas</strong>. Igual para todas las personas.</p>
+  <pre data-lang="EN"><code>sujeto + will + verbo en infinitivo
+
+OK, I'll look at it this morning.
+→ Vale, lo miro esta mañana (decisión en el momento).
+
+I'll send you the file.
+→ Te enviaré el archivo (promesa/oferta).
+
+Negativa: will not = won't
+I won't have time to deal with it then.</code></pre>
+
+  <h3>Resumen rápido</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Forma</th><th>Se usa para</th><th>Ejemplo</th></tr></thead>
+    <tbody>
+      <tr><td><strong>be going to</strong></td><td>Planes e intenciones</td><td>I'm going to learn Excel.</td></tr>
+      <tr><td><strong>Present Continuous</strong></td><td>Planes organizados (hora, lugar)</td><td>I'm meeting her at 6.</td></tr>
+      <tr><td><strong>will</strong></td><td>Decisiones espontáneas, promesas, ofertas</td><td>I'll help you.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Estructura de un email</h3>
+  <ol>
+    <li><strong>Subject</strong> — asunto breve y claro.</li>
+    <li><strong>Saludo</strong> — <code>Dear Mr Smith,</code> / <code>Hi Jane,</code> / <code>Hello team,</code></li>
+    <li><strong>Motivo</strong> — I'm writing to… / I'd like to…</li>
+    <li><strong>Cuerpo</strong> — información principal.</li>
+    <li><strong>Despedida</strong> — <code>Best regards,</code> / <code>Kind regards,</code> / <code>Yours sincerely,</code></li>
+    <li><strong>Firma</strong> — nombre, cargo y datos de contacto.</li>
+  </ol>
+
+  <h3>Frases útiles</h3>
+  <div class="cards">
+    <div class="card"><h5>Para abrir</h5><p>I'm writing to ask about… / I'd like to know if…</p></div>
+    <div class="card"><h5>Para adjuntar</h5><p>Please find attached… / I've attached the file.</p></div>
+    <div class="card"><h5>Para cerrar</h5><p>I look forward to hearing from you. / Let me know if you need anything else.</p></div>
+    <div class="card"><h5>Para disculparse</h5><p>I'm sorry for the delay. / Apologies for the confusion.</p></div>
+  </div>
+
+  <h3>Formal vs. informal</h3>
+  <ul>
+    <li><strong>Formal:</strong> Dear Mr Smith, · I would like to… · Yours sincerely,</li>
+    <li><strong>Informal:</strong> Hi Jane, · Can I…? · Best,</li>
+  </ul>
+
+  <h3>Phishing: cómo reconocerlo</h3>
+  <ul>
+    <li>Remitente desconocido o dirección sospechosa.</li>
+    <li>Enlaces o adjuntos que no esperabas.</li>
+    <li>Urgencia: «Your account will be closed», «Immediate action required».</li>
+    <li>Errores de ortografía o gramática.</li>
+    <li>Te piden contraseña, datos bancarios o información personal.</li>
+  </ul>
+
+  <div class="callout callout--tip">
+    <span class="callout__icon">💡</span>
+    <div class="callout__body"><strong>Reporta siempre el email</strong> con el botón <code>Report phishing</code>. Nunca respondas ni pinches los enlaces.</div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-read" data-read="tema2">Marcar como leído</button>
+    <details class="notes"><summary>📝 Mis notas</summary><textarea data-note="tema2" placeholder="Tus notas…"></textarea></details>
+  </div>
+</article>
+
+<article class="section" id="tema3" data-topic="tema3">
+  <header class="section__header">
+    <span class="section__num">03</span>
+    <h2>Searching the Internet · Vocabulario</h2>
+    <button class="section__read" data-read="tema3" aria-label="Marcar leído">✓</button>
+  </header>
+  <p>Buscar en Internet no es solo escribir una palabra: hay <strong>técnicas</strong> y <strong>operadores</strong> que te permiten encontrar resultados mucho más precisos.</p>
+
+  <h3>Términos clave</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Término</th><th>Español</th><th>Explicación</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Browser</strong></td><td>Navegador</td><td>Programa para ver páginas web (Chrome, Firefox).</td></tr>
+      <tr><td><strong>Search engine</strong></td><td>Buscador</td><td>Servicio que indexa la web (Google, Bing).</td></tr>
+      <tr><td><strong>Search box</strong></td><td>Cuadro de búsqueda</td><td>Donde escribes la consulta.</td></tr>
+      <tr><td><strong>Keyword</strong></td><td>Palabra clave</td><td>Término importante de tu búsqueda.</td></tr>
+      <tr><td><strong>Search tools</strong></td><td>Herramientas de búsqueda</td><td>Filtros: idioma, país, fecha…</td></tr>
+      <tr><td><strong>Advanced search</strong></td><td>Búsqueda avanzada</td><td>Página con opciones detalladas.</td></tr>
+      <tr><td><strong>Results</strong></td><td>Resultados</td><td>Lista de páginas que devuelve el buscador.</td></tr>
+      <tr><td><strong>Hit</strong></td><td>Resultado</td><td>Cada coincidencia encontrada.</td></tr>
+      <tr><td><strong>Ranking</strong></td><td>Clasificación</td><td>Orden de los resultados.</td></tr>
+      <tr><td><strong>Hyperlink</strong></td><td>Enlace</td><td>Texto o imagen que lleva a otra página.</td></tr>
+      <tr><td><strong>URL</strong></td><td>Dirección web</td><td>Uniform Resource Locator.</td></tr>
+      <tr><td><strong>Source</strong></td><td>Fuente</td><td>Origen de la información.</td></tr>
+      <tr><td><strong>Cache</strong></td><td>Caché</td><td>Copia temporal de páginas.</td></tr>
+      <tr><td><strong>History</strong></td><td>Historial</td><td>Registro de páginas visitadas.</td></tr>
+      <tr><td><strong>Term</strong></td><td>Término</td><td>Palabra o frase que buscas.</td></tr>
+      <tr><td><strong>Site map</strong></td><td>Mapa del sitio web</td><td>Índice con todas las páginas de un sitio.</td></tr>
+      <tr><td><strong>AI-generated</strong></td><td>Generado por IA</td><td>Contenido creado por inteligencia artificial.</td></tr>
+      <tr><td><strong>Research</strong></td><td>Investigación</td><td>Búsqueda profunda de información.</td></tr>
+      <tr><td><strong>Narrow your search</strong></td><td>Refinar la búsqueda</td><td>Añadir términos para acotar resultados.</td></tr>
+      <tr><td><strong>Combine</strong></td><td>Combinar</td><td>Unir términos u operadores.</td></tr>
+      <tr><td><strong>Custom</strong></td><td>Personalizado</td><td>Ajustado a tus necesidades.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Operadores de búsqueda</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Operador</th><th>Para qué sirve</th><th>Ejemplo</th></tr></thead>
+    <tbody>
+      <tr><td><code>"frase exacta"</code></td><td>Busca la frase literal.</td><td><code>"data protection"</code></td></tr>
+      <tr><td><code>-palabra</code></td><td>Excluye una palabra.</td><td><code>jaguar -car</code></td></tr>
+      <tr><td><code>site:</code></td><td>Busca dentro de un sitio.</td><td><code>site:wikipedia.org phishing</code></td></tr>
+      <tr><td><code>filetype:</code></td><td>Busca un tipo de archivo.</td><td><code>filetype:pdf English</code></td></tr>
+      <tr><td><code>OR</code></td><td>Una cosa u otra.</td><td><code>email OR mail</code></td></tr>
+      <tr><td><code>*</code></td><td>Comodín.</td><td><code>"the * of the internet"</code></td></tr>
+      <tr><td><code>intitle:</code></td><td>Busca en el título.</td><td><code>intitle:phishing</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Consejos de búsqueda eficaz</h3>
+  <ol>
+    <li>Usa <strong>palabras clave</strong> descriptivas, no frases largas.</li>
+    <li>Usa <strong>comillas</strong> para frases exactas.</li>
+    <li>Usa <strong>el signo menos</strong> para excluir términos.</li>
+    <li>Añade el <strong>país, el año o el formato</strong> para acotar.</li>
+    <li>Usa <strong>site:</strong> si solo quieres un dominio.</li>
+    <li>Comprueba la <strong>fuente</strong> y la fecha.</li>
+    <li>No te fíes solo de la IA: <strong>verifica</strong> siempre.</li>
+    <li>Usa <strong>search tools</strong> (idioma, país, fecha).</li>
+  </ol>
+
+  <div class="callout callout--tip">
+    <span class="callout__icon">💡</span>
+    <div class="callout__body"><strong>URL</strong> = Uniform Resource Locator. Es la dirección que escribes en el navegador.</div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-read" data-read="tema3">Marcar como leído</button>
+    <details class="notes"><summary>📝 Mis notas</summary><textarea data-note="tema3" placeholder="Tus notas…"></textarea></details>
+  </div>
+</article>
+
+<article class="section" id="tema4" data-topic="tema4">
+  <header class="section__header">
+    <span class="section__num">04</span>
+    <h2>Searching the Internet · Gramática</h2>
+    <button class="section__read" data-read="tema4" aria-label="Marcar leído">✓</button>
+  </header>
+
+  <h3>Comparativos</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Tipo</th><th>Regla</th><th>Ejemplo</th></tr></thead>
+    <tbody>
+      <tr><td>Corto (1 sílaba)</td><td>+ <strong>-er</strong></td><td>fast → faster</td></tr>
+      <tr><td>Termina en -y</td><td>-y → -ier</td><td>easy → easier</td></tr>
+      <tr><td>Largo (2+ sílabas)</td><td><strong>more</strong> + adj.</td><td>efficient → more efficient</td></tr>
+      <tr><td>Irregulares</td><td>—</td><td>good → better · bad → worse</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Superlativos</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Tipo</th><th>Regla</th><th>Ejemplo</th></tr></thead>
+    <tbody>
+      <tr><td>Corto</td><td>the + <strong>-est</strong></td><td>the fastest</td></tr>
+      <tr><td>Largo</td><td>the <strong>most</strong> + adj.</td><td>the most popular</td></tr>
+      <tr><td>Irregulares</td><td>—</td><td>the best · the worst</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout callout--tip">
+    <span class="callout__icon">💡</span>
+    <div class="callout__body"><strong>the</strong> acompaña siempre al superlativo: <em>the best</em>, <em>the most popular</em>.</div>
+  </div>
+
+  <h3>Preguntas (Wh- questions)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Wh-</th><th>Español</th><th>Ejemplo</th></tr></thead>
+    <tbody>
+      <tr><td>What</td><td>Qué</td><td>What does this term mean?</td></tr>
+      <tr><td>Where</td><td>Dónde</td><td>Where can I find the site map?</td></tr>
+      <tr><td>When</td><td>Cuándo</td><td>When was the page updated?</td></tr>
+      <tr><td>Who</td><td>Quién</td><td>Who wrote this article?</td></tr>
+      <tr><td>Why</td><td>Por qué</td><td>Why do search engines rank pages?</td></tr>
+      <tr><td>How</td><td>Cómo</td><td>How can I narrow my search?</td></tr>
+      <tr><td>Which</td><td>Cuál</td><td>Which browser do you use?</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Estructura de la pregunta</h3>
+  <pre data-lang="EN"><code>Wh- + auxiliar + sujeto + verbo principal + …?
+
+Where  can   I       find    the answer?
+What   does  a search engine  do?
+How    do    you     narrow  the search?</code></pre>
+
+  <div class="callout callout--tip">
+    <span class="callout__icon">💡</span>
+    <div class="callout__body">Si no hay Wh-, la pregunta empieza por el auxiliar: <em>Do you use Google?</em> · <em>Can I help you?</em></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-read" data-read="tema4">Marcar como leído</button>
+    <details class="notes"><summary>📝 Mis notas</summary><textarea data-note="tema4" placeholder="Tus notas…"></textarea></details>
+  </div>
+</article>
+
+<article class="section" id="tema5" data-topic="tema5">
+  <header class="section__header">
+    <span class="section__num">05</span>
+    <h2>Business Skills for IT · Vocabulario</h2>
+    <button class="section__read" data-read="tema5" aria-label="Marcar leído">✓</button>
+  </header>
+  <p>En el trabajo usarás herramientas ofimáticas y de gestión. Este bloque repasa el <strong>vocabulario profesional</strong> y las <strong>acciones típicas</strong>.</p>
+
+  <h3>Herramientas ofimáticas</h3>
+  <div class="cards">
+    <div class="card"><h5>Word processing</h5><p>Procesador de textos (Word, Google Docs).</p></div>
+    <div class="card"><h5>Spreadsheet</h5><p>Hoja de cálculo (Excel, Google Sheets).</p></div>
+    <div class="card"><h5>Presentation</h5><p>Presentaciones (PowerPoint, Google Slides).</p></div>
+    <div class="card"><h5>Database</h5><p>Base de datos (Access, MySQL).</p></div>
+    <div class="card"><h5>Project management</h5><p>Gestión de proyectos (Trello, Asana).</p></div>
+    <div class="card"><h5>Communication</h5><p>Correo, mensajería, videollamadas.</p></div>
+  </div>
+
+  <h3>Acciones</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Verbo</th><th>Español</th><th>Ejemplo</th></tr></thead>
+    <tbody>
+      <tr><td><strong>configure</strong></td><td>configurar</td><td>Configure the new laptop.</td></tr>
+      <tr><td><strong>customise</strong></td><td>personalizar</td><td>Customise the dashboard.</td></tr>
+      <tr><td><strong>enhance</strong></td><td>mejorar</td><td>Enhance the document with images.</td></tr>
+      <tr><td><strong>generate</strong></td><td>generar</td><td>Generate a report.</td></tr>
+      <tr><td><strong>merge</strong></td><td>combinar</td><td>Merge the two files.</td></tr>
+      <tr><td><strong>sync</strong></td><td>sincronizar</td><td>Sync your files to the cloud.</td></tr>
+      <tr><td><strong>track</strong></td><td>hacer seguimiento</td><td>Track the project progress.</td></tr>
+      <tr><td><strong>schedule</strong></td><td>programar</td><td>Schedule a meeting.</td></tr>
+      <tr><td><strong>sort</strong></td><td>ordenar</td><td>Sort the data alphabetically.</td></tr>
+      <tr><td><strong>filter</strong></td><td>filtrar</td><td>Filter the results by date.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Conceptos</h3>
+  <ul>
+    <li><strong>Real time</strong> — tiempo real.</li>
+    <li><strong>Cloud</strong> — nube (almacenamiento en línea).</li>
+    <li><strong>Platform</strong> — plataforma.</li>
+    <li><strong>Shared</strong> — compartido.</li>
+    <li><strong>Feature updates</strong> — actualizaciones de funciones.</li>
+    <li><strong>Licensed software</strong> — software con licencia.</li>
+    <li><strong>Embedded</strong> — insertado / incrustado.</li>
+  </ul>
+
+  <h3>Vocabulario completo</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>English</th><th>Español</th></tr></thead>
+    <tbody>
+      <tr><td>access</td><td>acceso</td></tr>
+      <tr><td>apply</td><td>presentar una solicitud</td></tr>
+      <tr><td>chart</td><td>gráfico</td></tr>
+      <tr><td>configure</td><td>configurar</td></tr>
+      <tr><td>customise</td><td>personalizar</td></tr>
+      <tr><td>data analysis</td><td>análisis de datos</td></tr>
+      <tr><td>embedded</td><td>insertado/a</td></tr>
+      <tr><td>enhance</td><td>mejorar, optimizar</td></tr>
+      <tr><td>feature updates</td><td>actualizaciones de funciones</td></tr>
+      <tr><td>files</td><td>archivos</td></tr>
+      <tr><td>filter</td><td>filtrar</td></tr>
+      <tr><td>format</td><td>formato</td></tr>
+      <tr><td>generate</td><td>generar</td></tr>
+      <tr><td>layout</td><td>diseño</td></tr>
+      <tr><td>licensed software</td><td>software con licencia</td></tr>
+      <tr><td>merge</td><td>combinar</td></tr>
+      <tr><td>platforms</td><td>plataformas</td></tr>
+      <tr><td>project management</td><td>gestión de proyectos</td></tr>
+      <tr><td>real time</td><td>tiempo real</td></tr>
+      <tr><td>reminder</td><td>recordatorio</td></tr>
+      <tr><td>schedule</td><td>programar</td></tr>
+      <tr><td>shared</td><td>compartido</td></tr>
+      <tr><td>sign up</td><td>registrarse</td></tr>
+      <tr><td>sort</td><td>ordenar</td></tr>
+      <tr><td>spreadsheet</td><td>hoja de cálculo</td></tr>
+      <tr><td>sync</td><td>sincronizar</td></tr>
+      <tr><td>table</td><td>tabla</td></tr>
+      <tr><td>tools</td><td>herramientas</td></tr>
+      <tr><td>track</td><td>hacer seguimiento</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="actions">
+    <button class="btn-read" data-read="tema5">Marcar como leído</button>
+    <details class="notes"><summary>📝 Mis notas</summary><textarea data-note="tema5" placeholder="Tus notas…"></textarea></details>
+  </div>
+</article>
+
+<article class="section" id="tema6" data-topic="tema6">
+  <header class="section__header">
+    <span class="section__num">06</span>
+    <h2>Software · Tipos y vocabulario</h2>
+    <button class="section__read" data-read="tema6" aria-label="Marcar leído">✓</button>
+  </header>
+
+  <h3>¿Qué es el software?</h3>
+  <p>Es la parte <strong>lógica</strong> del sistema: instrucciones y programas que le dicen al hardware qué hacer.</p>
+
+  <h3>Tipos de software</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Tipo</th><th>Función</th><th>Ejemplos</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Application software</strong></td><td>Realiza tareas para el usuario.</td><td>Word, Excel, Chrome, Photoshop.</td></tr>
+      <tr><td><strong>System software</strong></td><td>Gestiona el hardware y el sistema.</td><td>Windows, macOS, Linux, antivirus.</td></tr>
+      <tr><td><strong>Programming software</strong></td><td>Crea programas.</td><td>Editores, compiladores, IDE.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Subtipos de application software</h3>
+  <div class="cards">
+    <div class="card"><h5>General purpose</h5><p>Web browsers · word processing · spreadsheets · databases · presentations · graphics · email.</p></div>
+    <div class="card"><h5>Specific purpose</h5><p>Accounting · CAD · education · gaming · video/audio editing · payroll.</p></div>
+  </div>
+
+  <h3>System software</h3>
+  <div class="cards">
+    <div class="card"><h5>Operating systems</h5><p>Windows, macOS, Linux, ChromeOS, Android, iOS.</p></div>
+    <div class="card"><h5>Utility programs</h5><p>Antivirus, backup, disk management.</p></div>
+  </div>
+
+  <h3>Licencias y comercialización</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Término</th><th>Español</th><th>Qué es</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Free trial</strong></td><td>Prueba gratuita</td><td>Versión limitada por tiempo.</td></tr>
+      <tr><td><strong>Subscription</strong></td><td>Suscripción</td><td>Pago periódico (mensual/anual).</td></tr>
+      <tr><td><strong>Licence</strong></td><td>Licencia</td><td>Permiso de uso del software.</td></tr>
+      <tr><td><strong>Licensee</strong></td><td>Licenciatario</td><td>Persona que recibe la licencia.</td></tr>
+      <tr><td><strong>Fee</strong></td><td>Tasa / cuota</td><td>Dinero que se paga por un servicio.</td></tr>
+      <tr><td><strong>Package</strong></td><td>Paquete</td><td>Conjunto de programas.</td></tr>
+      <tr><td><strong>Module</strong></td><td>Módulo</td><td>Parte de un programa mayor.</td></tr>
+      <tr><td><strong>Utility</strong></td><td>Utilidad</td><td>Programa pequeño para una tarea.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Otros términos</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>English</th><th>Español</th></tr></thead>
+    <tbody>
+      <tr><td>cash flow</td><td>flujo de caja</td></tr>
+      <tr><td>cloud</td><td>nube</td></tr>
+      <tr><td>database</td><td>base de datos</td></tr>
+      <tr><td>efficiency</td><td>eficiencia</td></tr>
+      <tr><td>encode</td><td>codificar</td></tr>
+      <tr><td>existing</td><td>existente</td></tr>
+      <tr><td>extension</td><td>extensión</td></tr>
+      <tr><td>payroll</td><td>nómina</td></tr>
+      <tr><td>seller</td><td>vendedor</td></tr>
+      <tr><td>task</td><td>tarea</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout callout--tip">
+    <span class="callout__icon">💡</span>
+    <div class="callout__body"><strong>-er / -or</strong> = persona que hace algo: <em>seller</em> (vendedor), <em>developer</em> (desarrollador). <strong>-ee</strong> = persona que recibe: <em>licensee</em> (licenciatario).</div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-read" data-read="tema6">Marcar como leído</button>
+    <details class="notes"><summary>📝 Mis notas</summary><textarea data-note="tema6" placeholder="Tus notas…"></textarea></details>
+  </div>
+</article>
+
+<article class="section" id="tema7" data-topic="tema7">
+  <header class="section__header">
+    <span class="section__num">07</span>
+    <h2>Conditionals · Los cuatro condicionales</h2>
+    <button class="section__read" data-read="tema7" aria-label="Marcar leído">✓</button>
+  </header>
+
+  <p>Un <strong>conditional</strong> es una frase con dos partes: la <strong>if-clause</strong> (la condición) y la <strong>main clause</strong> (el resultado). En inglés hay <strong>cuatro tipos</strong> principales; cada uno se usa para un grado distinto de realidad.</p>
+
+  <pre data-lang="EN"><code>If clause  +  main clause      (o al revés: Main clause + If clause)
+
+If it rains,   I will stay at home.
+I will stay at home   if it rains.</code></pre>
+
+  <div class="callout callout--tip">
+    <span class="callout__icon">💡</span>
+    <div class="callout__body">Si empiezas por la parte del <code>if</code>, se pone <strong>coma</strong>. Si empiezas por la parte principal, <strong>no</strong> se pone coma.</div>
+  </div>
+
+  <h3>0) Zero Conditional · verdades generales</h3>
+  <p>Para <strong>cosas que siempre son verdad</strong>: leyes físicas, rutinas, hechos científicos.</p>
+  <pre data-lang="EN"><code>If + present simple,  present simple
+
+If you heat water to 100 °C, it boils.
+→ Si calientas el agua a 100 °C, hierve.
+
+If I drink coffee at night, I can't sleep.
+→ Si tomo café por la noche, no puedo dormir.</code></pre>
+
+  <h3>1) First Conditional · futuro posible</h3>
+  <p>Para <strong>situaciones reales o posibles en el futuro</strong> y sus consecuencias. Es el «si pasa esto, pasará esto otro».</p>
+  <pre data-lang="EN"><code>If + present simple,  will + infinitivo
+
+If we use online tools, it will be easier to work together.
+→ Si usamos herramientas online, será más fácil trabajar juntos.
+
+If I filter the emails, it will be easier to find them.
+→ Si filtro los correos, será más fácil encontrarlos.
+
+Negativa:  If you don't sort the emails, it won't be easy.</code></pre>
+
+  <div class="callout callout--warn">
+    <span class="callout__icon">⚠️</span>
+    <div class="callout__body"><strong>Error típico:</strong> después de <code>if</code> NO se pone <em>will</em>. ✅ <em>If I finish early, I'll call you.</em> ❌ <em>If I will finish early, I'll call you.</em></div>
+  </div>
+
+  <h3>2) Second Conditional · hipótesis</h3>
+  <p>Para <strong>situaciones hipotéticas, improbables o imaginarias</strong> en el presente o futuro. Muchas veces se traduce en español con el subjuntivo («si yo fuera…», «si tuviera…»).</p>
+  <pre data-lang="EN"><code>If + past simple,  would + infinitivo
+
+If I won the lottery, I would travel around the world.
+→ Si ganara la lotería, viajaría por todo el mundo.
+
+If I were you, I would apply for that job.
+→ Si yo fuera tú, solicitaría ese trabajo.
+
+Negativa:  If I didn't have a car, I wouldn't go to work.</code></pre>
+
+  <div class="callout callout--tip">
+    <span class="callout__icon">💡</span>
+    <div class="callout__body">Con el verbo <strong>be</strong>, en el Second Conditional se prefiere <em>were</em> para todas las personas: <em>If I were… / If he were…</em></div>
+  </div>
+
+  <h3>3) Third Conditional · pasado imposible</h3>
+  <p>Para <strong>situaciones que ya no se pueden cambiar</strong>: hipótesis sobre el pasado, arrepentimientos, reproches. Es el «si hubiera…, habría…».</p>
+  <pre data-lang="EN"><code>If + past perfect,  would have + past participle
+
+If I had studied, I would have passed the exam.
+→ Si hubiera estudiado, habría aprobado el examen.
+
+If she had known, she would have helped us.
+→ Si ella lo hubiera sabido, nos habría ayudado.
+
+Negativa:  If we hadn't missed the train, we wouldn't have been late.</code></pre>
+
+  <ul>
+    <li><strong>Pasado perfecto:</strong> had + participio (<em>had studied</em>, <em>had seen</em>).</li>
+    <li><strong>Participio:</strong> acabado en <strong>-ed</strong> (regulares) o 3ª columna (irregulares: <em>seen</em>, <em>gone</em>, <em>done</em>).</li>
+  </ul>
+
+  <h3>Tabla comparativa</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Tipo</th><th>If clause</th><th>Main clause</th><th>Uso</th><th>Ejemplo</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Zero</strong></td><td>present simple</td><td>present simple</td><td>Verdad general</td><td>If you heat ice, it melts.</td></tr>
+      <tr><td><strong>First</strong></td><td>present simple</td><td>will + inf.</td><td>Futuro posible</td><td>If it rains, I will stay.</td></tr>
+      <tr><td><strong>Second</strong></td><td>past simple</td><td>would + inf.</td><td>Hipótesis</td><td>If I won, I would travel.</td></tr>
+      <tr><td><strong>Third</strong></td><td>past perfect</td><td>would have + part.</td><td>Pasado imposible</td><td>If I had known, I would have come.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Ejercicio tipo (p. 59)</h3>
+  <p>Completa con las palabras del recuadro: <em>configure, customise, filter, track, sort, spreadsheet, table, tools</em>. Todas siguen el patrón del First Conditional:</p>
+  <pre data-lang="EN"><code>If you use a spreadsheet, it will be easier to plan the budget.
+If we list the customer orders in a table, we'll see all the dates and prices better.
+If she sorts the emails by date, she will find them faster.</code></pre>
+
+  <div class="callout callout--tip">
+    <span class="callout__icon">💡</span>
+    <div class="callout__body">Recuerda: si la frase empieza por <code>If</code>, el verbo va en <strong>presente</strong>. Y en 3ª persona, ¡con <strong>-s</strong>! <em>If she sorts…</em></div>
+  </div>
+
+  <h3>Subject pronouns</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>English</th><th>Español</th></tr></thead>
+    <tbody>
+      <tr><td>I</td><td>yo</td></tr>
+      <tr><td>you</td><td>tú / usted</td></tr>
+      <tr><td>he</td><td>él</td></tr>
+      <tr><td>she</td><td>ella</td></tr>
+      <tr><td>it</td><td>ello (cosa)</td></tr>
+      <tr><td>we</td><td>nosotros</td></tr>
+      <tr><td>they</td><td>ellos</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Object pronouns</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>English</th><th>Español</th></tr></thead>
+    <tbody>
+      <tr><td>me</td><td>me / mí</td></tr>
+      <tr><td>you</td><td>te / ti</td></tr>
+      <tr><td>him</td><td>le / lo / él</td></tr>
+      <tr><td>her</td><td>le / la / ella</td></tr>
+      <tr><td>it</td><td>lo / la (cosa)</td></tr>
+      <tr><td>us</td><td>nos / nosotros</td></tr>
+      <tr><td>them</td><td>les / los / ellas</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Ejemplos</h3>
+  <ul>
+    <li><strong>Subject:</strong> <em>She</em> works in IT.</li>
+    <li><strong>Object:</strong> I called <em>her</em> yesterday.</li>
+    <li><strong>Both:</strong> <em>They</em> sent <em>us</em> the file.</li>
+  </ul>
+
+  <div class="callout callout--tip">
+    <span class="callout__icon">💡</span>
+    <div class="callout__body">El <strong>sujeto</strong> hace la acción; el <strong>objeto</strong> la recibe.</div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-read" data-read="tema7">Marcar como leído</button>
+    <details class="notes"><summary>📝 Mis notas</summary><textarea data-note="tema7" placeholder="Tus notas…"></textarea></details>
+  </div>
+</article>
+
+<article class="section" id="tema8" data-topic="tema8">
+  <header class="section__header">
+    <span class="section__num">08</span>
+    <h2>Mediación y lenguaje útil</h2>
+    <button class="section__read" data-read="tema8" aria-label="Marcar leído">✓</button>
+  </header>
+
+  <h3>Useful language</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Función</th><th>Expresiones</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Presentar</strong></td><td>It's an online course… · It's a certification course… · What the course includes…</td></tr>
+      <tr><td><strong>Describir</strong></td><td>It's designed for… · You can… · It's good because…</td></tr>
+      <tr><td><strong>Dar opinión</strong></td><td>I think the best option is… · In my opinion… · I prefer…</td></tr>
+      <tr><td><strong>Explicar ventajas</strong></td><td>It's useful because… · The main advantage is…</td></tr>
+      <tr><td><strong>Explicar desventajas</strong></td><td>It can't… · One problem is that…</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Mediation</h3>
+  <p><strong>Mediar</strong> es explicar algo con tus propias palabras a alguien que no lo entiende: un compañero, un cliente, un familiar. En un examen de mediación se valora que:</p>
+  <ul>
+    <li>Expliques el <strong>significado</strong> con palabras sencillas.</li>
+    <li>Adaptes el <strong>registro</strong> al interlocutor.</li>
+    <li>Pongas <strong>ejemplos</strong> y comparaciones.</li>
+    <li>No copies literalmente el texto original.</li>
+  </ul>
+
+  <div class="example">
+    <p><strong>Ejemplo de mediación:</strong> «Phishing is a type of email scam. Criminals pretend to be a company you know, and they ask for your password or bank details. If you get an email like that, don't click any links and report it.»</p>
+  </div>
+
+  <div class="actions">
+    <button class="btn-read" data-read="tema8">Marcar como leído</button>
+    <details class="notes"><summary>📝 Mis notas</summary><textarea data-note="tema8" placeholder="Tus notas…"></textarea></details>
+  </div>
+</article>
+
+<article class="section" id="practica" data-topic="practica">
+  <header class="section__header">
+    <span class="section__num">🎮</span>
+    <h2>Práctica · Juegos interactivos</h2>
+  </header>
+  <p>Once modos (los cinco primeros de repaso y los seis últimos con formato de examen) para repasar el vocabulario y la gramática de los temas 1 a 8. Cada acierto suma <strong>XP</strong>, y esa experiencia se refleja en la tarjeta de Inglés del índice.</p>
+  <div class="gm-stats" aria-live="polite">
+    <span class="gm-lv" id="gmLv">Nivel 1</span><b id="gmXp">0 XP</b>
+    <div class="gm-bar" role="progressbar" aria-label="Progreso al siguiente nivel"><i id="gmBar"></i></div>
+    <small id="gmNext"></small>
+  </div>
+  <div class="gm-tabs" role="tablist" id="gmTabs">
+    <button class="gm-tab" role="tab" data-m="flash" aria-selected="true">🃏 Flashcards</button>
+    <button class="gm-tab" role="tab" data-m="quiz" aria-selected="false">❓ Quiz de vocabulario</button>
+    <button class="gm-tab" role="tab" data-m="match" aria-selected="false">🔗 Emparejar</button>
+    <button class="gm-tab" role="tab" data-m="fill" aria-selected="false">✍️ Completa la frase</button>
+    <button class="gm-tab" role="tab" data-m="order" aria-selected="false">🧩 Ordena la frase</button>
+    <button class="gm-tab" role="tab" data-m="wbox" aria-selected="false">📦 Rellenar con recuadro</button>
+    <button class="gm-tab" role="tab" data-m="tf" aria-selected="false">⚖️ True / False</button>
+    <button class="gm-tab" role="tab" data-m="read" aria-selected="false">📖 Reading y mediación</button>
+    <button class="gm-tab" role="tab" data-m="err" aria-selected="false">🔍 Corrige el error</button>
+    <button class="gm-tab" role="tab" data-m="trans" aria-selected="false">✏️ Transforma la frase</button>
+    <button class="gm-tab" role="tab" data-m="exam" aria-selected="false">🎓 Simulacro de examen</button>
+  </div>
+  <div class="gm-stage" id="gmStage" aria-live="polite"></div>
+</article>
+
+</main>
+
+<footer>
+  <div class="footer__inner">
+    <span class="footer__flag">
+      <svg class="footer__mini" viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="60" height="40" fill="#012169"/>
+        <path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="8"/>
+        <path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="3.5"/>
+        <path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="14"/>
+        <path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="8"/>
+      </svg>
+      Apuntes Inglés · Units 10 y 11 · Uso libre educativo
+    </span>
+    <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var KEY='en_lab_v1';
+
+  var themeBtn=document.getElementById('themeBtn');
+  themeBtn.onclick=function(){
+    var d=!document.documentElement.classList.contains('dark');
+    document.documentElement.classList.toggle('dark',d);
+    try{localStorage.setItem('theme',d?'dark':'light')}catch(e){}
+  };
+
+  var S={};
+  try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+  S.read=S.read||{};
+  S.notes=S.notes||{};
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+  function paintRead(){
+    document.querySelectorAll('[data-read]').forEach(function(b){
+      var on=!!S.read[b.dataset.read];
+      b.classList.toggle('on',on);
+      b.textContent=on?'✓ Leído':'Marcar como leído';
+    });
+    document.querySelectorAll('#toc a[data-section]').forEach(function(a){
+      var on=!!S.read[a.dataset.section];
+      a.classList.toggle('read',on);
+    });
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('[data-read]');
+    if(!b)return;
+    var k=b.dataset.read;
+    S.read[k]=!S.read[k];
+    S.xpRead=S.xpRead||{};
+    if(S.read[k]&&!S.xpRead[k]){S.xpRead[k]=1;S.xp=(+S.xp||0)+20}
+    save();
+    paintRead();
+  });
+
+  var timers={};
+  document.querySelectorAll('textarea[data-note]').forEach(function(t){
+    var k=t.dataset.note;
+    t.value=S.notes[k]||'';
+    t.addEventListener('input',function(){
+      clearTimeout(timers[k]);
+      timers[k]=setTimeout(function(){S.notes[k]=t.value;save()},400);
+    });
+  });
+
+  var si=document.getElementById('searchInput');
+  var st;
+  function clearMarks(){
+    document.querySelectorAll('mark').forEach(function(m){
+      var p=m.parentNode;
+      p.replaceChild(document.createTextNode(m.textContent),m);
+      p.normalize();
+    });
+  }
+  function search(){
+    clearMarks();
+    var q=si.value.trim();
+    if(!q||q.length<2)return;
+    var re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
+    var walker=document.createTreeWalker(document.getElementById('main'),NodeFilter.SHOW_TEXT,null);
+    var nodes=[],n;
+    while((n=walker.nextNode())){
+      if(/^(TEXTAREA|SCRIPT|STYLE|MARK)$/.test(n.parentNode.nodeName))continue;
+      re.lastIndex=0;
+      if(re.test(n.nodeValue))nodes.push(n);
+    }
+    nodes.forEach(function(nd){
+      var t=nd.nodeValue,f=document.createDocumentFragment(),last=0,m;
+      re.lastIndex=0;
+      while((m=re.exec(t))){
+        if(!m[0].length){re.lastIndex++;continue}
+        f.appendChild(document.createTextNode(t.slice(last,m.index)));
+        var mk=document.createElement('mark');
+        mk.textContent=m[0];
+        f.appendChild(mk);
+        last=m.index+m[0].length;
+      }
+      f.appendChild(document.createTextNode(t.slice(last)));
+      nd.parentNode.replaceChild(f,nd);
+    });
+    var first=document.querySelector('mark');
+    if(first)first.scrollIntoView({block:'center',behavior:'smooth'});
+  }
+  si.addEventListener('input',function(){clearTimeout(st);st=setTimeout(search,200)});
+  document.addEventListener('keydown',function(e){
+    if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){
+      e.preventDefault();si.focus();si.select();return;
+    }
+    if(e.key==='Escape'){
+      if(si.value){si.value='';clearMarks();si.blur()}
+    }
+  });
+
+  var barFill=document.getElementById('barFill');
+  var tocLinks=document.querySelectorAll('#toc a[data-section]');
+  var sections=document.querySelectorAll('article.section');
+  function onScroll(){
+    var h=document.documentElement;
+    barFill.style.width=(h.scrollTop/((h.scrollHeight-h.clientHeight)||1)*100)+'%';
+    var cur='';
+    sections.forEach(function(s){
+      if(s.getBoundingClientRect().top<150)cur=s.id;
+    });
+    tocLinks.forEach(function(a){
+      a.classList.toggle('active',a.dataset.section===cur);
+    });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  window.enXp={add:function(n){S.xp=(+S.xp||0)+n;save()},get:function(){return +S.xp||0}};
+  paintRead();
+})();
+</script>
+<script>
+(function(){'use strict';
+var V=[["attachment","archivo adjunto"],["blind carbon copy (bcc)","copia oculta (CCO)"],["carbon copy (Cc)","con copia (CC)"],["email client","gestor de correo"],["embed","insertar, incrustar"],["folder","carpeta"],["forward","reenviar"],["inbox","bandeja de entrada"],["junk","correo basura"],["malware","software malicioso"],["mark as read","marcar como leído"],["save draft","guardar borrador"],["signature","firma"],["spam","correo masivo no deseado"],["starred","destacado"],["subject","asunto"],["unknown sender","remitente desconocido"],["username","nombre de usuario"],["browser","navegador"],["search engine","buscador"],["search box","cuadro de búsqueda"],["keyword","palabra clave"],["search tools","herramientas de búsqueda"],["advanced search","búsqueda avanzada"],["results","resultados"],["hit","resultado (coincidencia)"],["ranking","clasificación"],["hyperlink","enlace"],["URL","dirección web"],["source","fuente"],["cache","caché"],["history","historial"],["site map","mapa del sitio web"],["AI-generated","generado por IA"],["research","investigación"],["narrow your search","refinar la búsqueda"],["combine","combinar"],["custom","personalizado"],["access","acceso"],["chart","gráfico"],["configure","configurar"],["customise","personalizar"],["data analysis","análisis de datos"],["enhance","mejorar, optimizar"],["feature updates","actualizaciones de funciones"],["files","archivos"],["filter","filtrar"],["format","formato"],["generate","generar"],["layout","diseño"],["licensed software","software con licencia"],["merge","combinar (archivos)"],["platforms","plataformas"],["project management","gestión de proyectos"],["real time","tiempo real"],["reminder","recordatorio"],["schedule","programar"],["shared","compartido"],["sign up","registrarse"],["sort","ordenar"],["spreadsheet","hoja de cálculo"],["sync","sincronizar"],["table","tabla"],["tools","herramientas"],["track","hacer seguimiento"],["free trial","prueba gratuita"],["subscription","suscripción"],["licence","licencia"],["licensee","licenciatario"],["fee","tasa, cuota"],["package","paquete"],["module","módulo"],["utility","utilidad"],["cash flow","flujo de caja"],["cloud","nube"],["database","base de datos"],["efficiency","eficiencia"],["encode","codificar"],["existing","existente"],["extension","extensión"],["payroll","nómina"],["seller","vendedor"],["task","tarea"]];
+var FILL=[
+["If you heat water to 100 °C, it ___.",["boils","will boil","would boil"],0,"Zero conditional: present simple + present simple (verdad general)."],
+["If it rains, I ___ at home.",["will stay","stay","would stay"],0,"First conditional: if + present simple, will + infinitivo."],
+["If I ___ the lottery, I would travel around the world.",["won","win","will win"],0,"Second conditional: if + past simple, would + infinitivo."],
+["If I ___ you, I would apply for that job.",["were","am","will be"],0,"Con be en el second conditional se usa were para todas las personas."],
+["If I ___ studied, I would have passed the exam.",["had","have","would have"],0,"Third conditional: if + past perfect, would have + participio."],
+["If she sorts the emails by date, she ___ them faster.",["will find","finds","would find"],0,"First conditional: resultado posible en el futuro."],
+["If I ___ early, I'll call you.",["finish","will finish","finished"],0,"Después de if NO se usa will en el first conditional."],
+["If we hadn't missed the train, we ___ late.",["wouldn't have been","wouldn't be","won't be"],0,"Third conditional negativo: wouldn't have + participio."],
+["I'm ___ to take part in a convention next month.",["going","will","go"],0,"Be going to expresa planes e intenciones."],
+["We're ___ a meeting in the afternoon. (ya está fijada)",["having","going have","will having"],0,"Present Continuous para planes ya organizados."],
+["Someone is at the door. OK, I ___ open it.",["'ll","'m going to","am opening"],0,"Will para decisiones espontáneas."],
+["This laptop is ___ than that one. (fast)",["faster","more fast","fastest"],0,"Adjetivo corto: + -er."],
+["Excel is ___ efficient than a calculator.",["more","most","the more"],0,"Adjetivo largo: more + adjetivo."],
+["This is ___ popular search engine.",["the most","more","most of"],0,"Superlativo largo: the most + adjetivo."],
+["She is ___ developer in the team. (good)",["the best","the better","the goodest"],0,"Superlativo irregular: good → the best."],
+["___ can I find the site map?",["Where","Who","Why"],0,"Where = dónde."],
+["___ wrote this article?",["Who","Which","When"],0,"Who = quién."],
+["I called ___ yesterday. (she)",["her","she","hers"],0,"Pronombre objeto: her."],
+["___ works in IT. (ella)",["She","Her","Hers"],0,"Pronombre sujeto: she."],
+["They sent ___ the file. (nosotros)",["us","we","our"],0,"Pronombre objeto: us."],
+["To search an exact phrase, use ___.",["quotation marks","a minus sign","the OR operator"],0,"Las comillas buscan la frase literal."],
+["To exclude a word from your search, use ___.",["a minus sign (-)","quotation marks","site:"],0,"jaguar -car excluye 'car'."],
+["To search only inside one website, use ___.",["site:","filetype:","intitle:"],0,"site:wikipedia.org phishing."],
+["Copies that other recipients can NOT see go in ___.",["Bcc","Cc","To"],0,"Bcc = blind carbon copy (copia oculta)."]
+];
+var ORDER=[
+["If it rains I will stay at home","Si llueve, me quedaré en casa."],
+["I'm going to learn Excel","Voy a aprender Excel."],
+["Where can I find the answer","¿Dónde puedo encontrar la respuesta?"],
+["How do you narrow the search","¿Cómo refinas la búsqueda?"],
+["Please find attached the file","Adjunto el archivo."],
+["I look forward to hearing from you","Espero tener noticias tuyas."],
+["She sorts the emails by date","Ella ordena los correos por fecha."],
+["If I won the lottery I would travel","Si ganara la lotería, viajaría."],
+["If I had studied I would have passed","Si hubiera estudiado, habría aprobado."],
+["What does a search engine do","¿Qué hace un buscador?"],
+["Do not open attachments from unknown senders","No abras adjuntos de remitentes desconocidos."],
+["We are meeting the client at five","Nos reunimos con el cliente a las cinco."]
+];
+var $=function(i){return document.getElementById(i)},st=$('gmStage'),mode='flash';
+function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function th(L){return 25*(L-1)*(L+2)}
+function lv(x){var L=1;while(L<10&&x>=th(L+1))L++;return L}
+function paintXp(){var x=window.enXp?window.enXp.get():0,L=lv(x),a=th(L),b=L>=10?a:th(L+1),pn=L>=10?100:Math.round((x-a)/(b-a)*100);
+  $('gmLv').textContent='Nivel '+L;$('gmXp').textContent=x+' XP';$('gmBar').style.width=pn+'%';
+  $('gmNext').textContent=L>=10?'Nivel máximo':(b-x)+' XP para el nivel '+(L+1)}
+function addXp(n){if(window.enXp&&n>0){window.enXp.add(n);paintXp()}}
+function end(title,score,total,xp,again){
+  st.innerHTML='<div class="gm-end"><div class="big">'+score+(total?' / '+total:'')+'</div><p><strong>'+esc(title)+'</strong></p><p>'+(xp?'+'+xp+' XP ganados':'')+'</p><button class="gm-btn" id="gmAgain" type="button">Jugar otra vez</button></div>';
+  $('gmAgain').onclick=again}
+function top(i,n,sc){return '<div class="gm-top"><span>Pregunta '+(i+1)+' de '+n+'</span><span>Aciertos: '+sc+'</span></div><div class="gm-prog"><i style="width:'+(i/n*100)+'%"></i></div>'}
+
+/* Flashcards */
+function flash(){
+  var deck=sh(V),i=0,back=false,known={},kn=0;
+  function draw(){
+    if(i>=deck.length){return end('¡Mazo completado!',kn,deck.length,0,flash)}
+    var c=deck[i];
+    st.innerHTML='<div class="gm-top"><span>Tarjeta '+(i+1)+' de '+deck.length+'</span><span>Las sé: '+kn+'</span></div><div class="gm-prog"><i style="width:'+(i/deck.length*100)+'%"></i></div>'+
+    '<div class="gm-card"><button type="button" id="gmFlip" class="'+(back?'back':'')+'" aria-label="Girar tarjeta"><span>'+esc(back?c[1]:c[0])+'<small>'+(back?'Español':'English · toca para girar')+'</small></span></button></div>'+
+    '<div class="gm-row"><button class="gm-btn sec" id="gmNo" type="button">🔁 Repasar</button><button class="gm-btn" id="gmYes" type="button">✓ Lo sé (+2 XP)</button></div>';
+    $('gmFlip').onclick=function(){back=!back;draw()};
+    $('gmNo').onclick=function(){back=false;deck.push(deck[i]);i++;draw()};
+    $('gmYes').onclick=function(){if(!known[c[0]]){known[c[0]]=1;kn++;addXp(2)}back=false;i++;draw()};
+  }
+  draw()}
+
+/* Motor de opción múltiple (quiz + completar) */
+function mcq(items,label,xpEach,again,nota){
+  var i=0,sc=0,xp=0;
+  function draw(){
+    if(i>=items.length){return end(label+(nota?' · Nota: '+(sc/items.length*10).toFixed(1)+' / 10':' completado'),sc,items.length,xp,again)}
+    var it=items[i];
+    st.innerHTML=top(i,items.length,sc)+(it.ctx?'<div class="gm-fb" style="margin:0 0 1rem;line-height:1.6">'+esc(it.ctx)+'</div>':'')+'<p class="gm-q">'+esc(it.q)+'</p><div class="gm-opts">'+it.o.map(function(o,k){return '<button class="gm-opt" type="button" data-k="'+k+'">'+esc(o)+'</button>'}).join('')+'</div><div id="gmFb"></div>';
+    st.querySelectorAll('.gm-opt').forEach(function(b){b.onclick=function(){
+      var k=+b.dataset.k,okk=k===it.a;
+      st.querySelectorAll('.gm-opt').forEach(function(x,n){x.disabled=true;if(n===it.a)x.classList.add('ok')});
+      if(!okk)b.classList.add('bad');else{sc++;xp+=xpEach;addXp(xpEach)}
+      $('gmFb').innerHTML='<div class="gm-fb"><strong>'+(okk?'¡Correcto! +'+xpEach+' XP':'No exactamente.')+'</strong>'+(it.e?' '+esc(it.e):'')+'</div><button class="gm-btn" id="gmNx" type="button">'+(i+1>=items.length?'Ver resultado':'Siguiente')+' →</button>';
+      $('gmNx').focus();$('gmNx').onclick=function(){i++;draw()}}});
+  }
+  draw()}
+
+function quiz(){
+  var pool=sh(V).slice(0,10),items=pool.map(function(p){
+    var toEs=Math.random()<.6,ai=toEs?1:0,qi=toEs?0:1;
+    var wrong=sh(V.filter(function(x){return x[ai]!==p[ai]})).slice(0,3).map(function(x){return x[ai]});
+    var o=sh([p[ai]].concat(wrong));
+    return{q:(toEs?'¿Qué significa «':'¿Cómo se dice en inglés «')+p[qi]+'»?',o:o,a:o.indexOf(p[ai]),e:p[0]+' = '+p[1]+'.'}});
+  mcq(items,'Quiz de vocabulario',5,quiz)}
+
+function fill(){
+  var items=sh(FILL).slice(0,10).map(function(f){var o=sh(f[1].map(function(t,n){return{t:t,c:n===f[2]}}));
+    return{q:f[0],o:o.map(function(x){return x.t}),a:o.findIndex(function(x){return x.c}),e:f[3]}});
+  mcq(items,'Completa la frase',8,fill)}
+
+/* Emparejar */
+function match(){
+  var pairs=sh(V).slice(0,6),L=sh(pairs.map(function(p,i){return{t:p[0],id:i}})),R=sh(pairs.map(function(p,i){return{t:p[1],id:i}})),
+      selL=null,done=0,errs=0;
+  var cells=[];L.forEach(function(l,n){cells.push({s:'L',d:l},{s:'R',d:R[n]})});
+  st.innerHTML='<div class="gm-top"><span>Une cada término con su traducción</span><span id="gmM">0 / 6</span></div><div class="gm-prog"><i id="gmMp" style="width:0"></i></div><div class="gm-match" id="gmGrid"></div>';
+  $('gmGrid').innerHTML=cells.map(function(c,n){return '<button type="button" class="gm-m" data-s="'+c.s+'" data-id="'+c.d.id+'">'+esc(c.d.t)+'</button>'}).join('');
+  $('gmGrid').addEventListener('click',function(e){
+    var b=e.target.closest('.gm-m');if(!b||b.classList.contains('done'))return;
+    if(b.dataset.s==='L'){$('gmGrid').querySelectorAll('.gm-m.sel').forEach(function(x){x.classList.remove('sel')});b.classList.add('sel');selL=b;return}
+    if(!selL)return;
+    if(selL.dataset.id===b.dataset.id){selL.classList.remove('sel');selL.classList.add('done');b.classList.add('done');selL=null;done++;
+      $('gmM').textContent=done+' / 6';$('gmMp').style.width=(done/6*100)+'%';
+      if(done===6){var xp=Math.max(6,30-errs*4);addXp(xp);setTimeout(function(){end('Emparejado con '+errs+' fallo'+(errs===1?'':'s'),6,6,xp,match)},350)}}
+    else{errs++;b.classList.add('err');setTimeout(function(){b.classList.remove('err')},400)}});
+}
+
+/* Ordenar frase */
+function order(){
+  var items=sh(ORDER).slice(0,6),i=0,sc=0,xp=0;
+  function draw(){
+    if(i>=items.length)return end('Ordena la frase completado',sc,items.length,xp,order);
+    var it=items[i],words=it[0].split(' '),pool=sh(words.map(function(w,n){return{w:w,n:n}})),ans=[];
+    function paint(){
+      st.innerHTML=top(i,items.length,sc)+'<p class="gm-q">'+esc(it[1])+'</p><div class="gm-slot" id="gmAns" aria-label="Tu frase"></div><div class="gm-slot" id="gmPool" style="border-style:solid;border-color:var(--border)" aria-label="Palabras disponibles"></div><div class="gm-row"><button class="gm-btn" id="gmChk" type="button">Comprobar</button><button class="gm-btn sec" id="gmClr" type="button">Borrar</button></div><div id="gmFb"></div>';
+      ans.forEach(function(o,k){var b=document.createElement('button');b.type='button';b.className='gm-w';b.textContent=o.w;b.onclick=function(){pool.push(ans.splice(k,1)[0]);paint()};$('gmAns').appendChild(b)});
+      pool.forEach(function(o,k){var b=document.createElement('button');b.type='button';b.className='gm-w';b.textContent=o.w;b.onclick=function(){ans.push(pool.splice(k,1)[0]);paint()};$('gmPool').appendChild(b)});
+      $('gmClr').onclick=function(){pool=pool.concat(ans);ans=[];paint()};
+      $('gmChk').onclick=function(){
+        var got=ans.map(function(o){return o.w}).join(' '),okk=got.toLowerCase()===it[0].toLowerCase();
+        if(okk){sc++;xp+=8;addXp(8)}
+        $('gmChk').disabled=true;$('gmClr').disabled=true;
+        $('gmFb').innerHTML='<div class="gm-fb"><strong>'+(okk?'¡Correcto! +8 XP':'Casi.')+'</strong> '+esc(it[0])+'</div><button class="gm-btn" id="gmNx" type="button">'+(i+1>=items.length?'Ver resultado':'Siguiente')+' →</button>';
+        $('gmNx').focus();$('gmNx').onclick=function(){i++;draw()}};
+    }
+    paint()}
+  draw()}
+
+/* ===== Formato examen ===== */
+var TF=[
+["Bcc recipients can be seen by the other people who receive the email.",0,"Bcc = blind carbon copy: los demás destinatarios no lo ven."],
+["Spam is unwanted mass email, usually advertising.",1,"Spam = correo masivo no deseado."],
+["Phishing tries to steal your personal data.",1,"Se hace pasar por una entidad conocida para robar datos."],
+["You should open attachments from unknown senders.",0,"Nunca: pueden contener malware."],
+["Forward means to send a received email to another person.",1,"Forward = reenviar."],
+["The URL is the address you type in the browser.",1,"URL = Uniform Resource Locator."],
+["The minus sign (-) is used to search for an exact phrase.",0,"El signo menos excluye una palabra; las comillas buscan la frase exacta."],
+["With site: you can search only inside one website.",1,"site:wikipedia.org phishing."],
+["Faster is the superlative of fast.",0,"Faster es el comparativo; el superlativo es the fastest."],
+["Will is used for spontaneous decisions, promises and offers.",1,"I'll help you."],
+["In the first conditional we put will after if.",0,"Después de if va presente simple: If I finish, I'll call you."],
+["In the second conditional we use were with all persons: If I were you…",1,"Se prefiere were incluso con I, he, she, it."],
+["The third conditional talks about unreal situations in the past.",1,"If + past perfect, would have + participio."],
+["System software includes operating systems such as Windows and Linux.",1,"System software gestiona el hardware."],
+["A licensee is the person who gives the licence.",0,"Licensee es quien recibe la licencia (-ee = quien recibe)."],
+["The Present Continuous can talk about future plans already arranged.",1,"I'm meeting the client at 5."],
+["A subscription is a one-time payment for life.",0,"Subscription = pago periódico (mensual o anual)."]
+];
+var ERR=[
+["If I will finish early, I'll call you.",["If I finish early, I'll call you.","If I finished early, I'll call you.","If I will finish early, I call you."],"Tras if no se usa will en el first conditional."],
+["If she sort the emails, she will find them faster.",["If she sorts the emails, she will find them faster.","If she sorted the emails, she will find them faster.","If she sort the emails, she finds them faster."],"Tercera persona: sorts (con -s)."],
+["This laptop is more fast than that one.",["This laptop is faster than that one.","This laptop is more faster than that one.","This laptop is fastest than that one."],"Adjetivo corto: fast → faster."],
+["Excel is the most good tool for data analysis.",["Excel is the best tool for data analysis.","Excel is the goodest tool for data analysis.","Excel is the better tool for data analysis."],"Superlativo irregular: good → the best."],
+["Where I can find the answer?",["Where can I find the answer?","Where I find can the answer?","Where do I can find the answer?"],"Wh- + auxiliar + sujeto + verbo."],
+["If I would have studied, I would have passed the exam.",["If I had studied, I would have passed the exam.","If I studied, I would have passed the exam.","If I had studied, I had passed the exam."],"Third conditional: if + past perfect."],
+["He work in the IT department.",["He works in the IT department.","He working in the IT department.","He is work in the IT department."],"Present simple, 3ª persona: works."],
+["I called she yesterday.",["I called her yesterday.","I called hers yesterday.","I called herself yesterday."],"Pronombre objeto: her."],
+["If I were you, I will apply for that job.",["If I were you, I would apply for that job.","If I was you, I will apply for that job.","If I am you, I would apply for that job."],"Second conditional: would + infinitivo."],
+["What does mean this term?",["What does this term mean?","What means this term?","What this term does mean?"],"Con does el verbo principal va en infinitivo tras el sujeto."]
+];
+var READ=[
+{ctx:"Hi team, I'm writing to let you know that the IT department is going to update all the laptops next week. Please save your files to the cloud before Monday. If you don't back up your files, you will lose them. I'm sending the schedule as an attachment. Best regards, Anna",
+ qs:[["Why is Anna writing the email?",["To inform about a laptop update.","To ask for a new laptop.","To report a phishing email."],0,"Lo dice con «I'm writing to let you know…»."],
+     ["What must employees do before Monday?",["Save their files to the cloud.","Delete their emails.","Buy a new laptop."],0,"«Please save your files to the cloud before Monday»."],
+     ["What will happen if they don't back up their files?",["They will lose them.","They will be faster.","Nothing will happen."],0,"First conditional: If + present, will + infinitivo."],
+     ["Where is the schedule?",["In the attachment.","In the subject.","In the Junk folder."],0,"«I'm sending the schedule as an attachment»."]]},
+{ctx:"Maria received an email from an unknown sender. The subject said: «Your account will be closed. Immediate action required!». The email asked for her password and contained a link. Maria didn't click it. She reported the email as phishing and deleted it. If she had clicked the link, the criminals would have stolen her data.",
+ qs:[["Why was the email suspicious?",["Unknown sender, urgency and a request for her password.","It had a long subject.","It was sent on Monday."],0,"Remitente desconocido + urgencia + contraseña = phishing."],
+     ["What did Maria do?",["She reported it and deleted it.","She answered it.","She forwarded it to her friends."],0,"«She reported the email as phishing and deleted it»."],
+     ["What would have happened if she had clicked the link?",["The criminals would have stolen her data.","Nothing.","She would have won a prize."],0,"Third conditional: pasado irreal."],
+     ["Which conditional is the last sentence?",["Third conditional","First conditional","Zero conditional"],0,"If + past perfect, would have + participio."]]},
+{ctx:"Mediación · Texto original: «Phishing is a type of email scam. Criminals pretend to be a company you know, and they ask for your password or bank details. If you get an email like that, don't click any links and report it.»",
+ qs:[["Un amigo no entiende inglés. ¿Qué explicación en español es la más fiel?",["Es una estafa por correo: se hacen pasar por una empresa conocida para robarte contraseñas o datos bancarios. No pinches enlaces y denúncialo.","Es un virus que borra tu ordenador al instalarlo.","Es publicidad masiva que llega a tu bandeja de entrada."],0,"Mediar = explicar el sentido con tus palabras, sin copiar literalmente."],
+     ["Which is the best way to explain «phishing» in simple English?",["It's a fake email that tries to steal your data.","It's a program that deletes your files.","It's an email with advertising."],0,"Palabras sencillas, ejemplo claro y registro adaptado."]]}
+];
+var TR=[
+["Escribe el first conditional: You don't sort the emails. It won't be easy.",["if you don't sort the emails it won't be easy","it won't be easy if you don't sort the emails"],"If you don't sort the emails, it won't be easy."],
+["First conditional: I finish early. I call you.",["if i finish early i'll call you","if i finish early i will call you","i'll call you if i finish early","i will call you if i finish early"],"If I finish early, I'll call you."],
+["Second conditional: I win the lottery. I travel around the world.",["if i won the lottery i would travel around the world","i would travel around the world if i won the lottery"],"If I won the lottery, I would travel around the world."],
+["Third conditional: I didn't study. I didn't pass the exam.",["if i had studied i would have passed the exam","i would have passed the exam if i had studied","if i'd studied i would have passed the exam"],"If I had studied, I would have passed the exam."],
+["Zero conditional: If you heat ice, it ___ (melt).",["melts"],"melts"],
+["Comparativo de «efficient».",["more efficient"],"more efficient"],
+["Superlativo de «good».",["the best"],"the best"],
+["Be going to: I / go to / a convention next month.",["i'm going to go to a convention next month","i am going to go to a convention next month","i'm going to go to a convention next month"],"I'm going to go to a convention next month."]
+];
+var WB=[
+{box:["configure","customise","filter","track","sort","spreadsheet","table","tools"],
+ qs:["If you use a ___, it will be easier to plan the budget.|spreadsheet","If we list the customer orders in a ___, we'll see the dates and prices better.|table","If you ___ the new laptop correctly, it will work well.|configure","If you ___ the dashboard, it will look better.|customise","If you ___ the results by date, you will find the email faster.|filter","If we ___ the project progress, we will finish on time.|track","If you ___ the data alphabetically, it will be easier to read.|sort","If we use online ___, it will be easier to work together.|tools"]},
+{box:["attachment","inbox","forward","signature","spam","phishing","folder","subject"],
+ qs:["I've sent the report as an ___.|attachment","New messages arrive in your ___.|inbox","If you ___ the email, your manager will see it.|forward","My name and job title are in my email ___.|signature","Unwanted advertising email is called ___.|spam","A fake email that steals your data is ___.|phishing","Move the email to another ___ to organise it.|folder","Write a clear ___ so people know what the email is about.|subject"]}
+];
+function tfItems(n){return sh(TF).slice(0,n).map(function(t){return{q:'True or False? '+t[0],o:['True','False'],a:t[1]?0:1,e:t[2]}})}
+function errItems(n){return sh(ERR).slice(0,n).map(function(t){var o=sh(t[1].map(function(x,k){return{t:x,c:k===0}}));return{q:'Find the mistake: «'+t[0]+'» → ¿cuál es la versión correcta?',o:o.map(function(x){return x.t}),a:o.findIndex(function(x){return x.c}),e:t[2]}})}
+function fillItems(n){return sh(FILL).slice(0,n).map(function(f){var o=sh(f[1].map(function(t,k){return{t:t,c:k===f[2]}}));return{q:f[0],o:o.map(function(x){return x.t}),a:o.findIndex(function(x){return x.c}),e:f[3]}})}
+function vocItems(n){return sh(V).slice(0,n).map(function(p){var w=sh(V.filter(function(x){return x[1]!==p[1]})).slice(0,3).map(function(x){return x[1]}),o=sh([p[1]].concat(w));return{q:'¿Qué significa «'+p[0]+'»?',o:o,a:o.indexOf(p[1]),e:p[0]+' = '+p[1]+'.'}})}
+function tf(){mcq(tfItems(10),'True / False',5,tf)}
+function err(){mcq(errItems(8),'Corrige el error',6,err)}
+function read(){var t=READ[Math.floor(Math.random()*READ.length)];mcq(t.qs.map(function(q){return{ctx:t.ctx,q:q[0],o:q[1],a:q[2],e:q[3]}}),'Reading',8,read)}
+function exam(){var it=sh(fillItems(5).concat(tfItems(4),errItems(3),vocItems(3)));mcq(it,'Simulacro de examen',4,exam,true)}
+
+function wbox(){
+  var set=WB[Math.floor(Math.random()*WB.length)],qs=sh(set.qs.map(function(q){var a=q.split('|');return{t:a[0],w:a[1]}}));
+  st.innerHTML='<div class="gm-top"><span>Completa con las palabras del recuadro (usa cada una una vez)</span></div><div class="gm-fb" style="margin:0 0 1rem;display:flex;flex-wrap:wrap;gap:.4rem">'+sh(set.box).map(function(w){return '<span class="gm-w" style="cursor:default">'+esc(w)+'</span>'}).join('')+'</div>'+
+  qs.map(function(q,n){var p=q.t.split('___');return '<p style="margin:.7rem 0;line-height:2">'+(n+1)+'. '+esc(p[0])+'<select class="gm-sel" data-n="'+n+'" style="padding:.3rem .5rem;border:1.5px solid var(--border-strong);border-radius:8px;background:var(--surface);color:var(--text);font:inherit"><option value="">…</option>'+set.box.slice().sort().map(function(w){return '<option>'+esc(w)+'</option>'}).join('')+'</select>'+esc(p[1]||'')+'</p>'}).join('')+
+  '<div class="gm-row"><button class="gm-btn" id="gmChk" type="button">Comprobar</button></div><div id="gmFb"></div>';
+  $('gmChk').onclick=function(){
+    var sc=0;st.querySelectorAll('.gm-sel').forEach(function(sel){var q=qs[+sel.dataset.n],ok=sel.value===q.w;sel.style.borderColor=ok?'var(--ok)':'var(--uk-red)';sel.style.background=ok?'var(--tip-bg)':'var(--warn-bg)';sel.disabled=true;if(ok)sc++;else sel.insertAdjacentHTML('afterend',' <small style="color:var(--uk-red);font-weight:700">('+esc(q.w)+')</small>')});
+    var xp=sc*6;addXp(xp);$('gmChk').disabled=true;
+    $('gmFb').innerHTML='<div class="gm-fb"><strong>'+sc+' / '+qs.length+' correctas · +'+xp+' XP</strong></div><button class="gm-btn" id="gmAg" type="button">Otro ejercicio →</button>';$('gmAg').onclick=wbox}}
+
+function norm(t){return t.toLowerCase().replace(/[’‘]/g,"'").replace(/won't/g,'will not').replace(/n't/g,' not').replace(/'ll/g,' will').replace(/'m/g,' am').replace(/'re/g,' are').replace(/'d\b/g,' would').replace(/[.,?!;:«»"]/g,'').replace(/\s+/g,' ').trim()}
+function trans(){
+  var items=sh(TR).slice(0,6),i=0,sc=0,xp=0;
+  function draw(){
+    if(i>=items.length)return end('Transforma la frase completado',sc,items.length,xp,trans);
+    var it=items[i];
+    st.innerHTML=top(i,items.length,sc)+'<p class="gm-q">'+esc(it[0])+'</p><input id="gmIn" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Tu respuesta" style="width:100%;padding:.75rem 1rem;border:1.5px solid var(--border-strong);border-radius:10px;font:inherit;background:var(--surface);color:var(--text)"><div class="gm-row"><button class="gm-btn" id="gmChk" type="button">Comprobar</button></div><div id="gmFb"></div>';
+    var inp=$('gmIn');inp.focus();
+    function chk(){
+      if($('gmChk').disabled)return;
+      var okk=it[1].map(norm).indexOf(norm(inp.value))>-1;
+      if(okk){sc++;xp+=10;addXp(10)}
+      inp.disabled=true;$('gmChk').disabled=true;inp.style.borderColor=okk?'var(--ok)':'var(--uk-red)';
+      $('gmFb').innerHTML='<div class="gm-fb"><strong>'+(okk?'¡Correcto! +10 XP':'Respuesta modelo:')+'</strong> '+esc(it[2])+'</div><button class="gm-btn" id="gmNx" type="button">'+(i+1>=items.length?'Ver resultado':'Siguiente')+' →</button>';
+      $('gmNx').focus();$('gmNx').onclick=function(){i++;draw()}}
+    $('gmChk').onclick=chk;inp.addEventListener('keydown',function(e){if(e.key==='Enter')chk()})}
+  draw()}
+
+var modes={flash:flash,quiz:quiz,match:match,fill:fill,order:order,wbox:wbox,tf:tf,read:read,err:err,trans:trans,exam:exam};
+$('gmTabs').addEventListener('click',function(e){var b=e.target.closest('.gm-tab');if(!b)return;
+  document.querySelectorAll('.gm-tab').forEach(function(t){t.setAttribute('aria-selected',t===b)});mode=b.dataset.m;modes[mode]()});
+paintXp();flash();
+})();
+</script>
+</body>
+</html>
