@@ -54,9 +54,9 @@ html.dark .theme-btn .moon{opacity:1;transform:rotate(0)}
 @keyframes floatD{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-16px) rotate(4deg)}}
 
 .toc{position:sticky;top:0;z-index:100;background:var(--toc);backdrop-filter:blur(16px) saturate(180%);border-bottom:1px solid var(--bd)}
-.toc__i{max-width:1200px;margin:0 auto;padding:.55rem 1rem;display:flex;gap:.3rem;overflow-x:auto;scrollbar-width:none}
+.toc__i{max-width:1200px;margin:0 auto;padding:.55rem 1rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;overflow:visible;scrollbar-width:none}
 .toc__i::-webkit-scrollbar{display:none}
-.toc__i a{flex-shrink:0;padding:.42rem .9rem;border-radius:999px;color:var(--txm);font-size:.82rem;font-weight:600;white-space:nowrap;border:1px solid transparent;transition:background .18s,color .18s;display:inline-flex;align-items:center;gap:.3rem}
+.toc__i a{flex-shrink:0;padding:.42rem .72rem;border-radius:999px;color:var(--txm);font-size:.82rem;font-weight:600;white-space:nowrap;border:1px solid transparent;transition:background .18s,color .18s;display:inline-flex;align-items:center;gap:.3rem}
 .toc__i a:hover{background:var(--bg-h);color:var(--tx)}
 .toc__i a.active{background:var(--p);color:#fff;box-shadow:0 3px 14px var(--ps)}
 .toc__i a.read{color:var(--ok)}
@@ -361,12 +361,12 @@ html.dark .toc__i a.active,html.dark thead th,html.dark .diff-btn.active,html.da
   </div>
   <div class="hero__c">
     <a class="home-link" href="index.html">← Inicio</a>
-    <span class="hero__b"><span class="hero__dot"></span>Apuntes BD · Tema 1, 1bis y 2</span>
+    <span class="hero__b"><span class="hero__dot"></span>Apuntes BD · Temas 1–3</span>
     <h1 class="hero__t">Bases de Datos</h1>
-    <p class="hero__s">Almacenamiento, SGBD, arquitectura ANSI/SPARC, legislación y modelo Entidad-Relación. Compendio + laboratorio gamificado.</p>
+    <p class="hero__s">Almacenamiento, SGBD, arquitectura ANSI/SPARC, legislación, modelo Entidad-Relación, modelo relacional y SQL. Compendio + laboratorio gamificado.</p>
     <div class="hero__stats">
-      <span class="stat">📚 <strong>10</strong> bloques</span>
-      <span class="stat">🎮 <strong>9</strong> modos</span>
+      <span class="stat">📚 <strong>11</strong> bloques</span>
+      <span class="stat">🎮 <strong>9</strong> juegos</span>
       <span class="stat">🏆 <strong>10</strong> niveles</span>
     </div>
     <div class="hero__tools">
@@ -395,6 +395,7 @@ html.dark .toc__i a.active,html.dark thead th,html.dark .diff-btn.active,html.da
   <a href="#tema8" data-section="tema8">8. Entidades y claves</a>
   <a href="#tema9" data-section="tema9">9. Relaciones</a>
   <a href="#tema10" data-section="tema10">10. EER</a>
+  <a href="#tema11" data-section="tema11">11. Modelo relacional + SQL</a>
   <a href="#practica" class="cta">🎮 Práctica</a>
 </div></nav>
 
@@ -868,6 +869,287 @@ html.dark .toc__i a.active,html.dark thead th,html.dark .diff-btn.active,html.da
   </div>
 </article>
 
+
+<!-- TEMA 11: TEMA 3 DEL PDF -->
+<article class="section" id="tema11" data-topic="tema11">
+  <header class="section__h"><span class="section__badge">11</span><h2 class="section__t">El modelo relacional y SQL (Tema 3 del PDF)</h2><button class="section__read" data-read="tema11" aria-label="Marcar leído">✓</button></header>
+  <p>Este tema desarrolla el paso del modelo lógico al modelo relacional y su implementación mediante SQL, con especial atención a MariaDB y PostgreSQL.</p>
+
+  <h3>1. El modelo relacional</h3>
+  <p>El modelo relacional es el modelo lógico utilizado cuando se elige un SGBD relacional. Fue creado por <strong>Edgar F. Codd a finales de los años 60</strong>; los primeros SGBD relacionales aparecieron en los años 80. Es el modelo lógico más extendido. Ejemplos de SGBD relacionales: Oracle, PostgreSQL, MySQL y SQL Server.</p>
+  <div class="tarjetas">
+    <div class="tarjeta t-info"><h4>Independencia física</h4><p>La forma de almacenar los datos no debe influir en su manipulación lógica.</p></div>
+    <div class="tarjeta t-info"><h4>Independencia lógica</h4><p>Las aplicaciones no deberían modificarse cuando se modifica la base de datos.</p></div>
+    <div class="tarjeta t-pro"><h4>Flexibilidad</h4><p>Permite ofrecer diferentes vistas para diferentes usuarios.</p></div>
+    <div class="tarjeta t-ac"><h4>Uniformidad</h4><p>Busca sencillez y una forma uniforme de representar los datos.</p></div>
+  </div>
+
+  <h3>2. Elementos de una relación (tabla)</h3>
+  <ul class="lista">
+    <li><strong>Relación:</strong> tabla con filas y columnas. Una BD relacional es un conjunto de tablas relacionadas y con nombre único.</li>
+    <li><strong>Atributo, campo o columna:</strong> propiedad que almacena cada columna (nombre, DNI, edad…). Los nombres de columnas no se repiten dentro de una misma tabla, aunque pueden repetirse en tablas distintas.</li>
+    <li><strong>Tupla, registro o fila:</strong> ocurrencia concreta almacenada en la tabla. Todas las tuplas tienen el mismo número de campos y no puede haber dos tuplas iguales.</li>
+    <li><strong>Notación de campo:</strong> <code>TABLA.campo</code>, por ejemplo <code>CLIENTE.nombre</code>.</li>
+    <li><strong>Dominio:</strong> conjunto o tipo de valores que puede tomar un atributo. Cada atributo toma un único valor atómico por tupla.</li>
+  </ul>
+  <p>Dominios básicos: texto (por ejemplo, un código postal), numérico, fecha/hora, booleano (V/F) y autonumérico (secuencia que incrementa el SGBD).</p>
+  <div class="callout callout--info"><i>💡</i><div><strong>Atomicidad:</strong> un campo almacena un solo valor para cada registro. No se deben guardar dos DNIs o dos fechas en el mismo atributo.</div></div>
+
+  <h3>3. Claves</h3>
+  <div class="tabla-c"><table><thead><tr><th>Clave</th><th>Significado</th></tr></thead><tbody>
+    <tr><td><strong>PK · Primary Key</strong></td><td>Clave primaria. Una columna o conjunto de columnas que identifica de forma única cada fila. Toda tabla debe tenerla y no admite valores repetidos ni NULL.</td></tr>
+    <tr><td><strong>Clave subrogada</strong></td><td>Identificador sustituto, normalmente un <code>id</code> numérico, secuencial y autoincrementable, sin significado propio de negocio.</td></tr>
+    <tr><td><strong>Clave candidata</strong></td><td>Cada campo o conjunto de campos que podría identificar unívocamente una tupla.</td></tr>
+    <tr><td><strong>Clave alternativa · UK</strong></td><td>Clave candidata que no se ha elegido como primaria. En el enfoque del tema, UNIQUE impide repetidos y puede permitir NULL según el SGBD.</td></tr>
+    <tr><td><strong>FK · Foreign Key</strong></td><td>Clave ajena: campo(s) cuyos valores referencian normalmente la PK de otra tabla. Ambas claves deben tener dominios compatibles.</td></tr>
+  </tbody></table></div>
+  <p>Una FK puede ser también PK, una tabla puede tener varias FK o ninguna, y en una relación reflexiva una FK puede apuntar a la PK de su propia tabla. En una relación 1:N, la FK se coloca normalmente en la tabla del lado N.</p>
+  <pre data-lang="SQL"><code>CREATE TABLE CATEGORIA (
+  id INT PRIMARY KEY,
+  nombre VARCHAR(40)
+);
+
+CREATE TABLE PRODUCTO (
+  id INT PRIMARY KEY,
+  nombre VARCHAR(60),
+  idCategoria INT,
+  FOREIGN KEY (idCategoria) REFERENCES CATEGORIA(id)
+);</code></pre>
+  <p>En este ejemplo, cada producto puede referenciar una categoría y una categoría puede estar asociada a muchos productos.</p>
+
+  <h3>4. Borrado y actualización de claves referenciadas</h3>
+  <p>Cuando se elimina o modifica una clave primaria que está siendo referenciada por claves ajenas, se debe definir qué comportamiento seguirá el SGBD. Las acciones referenciales principales son:</p>
+  <div class="tarjetas">
+    <div class="tarjeta t-con"><h4>RESTRICT / NO ACTION</h4><p>Impide la operación si existen registros relacionados. Es el comportamiento por defecto si no se indica otro.</p></div>
+    <div class="tarjeta t-info"><h4>CASCADE</h4><p>Propaga el borrado o la actualización a los registros que referencian al registro origen.</p></div>
+    <div class="tarjeta t-ac"><h4>SET NULL</h4><p>Establece a NULL la clave ajena de los registros relacionados; se pierde esa relación.</p></div>
+  </div>
+
+  <h3>5. Restricciones semánticas y valores NULL</h3>
+  <ul class="lista">
+    <li><strong>PK:</strong> impide repetir valores y no admite NULL.</li>
+    <li><strong>UK / UNIQUE:</strong> impide valores repetidos. El tratamiento de NULL puede variar según el SGBD.</li>
+    <li><strong>VNN / NOT NULL:</strong> obliga a que el atributo tenga valor.</li>
+    <li><strong>Regla de validación:</strong> condición que debe cumplir un dato para poder actualizarse.</li>
+  </ul>
+  <p>Las restricciones pueden aplicarse a nivel de fila (por ejemplo, devolución posterior al préstamo), de conjunto de filas (máximo de pedidos diarios) o de negocio (comprobar si la dirección de envío coincide con la del cliente).</p>
+  <p><strong>NULL</strong> representa ausencia de información: dato desconocido o no aplicable. En una FK puede indicar que el registro no está relacionado con ninguno. En un booleano introduce un tercer estado además de verdadero y falso.</p>
+  <div class="callout callout--warn"><i>⚠️</i><div><strong>Integridad de entidad:</strong> toda PK debe tener valor. <strong>Integridad referencial:</strong> una FK debe coincidir con una PK existente en la tabla referenciada o ser NULL. Una FK que forma parte de una PK no puede ser NULL por la integridad de entidad.</div></div>
+
+  <h3>6. Esquema relacional y paso de MR a ER</h3>
+  <p>El esquema relacional (también llamado esquema lógico o canónico) representa las tablas mediante texto: nombre de tabla en mayúsculas y campos entre paréntesis, normalmente en minúsculas. Por convención, el primer atributo es la PK y se subraya; los atributos FK se marcan con un asterisco. Después se enumeran las restricciones PK y FK, indicando a qué tabla apunta cada FK.</p>
+  <pre data-lang="ESQUEMA RELACIONAL"><code>AUTOR (codigo, nombre)
+  PK (codigo)
+
+LIBRO (isbn, titulo, autor*)
+  PK (isbn)
+  FK (autor) → AUTOR(codigo)</code></pre>
+  <p>El nombre de la FK no tiene por qué coincidir con el de la PK referenciada, pero sus dominios deben ser iguales. En el ejemplo, un libro puede tener cero o un autor (0,1), mientras que un autor puede aparecer en cero o muchos libros (0,N).</p>
+  <h4>Reglas para reconstruir relaciones desde el modelo relacional</h4>
+  <ul class="lista">
+    <li>Si una FK no es PK y además es UK, la relación es <strong>1:1</strong>.</li>
+    <li>Si una FK no es PK y no es UK, la relación es <strong>1:N</strong>.</li>
+    <li>Si esa FK también es VNN / NOT NULL, la cardinalidad mínima del lado que la contiene es 1.</li>
+    <li>Si la FK forma parte de la PK: si toda la PK es FK, se identifica una entidad hija; si la FK es un subconjunto incompleto de la PK, hay una restricción de identificación; si es un subconjunto completo de la PK, representa una relación N:M.</li>
+  </ul>
+  <p>Una tabla intermedia como MATRICULAR, con dos FK que forman conjuntamente su PK (una hacia ALUMNO y otra hacia ASIGNATURA), representa una relación N:M. Si se transforma el modelo y una de esas claves deja de formar parte de la PK, pueden cambiar las cardinalidades y la tabla intermedia puede pasar a comportarse como entidad débil con una restricción de identificación.</p>
+
+  <h3>7. SQL y sus sublenguajes</h3>
+  <p><strong>SQL</strong> es el lenguaje declarativo habitual para interactuar con bases de datos relacionales: se indica qué se quiere hacer, no cómo ejecutarlo paso a paso. El tema distingue cuatro sublenguajes:</p>
+  <div class="tabla-c"><table><thead><tr><th>Sublenguaje</th><th>Función</th><th>Sentencias / uso</th></tr></thead><tbody>
+    <tr><td><strong>DDL</strong></td><td>Definir y modificar la estructura de la BD.</td><td>CREATE, ALTER, DROP.</td></tr>
+    <tr><td><strong>DML</strong></td><td>Almacenar, modificar y eliminar datos; también se usa para recuperar datos.</td><td>INSERT, UPDATE, DELETE. Algunos autores separan DQL para consultas.</td></tr>
+    <tr><td><strong>DCL</strong></td><td>Gestionar roles, permisos y usuarios.</td><td>Control de acceso.</td></tr>
+    <tr><td><strong>TCL</strong></td><td>Administrar las modificaciones realizadas con DML.</td><td>Control de transacciones.</td></tr>
+  </tbody></table></div>
+  <p>Las instrucciones finalizan con punto y coma (<code>;</code>), los comentarios de una línea pueden comenzar con <code>--</code> y una instrucción puede distribuirse en varias líneas. En la notación de sintaxis, los corchetes indican elementos opcionales y las barras verticales alternativas.</p>
+  <pre data-lang="SQL"><code>SELECT [ALL | DISTINCT] columna1 [, columna2, ...] | *
+FROM tabla1
+[WHERE condición]
+[ORDER BY expr1 [DESC | ASC]];</code></pre>
+
+  <h3>8. DDL: bases de datos y almacenamiento</h3>
+  <ul class="lista">
+    <li><strong>CREATE:</strong> crea bases de datos, tablas, vistas e índices.</li>
+    <li><strong>ALTER:</strong> modifica la estructura de un objeto.</li>
+    <li><strong>DROP:</strong> elimina tablas e índices.</li>
+  </ul>
+  <p>Jerarquía lógica general: <strong>tablespace</strong> (espacio de tablas) → <strong>base de datos</strong> → <strong>esquema</strong> → <strong>tabla</strong>. Un tablespace agrupa físicamente bases de datos o esquemas; el esquema agrupa tablas. En MariaDB/MySQL, esquema y base de datos son conceptos equivalentes y no se soporta la jerarquía completa. PostgreSQL permite trabajar con tablespaces y esquemas.</p>
+  <pre data-lang="SQL"><code>-- MariaDB: crear y seleccionar una base de datos
+CREATE DATABASE centro;
+USE centro;
+
+-- PostgreSQL: crear un esquema y establecerlo como activo
+CREATE SCHEMA centro;
+SET search_path TO centro;
+SHOW search_path;</code></pre>
+  <p>En PostgreSQL se emplea <code>CREATE TABLESPACE</code> para crear un espacio de tablas. En MariaDB, la codificación y la colación se pueden indicar al crear la BD con <code>CHARACTER SET</code> y <code>COLLATE</code>. <code>utf8mb4</code> permite almacenar todos los caracteres Unicode, incluidos emojis.</p>
+
+  <h3>9. Tipos de datos</h3>
+  <p>Las categorías generales son numéricos, cadenas, fecha/hora, binarios y otros (por ejemplo XML). En MariaDB destacan:</p>
+  <div class="tabla-c"><table><thead><tr><th>Tipo / familia</th><th>Uso y recomendaciones del tema</th></tr></thead><tbody>
+    <tr><td><strong>CHAR(n)</strong></td><td>Cadena de longitud uniforme. Ej.: código postal CHAR(5), matrícula CHAR(7).</td></tr>
+    <tr><td><strong>VARCHAR(n)</strong></td><td>Cadena de longitud variable y relativamente corta. Ej.: nombre VARCHAR(32). Preferible si se va a comparar, ordenar o agrupar.</td></tr>
+    <tr><td><strong>TEXT</strong></td><td>Textos extensos, como manuales o libros. MEDIUMTEXT y LONGTEXT permiten tamaños mayores.</td></tr>
+    <tr><td><strong>TINYINT, SMALLINT, INT, BIGINT</strong></td><td>Números enteros con rangos y tamaños diferentes. SIGNED admite negativos; UNSIGNED no.</td></tr>
+    <tr><td><strong>FLOAT / DOUBLE</strong></td><td>Coma flotante: rango y velocidad, pero precisión no uniforme y posibles errores de redondeo.</td></tr>
+    <tr><td><strong>DECIMAL(p,s) / NUMERIC</strong></td><td>Coma fija y precisión controlada. p = dígitos totales; s = decimales. Ej.: DECIMAL(10,2) para dinero.</td></tr>
+    <tr><td><strong>DATE</strong></td><td>Solo fecha: YYYY-MM-DD.</td></tr>
+    <tr><td><strong>TIME</strong></td><td>Solo hora: HH:MM:SS.</td></tr>
+    <tr><td><strong>DATETIME</strong></td><td>Fecha y hora; no almacena zona horaria ni convierte a UTC.</td></tr>
+    <tr><td><strong>TIMESTAMP</strong></td><td>Marca temporal que suele gestionar conversión de zona horaria; el tema indica límite en 2038 por su almacenamiento de 4 bytes.</td></tr>
+    <tr><td><strong>BINARY</strong></td><td>Datos binarios.</td></tr>
+  </tbody></table></div>
+  <p>Para valores que requieren precisión (contabilidad, finanzas o dinero), se recomienda DECIMAL; FLOAT/DOUBLE cuando importan más la velocidad y el rango. Para aplicaciones internacionales, conviene tener en cuenta la zona horaria y almacenar fechas/horas en UTC para mantener coherencia.</p>
+  <h4>ENUM, tipos propios y dominios</h4>
+  <p><code>ENUM</code> limita un campo a un conjunto pequeño y estable de valores. Es útil cuando la lista cambia poco y permite validación automática. No es recomendable si los valores cambian con frecuencia, necesitan traducción o deben asociarse a más información; en esos casos es preferible una tabla de referencia con FK.</p>
+  <p>En PostgreSQL, <code>CREATE DOMAIN</code> permite definir un tipo basado en otro con restricciones adicionales, como validaciones, longitud o formato.</p>
+
+  <h3>10. Crear, modificar y eliminar tablas (DDL)</h3>
+  <p>La creación de tablas traslada el modelo relacional al modelo físico. Los nombres de tabla deben ser únicos, comenzar por un carácter alfabético y no coincidir con palabras reservadas. El documento propone como convención TABLAS en mayúsculas y columnas en minúsculas.</p>
+  <pre data-lang="SQL"><code>CREATE TABLE CIUDAD (
+  nombre VARCHAR(20) NOT NULL,
+  poblacion INT DEFAULT 5000,
+  codigoPostal CHAR(5) NOT NULL DEFAULT '03203'
+);
+
+-- Consultar la estructura en MariaDB
+DESCRIBE CIUDAD;
+
+-- Crear una tabla a partir de una consulta
+CREATE TABLE CIUDAD_COPIA AS
+SELECT * FROM CIUDAD;</code></pre>
+  <p>Se pueden definir restricciones de obligatoriedad (<code>NOT NULL</code>) y valores por defecto (<code>DEFAULT</code>). La PK puede ser simple o compuesta; por convención es habitual declararla como restricción después de los campos.</p>
+  <pre data-lang="SQL"><code>CREATE TABLE PERSONA (
+  id INT,
+  dni CHAR(9) NOT NULL,
+  nombre VARCHAR(60),
+  CONSTRAINT PK_PERSONA PRIMARY KEY (id),
+  CONSTRAINT UK_PERSONA_DNI UNIQUE (dni)
+);
+
+-- Modificar estructura
+ALTER TABLE PERSONA ADD COLUMN telefono VARCHAR(15);
+ALTER TABLE PERSONA DROP COLUMN telefono;
+ALTER TABLE PERSONA MODIFY nombre VARCHAR(80);
+
+-- Eliminar tabla
+DROP TABLE PERSONA;</code></pre>
+  <p>La estructura se modifica con <code>ALTER TABLE</code>: se pueden añadir o eliminar columnas y cambiar sus definiciones. Para cambiar una PK, primero se elimina con <code>DROP PRIMARY KEY</code> y luego se vuelve a crear. Si hay FK dependientes, deben gestionarse antes. Al eliminar tablas relacionadas, el orden importa: primero las tablas que contienen FK dependientes.</p>
+
+  <h3>11. UNIQUE, claves ajenas y CHECK</h3>
+  <p>Una propiedad UK del modelo se implementa con <code>UNIQUE</code>, que crea un índice e impide valores repetidos. La diferencia destacada en el documento es que una clave única puede admitir NULL, mientras que una PK no.</p>
+  <pre data-lang="SQL"><code>CREATE TABLE CURSAR (
+  nifEstudiante CHAR(9) NOT NULL,
+  idAsignatura INT NOT NULL,
+  CONSTRAINT PK_CURSAR PRIMARY KEY (nifEstudiante, idAsignatura),
+  CONSTRAINT FK_EST_CUR FOREIGN KEY (nifEstudiante)
+    REFERENCES ESTUDIANTE(nif),
+  CONSTRAINT FK_ASI_CUR FOREIGN KEY (idAsignatura)
+    REFERENCES ASIGNATURA(id)
+);</code></pre>
+  <p>Es preferible definir las FK como restricciones. Para una FK compuesta se enumeran los campos separados por comas. Como convención de nombres, el tema propone <code>FK_</code> seguido de abreviaturas de las tablas padre e hija.</p>
+  <p>Las acciones <code>ON DELETE</code> y <code>ON UPDATE</code> determinan la propagación al borrar o actualizar la clave referenciada. <code>CHECK</code> permite validar una columna o comparar varios atributos de una misma fila.</p>
+  <pre data-lang="SQL"><code>CREATE TABLE VEHICULO (
+  id INT PRIMARY KEY,
+  color VARCHAR(10),
+  precio DECIMAL(10,2),
+  CONSTRAINT CK_COLOR CHECK (color IN ('Blanco','Negro','Otro')),
+  CONSTRAINT CK_PRECIO CHECK (precio > 1000)
+);</code></pre>
+  <p>Las restricciones también pueden gestionarse sobre tablas existentes mediante <code>ALTER TABLE</code>.</p>
+
+  <h3>12. Columnas generadas</h3>
+  <p>Una columna generada o virtual obtiene su valor automáticamente a partir de una expresión y no permite introducir un valor propio mediante DML.</p>
+  <div class="tarjetas">
+    <div class="tarjeta t-info"><h4>VIRTUAL</h4><p>Se calcula cuando se consulta. No ocupa espacio adicional para almacenar el resultado, pero consume CPU al calcularse.</p></div>
+    <div class="tarjeta t-pro"><h4>STORED</h4><p>Se calcula y almacena físicamente. Ocupa espacio y añade trabajo al escribir, pero las lecturas son más rápidas y permite crear índices sobre ella.</p></div>
+  </div>
+  <p>Se pueden usar para transformaciones y normalizaciones de texto o para calcular valores derivados, como la edad a partir de una fecha de nacimiento. También se pueden añadir a una tabla existente mediante ALTER TABLE.</p>
+
+  <h3>13. Supuesto práctico DDL</h3>
+  <p>El documento propone partir de tablas EMPLEADO, PROYECTO, VEHICULO y ASIGNACION, deducir sus PK y FK y crear el DDL respetando las relaciones. Las reglas pedidas son:</p>
+  <ol class="lista">
+    <li>Al eliminar o modificar un proyecto, se eliminan o modifican automáticamente sus asignaciones.</li>
+    <li>Al eliminar o actualizar un empleado, se propaga la operación a sus asignaciones.</li>
+    <li>Al eliminar un empleado, su vehículo no se elimina; al cambiar su identificación, se actualiza también en el vehículo.</li>
+    <li>Al eliminar un empleado, los empleados de los que era jefe permanecen; al actualizar su identificación, también se actualiza la referencia al jefe.</li>
+  </ol>
+  <p>Después se pide eliminar la columna MODELO de VEHICULO, añadir COLOR limitado a Blanco/Negro/Otro, añadir PRECIO superior a 1000 €, vaciar VEHICULO y finalmente eliminar la tabla.</p>
+
+  <h3>14. Carga e importación de datos</h3>
+  <p>Los SGBD ofrecen herramientas para ejecutar scripts, importar datos y recuperar copias de seguridad. Un script SQL puede ejecutarse desde la línea de comandos mediante redirección o parámetros; dentro del cliente MariaDB se puede usar <code>source</code>. Para importar archivos de texto o CSV en MariaDB se menciona <code>mariadb-import</code>; para exportar, <code>mariadb-dump</code>.</p>
+
+  <h3>15. DML: insertar, modificar y borrar</h3>
+  <p>DML permite gestionar los registros: insertar, modificar y eliminar datos. En este tema se estudian estas operaciones; las consultas se dejan para unidades posteriores.</p>
+  <h4>INSERT</h4>
+  <pre data-lang="SQL"><code>-- Insertar indicando las columnas
+INSERT INTO CIUDAD (nombre, poblacion)
+VALUES ('Elche', 240000);
+
+-- Insertar varios registros
+INSERT INTO CIUDAD (nombre, poblacion)
+VALUES ('Elche', 240000), ('Alicante', 350000);
+
+-- Omitir un id autoincrementable
+INSERT INTO PERSONA (nombre)
+VALUES ('José Manuel Pérez');</code></pre>
+  <p>Si se omiten los nombres de columnas, hay que proporcionar un valor para todas ellas y respetar exactamente el orden de creación y los tipos. Se puede consultar la estructura con <code>DESCRIBE nombre_tabla</code>. En claves subrogadas autoincrementables se puede omitir el ID. En MariaDB, <code>LAST_INSERT_ID()</code> permite recuperar el último identificador generado en la conexión. También existe INSERT ... SELECT para insertar el resultado de una consulta.</p>
+  <p>Al insertar datos en varias tablas relacionadas, primero se insertan las tablas que no dependen de otras y después las que contienen FK, respetando la integridad referencial.</p>
+  <h4>UPDATE</h4>
+  <pre data-lang="SQL"><code>-- Modificar un campo concreto
+UPDATE CIUDAD
+SET poblacion = 250000
+WHERE nombre = 'Elche';
+
+-- Actualizar mediante un cálculo
+UPDATE CIUDAD
+SET poblacion = poblacion * 1.10
+WHERE nombre = 'Elche';</code></pre>
+  <p><code>WHERE</code> filtra los registros que se modificarán. Sin una condición adecuada, la operación puede afectar a todas las filas.</p>
+  <h4>DELETE y TRUNCATE</h4>
+  <pre data-lang="SQL"><code>-- Borrar registros que cumplen una condición
+DELETE FROM CIUDAD WHERE nombre = 'Elche';
+
+-- Vaciar una tabla
+TRUNCATE TABLE CIUDAD;</code></pre>
+  <p>El documento explica que TRUNCATE vacía la tabla y reinicia los campos autonuméricos; a diferencia de DELETE, no selecciona registros concretos mediante WHERE. DROP TABLE elimina la estructura de la tabla.</p>
+
+  <h3>16. Trabajar con fechas</h3>
+  <ul class="lista">
+    <li><strong>DATE:</strong> solo fecha, formato <code>YYYY-MM-DD</code>.</li>
+    <li><strong>DATETIME:</strong> fecha y hora, formato <code>YYYY-MM-DD HH:MM:SS</code>.</li>
+    <li><strong>TIMESTAMP:</strong> marca temporal con rango más limitado.</li>
+    <li><strong>TIME:</strong> solo hora, formato <code>HH:MM:SS</code>.</li>
+  </ul>
+  <pre data-lang="SQL"><code>-- Operaciones con fechas
+UPDATE tabla
+SET fecha = DATE_ADD(fecha, INTERVAL 7 DAY)
+WHERE id = 1;
+
+UPDATE tabla
+SET fecha = DATE_SUB(fecha, INTERVAL 1 MONTH)
+WHERE id = 1;
+
+-- Fecha actual
+SELECT CURDATE(), NOW();
+
+-- Convertir una fecha en formato personalizado
+INSERT INTO tabla (fecha)
+VALUES (STR_TO_DATE('03/12/2024', '%d/%m/%Y'));</code></pre>
+  <p><code>DATE_ADD</code> suma intervalos y <code>DATE_SUB</code> los resta. Se pueden filtrar registros por mes o año usando <code>MONTH()</code> y <code>YEAR()</code>. Para <code>STR_TO_DATE()</code>, los formatos más usados son: <code>%d</code> día, <code>%m</code> mes, <code>%Y</code> año de cuatro dígitos, <code>%y</code> año de dos dígitos, <code>%H</code> hora 24 h, <code>%h</code> hora 12 h, <code>%i</code> minutos, <code>%s</code> segundos y <code>%p</code> AM/PM.</p>
+  <div class="callout callout--tip"><i>✓</i><div>El tema recomienda el formato ISO <strong>YYYY-MM-DD</strong> y funciones como <strong>NOW()</strong> o <strong>CURDATE()</strong> para fechas actuales.</div></div>
+
+  <h3>17. Operaciones en cascada: consecuencias</h3>
+  <p>Al borrar un registro referenciado por una FK, se aplica la regla configurada. Con RESTRICT/NO ACTION el borrado se bloquea; con CASCADE se eliminan los registros dependientes; con SET NULL se conserva el registro dependiente, pero pierde el valor de la FK. El documento compara estos comportamientos en las asignaciones a proyectos y en la relación reflexiva de EMPLEADO (jefe): la elección debe responder a las reglas del negocio para evitar borrar información que debe permanecer.</p>
+
+  <div class="callout callout--warn"><i>📌</i><div><strong>Repaso clave del tema:</strong> distinguir PK/FK/UK, saber comprobar integridad de entidad y referencial, reconstruir cardinalidades desde las FK, reconocer DDL frente a DML y controlar el efecto de WHERE y de las acciones ON DELETE / ON UPDATE.</div></div>
+  <div class="topic-actions">
+    <button class="btn-read" data-read="tema11">Marcar como leído</button>
+    <details class="notes"><summary>📝 Mis notas</summary><textarea data-note="tema11" placeholder="Tus notas…"></textarea></details>
+  </div>
+</article>
+
 </main>
 
 <!-- PRÁCTICA -->
@@ -875,7 +1157,7 @@ html.dark .toc__i a.active,html.dark thead th,html.dark .diff-btn.active,html.da
   <div class="practice__head">
     <span class="practice__badge">Laboratorio</span>
     <h2 class="practice__title">🎮 Zona de práctica</h2>
-    <p class="practice__sub">9 modos, XP, insignias y repetición espaciada Leitner. Todo se guarda en este navegador.</p>
+    <p class="practice__sub">9 modos, XP, insignias y repetición espaciada Leitner. Ahora incluye también el Tema 3: modelo relacional y SQL. Todo se guarda en este navegador.</p>
   </div>
 
   <div class="xp-card" id="xpCard"></div>
@@ -884,9 +1166,9 @@ html.dark .toc__i a.active,html.dark thead th,html.dark .diff-btn.active,html.da
     <div class="kpi"><div class="kpi__label">Aciertos</div><div class="kpi__val"><span id="kpiCorrect">0</span><small>/<span id="kpiTotal">0</span></small></div><div class="kpi__bar"><div class="kpi__fill" id="kpiAccFill" style="width:0%"></div></div></div>
     <div class="kpi"><div class="kpi__label">Precisión</div><div class="kpi__val"><span id="kpiAcc">0</span>%</div><div class="kpi__bar"><div class="kpi__fill" id="kpiAccFill2" style="width:0%"></div></div></div>
     <div class="kpi"><div class="kpi__label">Mejor racha</div><div class="kpi__val" id="kpiStreak">0</div></div>
-    <div class="kpi"><div class="kpi__label">Capítulos leídos</div><div class="kpi__val"><span id="kpiRead">0</span><small>/10</small></div><div class="kpi__bar"><div class="kpi__fill" id="kpiReadFill" style="width:0%"></div></div></div>
+    <div class="kpi"><div class="kpi__label">Capítulos leídos</div><div class="kpi__val"><span id="kpiRead">0</span><small>/11</small></div><div class="kpi__bar"><div class="kpi__fill" id="kpiReadFill" style="width:0%"></div></div></div>
     <div class="kpi"><div class="kpi__label">Tarjetas dominadas</div><div class="kpi__val" id="kpiMastered">0</div></div>
-    <div class="kpi"><div class="kpi__label">Temas aprobados</div><div class="kpi__val"><span id="kpiPassed">0</span><small>/10</small></div></div>
+    <div class="kpi"><div class="kpi__label">Temas aprobados</div><div class="kpi__val"><span id="kpiPassed">0</span><small>/11</small></div></div>
   </div>
 
   <div class="lab">
@@ -919,7 +1201,7 @@ html.dark .toc__i a.active,html.dark thead th,html.dark .diff-btn.active,html.da
 
 <footer class="footer">
   <div class="footer__i">
-    <div class="footer__b"><h3>Apuntes BD · Lab de Bases de Datos</h3><p>Temas 1, 1bis y 2 · Compendio + práctica gamificada.</p></div>
+    <div class="footer__b"><h3>Apuntes BD · Lab de Bases de Datos</h3><p>Temas 1, 1bis, 2 y 3 · Compendio + práctica gamificada.</p></div>
     <div class="footer__c"><h4>Bloques</h4><ul><li><a href="#tema1">Datos</a></li><li><a href="#tema4">SGBD</a></li><li><a href="#tema7">Modelo E-R</a></li><li><a href="#practica">Práctica</a></li></ul></div>
     <div class="footer__c"><h4>Recursos</h4><ul><li><a href="https://es.wikipedia.org/wiki/Base_de_datos" target="_blank" rel="noopener">Wikipedia · BD</a></li><li><a href="https://www.aepd.es/" target="_blank" rel="noopener">AEPD</a></li></ul></div>
   </div>
@@ -953,8 +1235,8 @@ html.dark .toc__i a.active,html.dark thead th,html.dark .diff-btn.active,html.da
 /* ============================================================
    1. CONTENIDO EDITABLE
    ============================================================ */
-var TOPICS = ['tema1','tema2','tema3','tema4','tema5','tema6','tema7','tema8','tema9','tema10'];
-var TOPIC_NAMES = {tema1:'Datos',tema2:'Ficheros',tema3:'BD y modelos',tema4:'SGBD',tema5:'Arq. 3 niveles',tema6:'Perfiles y RGPD',tema7:'Diseño E-R',tema8:'Entidades',tema9:'Relaciones',tema10:'EER'};
+var TOPICS = ['tema1','tema2','tema3','tema4','tema5','tema6','tema7','tema8','tema9','tema10','tema11'];
+var TOPIC_NAMES = {tema1:'Datos',tema2:'Ficheros',tema3:'BD y modelos',tema4:'SGBD',tema5:'Arq. 3 niveles',tema6:'Perfiles y RGPD',tema7:'Diseño E-R',tema8:'Entidades',tema9:'Relaciones',tema10:'EER',tema11:'Modelo relacional + SQL'};
 
 var LEVELS = [
   {lv:1,name:'Novato',emoji:'🌱',xp:0},
@@ -1116,7 +1398,8 @@ var ERRORS = [
   {cat:'tema7',lines:['Entidades: sustantivos en singular y MAYÚSCULAS (LINEA_PEDIDO).','Atributos: singular en camelCase (nombreCompleto).','Relaciones: sustantivos en minúscula (compra).','Relaciones: verbos en MAYÚSCULAS (COMPRAR).'],bad:2,why:'Las relaciones se nombran con verbos en MAYÚSCULAS.'},
   {cat:'tema8',lines:['La clave primaria no admite nulos.','La clave primaria debe ser estable.','Una clave ajena es siempre PK en la misma entidad.','Una superclave identifica de forma única.'],bad:2,why:'La clave ajena es PK en OTRA entidad.'},
   {cat:'tema9',lines:['Card(E,R)=(1,1): siempre exactamente una ocurrencia.','Card(E,R)=(0,N): ninguna o muchas.','Card(E,R)=(1,N): ninguna o muchas.','Una relación ternaria implica tres entidades.'],bad:2,why:'(1,N) significa una o muchas; el mínimo 1 obliga a participar.'},
-  {cat:'tema10',lines:['Total: toda ocurrencia del padre está en alguna subclase.','Disjunta: solo una subclase a la vez.','Solapada: ninguna subclase a la vez.','Parcial: el padre puede no estar en ninguna subclase.'],bad:2,why:'Solapada permite varias subclases simultáneas.'}
+  {cat:'tema10',lines:['Total: toda ocurrencia del padre está en alguna subclase.','Disjunta: solo una subclase a la vez.','Solapada: ninguna subclase a la vez.','Parcial: el padre puede no estar en ninguna subclase.'],bad:2,why:'Solapada permite varias subclases simultáneas.'},
+  {cat:'tema11',lines:['Una tupla representa una fila de la tabla.','La clave primaria admite valores NULL.','DDL incluye CREATE, ALTER y DROP.','Una clave ajena referencia una clave de otra tabla.'],bad:1,why:'La clave primaria identifica cada fila y no admite NULL ni valores repetidos.'}
 ];
 
 var ORDERS = [
@@ -1124,14 +1407,16 @@ var ORDERS = [
   {t:'Ordena la escalera del conocimiento',items:['Dato','Información','Conocimiento']},
   {t:'Ordena los niveles ANSI/SPARC, del usuario al disco',items:['Esquema externo','Esquema conceptual','Esquema interno']},
   {t:'Ordena el método para elaborar un modelo E-R',items:['Leer y comprender el problema','Localizar entidades y relaciones','Extraer atributos e identificadores','Definir cardinalidades','Revisar redundancias y derivados']},
-  {t:'Ordena de menor a mayor evolución histórica',items:['Jerárquico','En red','Relacional','NoSQL']}
+  {t:'Ordena de menor a mayor evolución histórica',items:['Jerárquico','En red','Relacional','NoSQL']},
+  {t:'Ordena las operaciones habituales para crear y poblar una tabla',items:['CREATE TABLE','INSERT INTO','UPDATE','DELETE']}
 ];
 
 var MATCHES = [
   {t:'Símbolos del modelo E-R',p:[['Rectángulo','Entidad'],['Elipse','Atributo'],['Rombo','Relación'],['Doble elipse','Multivaluado'],['Elipse punteada','Derivado']]},
   {t:'Cardinalidades',p:[['(0,1)','Ninguna o una'],['(1,1)','Exactamente una'],['(0,N)','Ninguna o muchas'],['(1,N)','Una o muchas']]},
   {t:'Lenguajes y arquitecturas',p:[['DDL','Definición'],['DCL','Control'],['DML','Manipulación'],['MS Access','Monousuario'],['PostgreSQL','Cliente-servidor']]},
-  {t:'Claves',p:[['Superclave','Identifica de forma única'],['Candidata','Superclave mínima'],['Primaria','Candidata elegida'],['Alternativa','Candidata no elegida'],['Ajena','PK de otra entidad']]}
+  {t:'Claves',p:[['Superclave','Identifica de forma única'],['Candidata','Superclave mínima'],['Primaria','Candidata elegida'],['Alternativa','Candidata no elegida'],['Ajena','PK de otra entidad']]},
+  {t:'Modelo relacional y SQL',p:[['Relación','Tabla'],['Tupla','Fila'],['Atributo','Columna'],['PK','Identifica cada fila'],['FK','Referencia otra tabla'],['DDL','Define estructuras'],['DML','Manipula datos']]}
 ];
 
 var PG = [
@@ -1140,6 +1425,10 @@ var PG = [
     {t:'Tiene al menos 3 columnas (th)',f:function(d){return d.querySelectorAll('th').length>=3}},
     {t:'Incluye las columnas dni, nombre y email',f:function(d){var h=[].map.call(d.querySelectorAll('th'),function(x){return x.textContent.trim().toLowerCase()}).join('|');return /dni/.test(h)&&/nombre/.test(h)&&/email/.test(h)}},
     {t:'Tiene al menos 2 filas de datos (td)',f:function(d){return [].filter.call(d.querySelectorAll('tr'),function(r){return r.querySelector('td')}).length>=2}}]},
+  {t:'Crea una tabla PRODUCTO con id como clave primaria, nombre obligatorio y precio decimal.',s:'<table>\n  <caption>PRODUCTO</caption>\n  <tr><th>id</th><th>nombre</th><th>precio</th></tr>\n  <tr><td>1</td><td>Teclado</td><td>29.90</td></tr>\n</table>',checks:[
+    {t:'Existe la tabla PRODUCTO',f:function(d){var c=d.querySelector('table caption');return !!c&&/producto/i.test(c.textContent)}},
+    {t:'Incluye id, nombre y precio',f:function(d){var h=[].map.call(d.querySelectorAll('th'),function(x){return x.textContent.trim().toLowerCase()}).join('|');return /id/.test(h)&&/nombre/.test(h)&&/precio/.test(h)}},
+    {t:'Incluye al menos una fila de datos',f:function(d){return d.querySelectorAll('td').length>=3}}]},
   {t:'Tabla MATRICULA con claves ajenas: columnas dniAlumno, codAsignatura y fecha, con 2 filas completas.',s:'<table>\n  <caption>MATRICULA</caption>\n</table>',checks:[
     {t:'Hay una <table> con <caption>MATRICULA',f:function(d){var c=d.querySelector('table caption');return !!c&&/matricula/i.test(c.textContent)}},
     {t:'Columnas dniAlumno, codAsignatura y fecha',f:function(d){var h=[].map.call(d.querySelectorAll('th'),function(x){return x.textContent.trim().toLowerCase()}).join('|');return /dnialumno/.test(h)&&/codasignatura/.test(h)&&/fecha/.test(h)}},
@@ -1150,6 +1439,63 @@ var PG = [
 /* ============================================================
    2. UTILIDADES, ESTADO Y XP
    ============================================================ */
+
+/* Ampliación de práctica: Tema 11 (modelo relacional y SQL del PDF) */
+QUESTIONS.push(
+ {q:'¿Qué representa una tupla en el modelo relacional?',o:['Una fila o registro','Una columna','El dominio de un campo','Una base de datos'],c:0,cat:'tema11',diff:'easy',expl:'Una tupla es una ocurrencia o registro de la tabla.'},
+ {q:'¿Qué es el dominio de un atributo?',o:['El conjunto o tipo de valores que puede tomar','El nombre de la tabla','La clave primaria','El número de filas'],c:0,cat:'tema11',diff:'easy',expl:'El dominio limita los valores posibles de un campo.'},
+ {q:'¿Qué característica tiene una clave primaria?',o:['Identifica cada fila y no admite NULL ni repetidos','Puede repetirse','Siempre es texto','Puede contener NULL'],c:0,cat:'tema11',diff:'easy',expl:'La PK identifica de forma única cada tupla.'},
+ {q:'Una clave candidata que no se elige como PK es:',o:['Una clave alternativa','Una clave subrogada','Una tupla','Un dominio'],c:0,cat:'tema11',diff:'medium',expl:'Las claves candidatas no elegidas como PK son alternativas.'},
+ {q:'¿Qué hace una clave ajena?',o:['Referencia valores de otra tabla','Ordena las filas','Crea una copia de la tabla','Sustituye a todas las PK'],c:0,cat:'tema11',diff:'easy',expl:'La FK relaciona tablas mediante valores referenciados.'},
+ {q:'La integridad referencial permite que una FK:',o:['Coincida con una PK referenciada o sea NULL','Contenga cualquier valor','Sea siempre única','Sea siempre texto'],c:0,cat:'tema11',diff:'medium',expl:'La FK debe apuntar a una PK existente o ser NULL.'},
+ {q:'¿Qué acción propaga el borrado a los registros relacionados?',o:['CASCADE','RESTRICT','SET NULL','DEFAULT'],c:0,cat:'tema11',diff:'easy',expl:'CASCADE propaga la operación a las filas dependientes.'},
+ {q:'¿Qué sublenguaje SQL define estructuras?',o:['DDL','DML','DCL','TCL'],c:0,cat:'tema11',diff:'easy',expl:'DDL incluye CREATE, ALTER y DROP.'},
+ {q:'¿Qué sentencia modifica la estructura de una tabla?',o:['ALTER TABLE','UPDATE','INSERT','SELECT'],c:0,cat:'tema11',diff:'easy',expl:'ALTER TABLE modifica columnas y restricciones.'},
+ {q:'¿Qué tipo es adecuado para importes que requieren precisión?',o:['DECIMAL','FLOAT','DOUBLE','TEXT'],c:0,cat:'tema11',diff:'medium',expl:'DECIMAL es de coma fija y conserva la precisión indicada.'},
+ {q:'¿Qué diferencia hay entre CHAR y VARCHAR?',o:['CHAR es longitud uniforme; VARCHAR es variable','CHAR es numérico','VARCHAR solo guarda fechas','No hay diferencia'],c:0,cat:'tema11',diff:'medium',expl:'CHAR se recomienda para longitudes uniformes y VARCHAR para variables.'},
+ {q:'¿Qué tipo almacena solo una fecha?',o:['DATE','TIME','DATETIME','BINARY'],c:0,cat:'tema11',diff:'easy',expl:'DATE almacena una fecha sin hora.'},
+ {q:'¿Qué hace CHECK?',o:['Valida una condición de los datos','Elimina una tabla','Crea un usuario','Ordena registros'],c:0,cat:'tema11',diff:'medium',expl:'CHECK impone una condición que debe cumplirse.'},
+ {q:'¿Qué hace TRUNCATE TABLE según el tema?',o:['Vacía la tabla y reinicia autonuméricos','Elimina solo una fila','Cambia el nombre','Añade una columna'],c:0,cat:'tema11',diff:'medium',expl:'TRUNCATE vacía los datos y reinicia campos autonuméricos.'},
+ {q:'¿Qué ocurre si se omiten las columnas en INSERT?',o:['Hay que proporcionar valores para todas en su orden','Se insertan valores aleatorios','Solo se inserta la PK','La sentencia no permite valores'],c:0,cat:'tema11',diff:'medium',expl:'Los valores deben corresponder a todas las columnas según el orden de creación.'},
+ {q:'¿Qué cláusula limita las filas afectadas por UPDATE?',o:['WHERE','ORDER BY','CREATE','DEFAULT'],c:0,cat:'tema11',diff:'easy',expl:'WHERE filtra las filas que se modificarán.'},
+ {q:'¿Qué hace DATE_ADD(fecha, INTERVAL 7 DAY)?',o:['Suma siete días','Resta siete días','Convierte a texto','Elimina la fecha'],c:0,cat:'tema11',diff:'medium',expl:'DATE_ADD añade el intervalo indicado.'},
+ {q:'¿Qué tipo de columna generada guarda físicamente su resultado?',o:['STORED','VIRTUAL','NULL','ENUM'],c:0,cat:'tema11',diff:'medium',expl:'STORED calcula y almacena el valor.'}
+);
+FLASHCARDS.push(
+ {id:'fc34',f:'Modelo relacional',b:'Modelo lógico basado en relaciones (tablas), creado por Codd a finales de los años 60. Objetivos: independencia física y lógica, flexibilidad y uniformidad.',cat:'tema11'},
+ {id:'fc35',f:'Relación, atributo y tupla',b:'Relación = tabla; atributo = columna/campo; tupla = fila/registro.',cat:'tema11'},
+ {id:'fc36',f:'Dominio',b:'Conjunto o tipo de valores que puede tomar un atributo. Cada campo almacena un valor atómico por tupla.',cat:'tema11'},
+ {id:'fc37',f:'PK, FK y UK',b:'PK identifica una fila y no admite NULL ni repetidos. FK referencia otra tabla. UK impide repetidos y puede admitir NULL según el SGBD.',cat:'tema11'},
+ {id:'fc38',f:'Clave subrogada',b:'Identificador sustituto, normalmente id numérico, secuencial y autoincrementable, sin significado propio de negocio.',cat:'tema11'},
+ {id:'fc39',f:'Integridad de entidad',b:'Toda clave primaria debe tener valor: no admite NULL.',cat:'tema11'},
+ {id:'fc40',f:'Integridad referencial',b:'Una FK debe coincidir con una PK existente en la tabla referenciada o tomar NULL.',cat:'tema11'},
+ {id:'fc41',f:'Acciones referenciales',b:'RESTRICT/NO ACTION impide la operación; CASCADE la propaga; SET NULL pone a NULL la FK relacionada.',cat:'tema11'},
+ {id:'fc42',f:'DDL y DML',b:'DDL define estructuras (CREATE, ALTER, DROP). DML inserta, modifica y elimina datos (INSERT, UPDATE, DELETE).',cat:'tema11'},
+ {id:'fc43',f:'DECIMAL(p,s)',b:'Tipo de coma fija. p indica el número total de dígitos y s la cantidad de decimales. Recomendado para dinero.',cat:'tema11'},
+ {id:'fc44',f:'CHAR, VARCHAR y TEXT',b:'CHAR: longitud uniforme. VARCHAR: longitud variable y relativamente corta. TEXT: textos extensos.',cat:'tema11'},
+ {id:'fc45',f:'DATE, TIME, DATETIME, TIMESTAMP',b:'DATE solo fecha; TIME solo hora; DATETIME fecha y hora sin zona horaria; TIMESTAMP marca temporal con gestión de zona horaria.',cat:'tema11'},
+ {id:'fc46',f:'ENUM',b:'Conjunto pequeño y estable de valores posibles. Si cambia a menudo o necesita datos adicionales, mejor una tabla de referencia con FK.',cat:'tema11'},
+ {id:'fc47',f:'VIRTUAL y STORED',b:'VIRTUAL se calcula en cada consulta; STORED se calcula y almacena físicamente.',cat:'tema11'},
+ {id:'fc48',f:'INSERT, UPDATE y DELETE',b:'INSERT añade registros; UPDATE modifica los que cumplen WHERE; DELETE elimina registros seleccionados por WHERE.',cat:'tema11'}
+);
+GLOSS.push(
+ {t:'Relación',x:'Tabla formada por filas y columnas en el modelo relacional.',cat:'tema11',lv:'easy'},
+ {t:'Tupla',x:'Fila o registro que representa una ocurrencia de la relación.',cat:'tema11',lv:'easy'},
+ {t:'Atributo',x:'Columna o campo que almacena una propiedad de la tabla.',cat:'tema11',lv:'easy'},
+ {t:'Dominio',x:'Conjunto o tipo de valores permitidos para un atributo.',cat:'tema11',lv:'medium'},
+ {t:'Clave primaria (PK)',x:'Campo o conjunto de campos que identifica unívocamente cada fila y no admite NULL.',cat:'tema11',lv:'easy',alt:['pk','primary key']},
+ {t:'Clave ajena (FK)',x:'Campo cuyos valores referencian normalmente la clave primaria de otra tabla.',cat:'tema11',lv:'easy',alt:['fk','foreign key']},
+ {t:'Clave candidata',x:'Campo o conjunto de campos capaz de identificar de forma única una tupla.',cat:'tema11',lv:'medium'},
+ {t:'Clave subrogada',x:'Identificador sustituto, normalmente autoincrementable y sin significado de negocio.',cat:'tema11',lv:'medium'},
+ {t:'Integridad de entidad',x:'Exige que toda clave primaria tenga valor y no sea NULL.',cat:'tema11',lv:'medium'},
+ {t:'Integridad referencial',x:'Exige que la FK coincida con una PK existente o sea NULL.',cat:'tema11',lv:'medium'},
+ {t:'DDL',x:'Sublenguaje SQL para definir y modificar estructuras de bases de datos.',cat:'tema11',lv:'easy'},
+ {t:'DML',x:'Sublenguaje SQL para insertar, modificar y eliminar datos.',cat:'tema11',lv:'easy'},
+ {t:'CHECK',x:'Restricción que valida que los datos cumplan una condición.',cat:'tema11',lv:'medium'},
+ {t:'Columna generada',x:'Columna cuyo valor se calcula automáticamente a partir de una expresión.',cat:'tema11',lv:'medium'},
+ {t:'STR_TO_DATE',x:'Función para convertir una cadena con formato personalizado en fecha.',cat:'tema11',lv:'hard'}
+);
+
 var KEY='bd_lab_v1', DL={easy:'Fácil',medium:'Media',hard:'Difícil'}, BASE={easy:10,medium:15,hard:25};
 var D0=function(){return {xp:0,ok:0,tot:0,streak:0,best:0,read:{},notes:{},box:{},passed:{},once:{},wrong:{}}};
 var S=D0();
@@ -1184,7 +1530,7 @@ function paint(){
    '<details class="xp-help"'+(open?' open':'')+'><summary>¿Cómo gano XP?</summary><ul><li>Acierto: fácil 10 · media 15 · difícil 25 XP.</li><li>Modo escribir ×1,5 (+0,25 con 25 s, +0,5 con 12 s).</li><li>Flashcards ×0,6 · modo examen ×1,25.</li><li>Cada pista resta un 25 % (máx. 3). Saltar = 1 XP. Fallar = 0.</li><li>Ordenar y Playground dan XP solo la primera vez.</li><li>Umbral del nivel L: 25·(L−1)·(L+2) XP.</li></ul></details>';
   var acc=S.tot?Math.round(S.ok/S.tot*100):0,rd=Object.keys(S.read).filter(function(k){return S.read[k]}).length;
   $('kpiCorrect').textContent=S.ok;$('kpiTotal').textContent=S.tot;$('kpiAcc').textContent=acc;$('kpiAccFill').style.width=acc+'%';$('kpiAccFill2').style.width=acc+'%';
-  $('kpiStreak').textContent=S.best;$('kpiRead').textContent=rd;$('kpiReadFill').style.width=rd*10+'%';
+  $('kpiStreak').textContent=S.best;$('kpiRead').textContent=rd;$('kpiReadFill').style.width=(rd/11*100)+'%';
   $('kpiMastered').textContent=FLASHCARDS.filter(function(c){return S.box[c.id]===3}).length;
   $('kpiPassed').textContent=Object.keys(S.passed).filter(function(k){return S.passed[k]}).length;
   $('hudEmoji').textContent=cur.emoji;$('hudLv').textContent='Nivel '+L;$('hudXp').textContent=S.xp+' XP';$('hudFill').style.width=pc+'%'}
