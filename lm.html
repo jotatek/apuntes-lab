@@ -2797,9 +2797,7 @@ var QUIZ = [
 ];
 
 var BUGS = [
-    { t: 'Etiqueta sin cerrar', code: ['<body>', '  <h1>Mi web</h1>', '  <p>Bienvenido a mi página', '  <p>Segundo párrafo</p>', '
-
-</body>'], bad: 2, why: 'El primer <p> no está cerrado: todo documento debe cerrar sus etiquetas y anidarlas correctamente.' },
+    { t: 'Etiqueta sin cerrar', code: ['<body>', '  <h1>Mi web</h1>', '  <p>Bienvenido a mi página', '  <p>Segundo párrafo</p>', '</body>'], bad: 2, why: 'El primer <p> no está cerrado: todo documento debe cerrar sus etiquetas y anidarlas correctamente.' },
     { t: 'Bloque dentro de línea', code: ['<main>', '  <span>', '    <div>Texto</div>', '  </span>', '</main>'], bad: 2, why: 'Una etiqueta de línea (<span>) nunca puede encerrar una etiqueta de bloque (<div>).' },
     { t: 'Dos títulos principales', code: ['<body>', '  <h1>Compendio HTML</h1>', '  <h2>Introducción</h2>', '  <h1>Estructura</h1>', '</body>'], bad: 3, why: 'Solo debe haber un <h1> por página. Los apartados usan <h2> a <h6>.' },
     { t: 'Salto de nivel en encabezados', code: ['<body>', '  <h1>Formularios</h1>', '  <h2>Atributos</h2>', '  <h4>Detalle de action</h4>', '</body>'], bad: 3, why: 'Los encabezados no deben saltarse niveles de la jerarquía: tras <h2> toca <h3>.' },
