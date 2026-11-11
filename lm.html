@@ -1817,10 +1817,35 @@ html.dark{--primary:#829aa9!important;--bg:#090c10!important;--bg-elevated:#1116
 .xp__lvl,.xp-badge,.xp-badge__icon{background:#273039!important;color:#d7e2e8!important}
 .xp__progress>i,.progress__bar,.bar-fill{background:#779f99!important}
 button.primary,.btn-primary,.quiz__option.is-correct{background:#263b3b!important;border-color:#587d78!important}
-</style></head>
+</style>
+<style id="academic-ranks-style">
+:root{--rank-accent:#b98270;}
+/* Panel de rangos académicos: misma estructura y jerarquía que el resto de asignaturas. */
+.rank-panel{margin:1rem auto 1.4rem;padding:1.1rem;max-width:1180px;border:1px solid #29313a;border-radius:16px;background:#11161d;color:#e1e7ed}
+.rank-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:.85rem}
+.rank-head h3{margin:0;font-size:1.05rem;color:#e1e7ed}
+.rank-head p{margin:.3rem 0 0;opacity:.72;font-size:.82rem;color:#aab7c4}
+.rank-current{font-weight:800;padding:.4rem .7rem;border-radius:999px;background:var(--rank-accent);color:#10151b;font-size:.8rem}
+.rank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.65rem}
+.rank-item{padding:.75rem;border:1px solid #303b46;border-radius:12px;background:#171e27;display:flex;gap:.65rem;align-items:center;min-width:0;color:#e1e7ed}
+.rank-item.locked{opacity:.42;filter:grayscale(1)}
+.rank-item.unlocked{border-color:color-mix(in srgb,var(--rank-accent) 55%,#303b46)}
+.rank-icon{font-size:1.65rem;flex:0 0 auto}
+.rank-item strong{display:block;font-size:.84rem;line-height:1.3}
+.rank-item small{display:block;font-size:.72rem;opacity:.72;margin-top:.15rem;color:#b7c3ce}
+.rank-next{font-size:.82rem;margin:.8rem 0 0;opacity:.8;color:#c2cdd7}
+.rank-toast{position:fixed;z-index:99999;left:50%;bottom:24px;transform:translateX(-50%);padding:.85rem 1.2rem;border:1px solid #3b4b58;border-radius:14px;background:#17212b;color:white;box-shadow:0 8px 30px #0008;font-weight:700;text-align:center;max-width:min(90vw,420px)}
+@media(max-width:720px){.rank-panel{margin:.8rem .75rem 1rem;padding:.9rem}.rank-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.45rem}.rank-item{padding:.55rem;gap:.45rem}.rank-icon{font-size:1.35rem}.rank-item strong{font-size:.76rem}.rank-item small{font-size:.66rem}}
+/* Los rangos sustituyen a las insignias genéricas de nivel en estas dos páginas. */
+.xp__badges{display:none!important}
+</style>
+
+</head>
 <body><nav class="course-switcher" aria-label="Navegación entre asignaturas">
 <a href="index.html">⌂ Inicio</a><a href="bd.html">Bases de Datos</a><a href="iso.html">Sistemas Operativos</a><a href="fhw.html">Hardware</a><a href="ingles.html">Inglés</a><a href="lm.html">Lenguaje de Marcas</a><a href="redes.html">Redes</a>
 </nav>
+
+
 
 <div class="progress" aria-hidden="true"><div class="progress__bar" id="progressBar"></div></div>
 
@@ -2244,6 +2269,11 @@ button.primary,.btn-primary,.quiz__option.is-correct{background:#263b3b!importan
             <p class="lab__intro">
                 Pon a prueba lo que has leído en los siete temas anteriores. Todas las preguntas salen de la teoría de este compendio, y tu progreso (aciertos, rachas, tarjetas y capítulos leídos) se guarda en este navegador.
             </p>
+
+            <section class="rank-panel" id="rankPanel" aria-label="Rangos de Lenguaje de Marcas">
+ <div class="rank-head"><div><h3>🏅 Rangos de Lenguaje de Marcas</h3><p>Consigue niveles para ascender. Cada rango requiere más esfuerzo que el anterior.</p></div><span class="rank-current" id="rankCurrent">Rango inicial</span></div>
+ <div class="rank-grid" id="rankGrid"></div><p class="rank-next" id="rankNext"></p>
+</section>
 
             <section class="xp" aria-label="Experiencia, nivel e insignias">
                 <div id="xpPanel" aria-live="polite"></div>
@@ -2767,7 +2797,9 @@ var QUIZ = [
 ];
 
 var BUGS = [
-    { t: 'Etiqueta sin cerrar', code: ['<body>', '  <h1>Mi web</h1>', '  <p>Bienvenido a mi página', '  <p>Segundo párrafo</p>', '</body>'], bad: 2, why: 'El primer <p> no está cerrado: todo documento debe cerrar sus etiquetas y anidarlas correctamente.' },
+    { t: 'Etiqueta sin cerrar', code: ['<body>', '  <h1>Mi web</h1>', '  <p>Bienvenido a mi página', '  <p>Segundo párrafo</p>', '
+
+</body>'], bad: 2, why: 'El primer <p> no está cerrado: todo documento debe cerrar sus etiquetas y anidarlas correctamente.' },
     { t: 'Bloque dentro de línea', code: ['<main>', '  <span>', '    <div>Texto</div>', '  </span>', '</main>'], bad: 2, why: 'Una etiqueta de línea (<span>) nunca puede encerrar una etiqueta de bloque (<div>).' },
     { t: 'Dos títulos principales', code: ['<body>', '  <h1>Compendio HTML</h1>', '  <h2>Introducción</h2>', '  <h1>Estructura</h1>', '</body>'], bad: 3, why: 'Solo debe haber un <h1> por página. Los apartados usan <h2> a <h6>.' },
     { t: 'Salto de nivel en encabezados', code: ['<body>', '  <h1>Formularios</h1>', '  <h2>Atributos</h2>', '  <h4>Detalle de action</h4>', '</body>'], bad: 3, why: 'Los encabezados no deben saltarse niveles de la jerarquía: tras <h2> toca <h3>.' },
@@ -3668,6 +3700,28 @@ $('resetProgress').addEventListener('click', function () {
 buildSectionTools();
 renderStats(); simConfig(); typeConfig(); quizConfig(); bugConfig(); sortConfig(); matchConfig(); playConfig();
 
+})();
+</script>
+
+<script id="academic-ranks-controller">
+(function(){
+'use strict';
+var KEY='lm_lab_v1', RANK_KEY=KEY+'_rank_unlocked';
+var RANKS=[[1, 'Iniciación al marcado', '🏷️'], [3, 'Maquetador web', '🧱'], [6, 'Desarrollador web', '🌐'], [10, 'Arquitecto web', '🎓']];
+function getXP(){try{var d=JSON.parse(localStorage.getItem(KEY)||'{}');return Math.max(0,+d.xp||0)}catch(e){return 0}}
+function level(x){var l=1;while(l<10&&x>=25*l*(l+3))l++;return l}
+function draw(notify){
+ var xp=getXP(),lv=level(xp),idx=0;RANKS.forEach(function(r,i){if(lv>=r[0])idx=i});
+ var grid=document.getElementById('rankGrid');if(!grid)return;
+ grid.innerHTML=RANKS.map(function(r){var open=lv>=r[0];return '<div class="rank-item '+(open?'unlocked':'locked')+'" title="'+r[1]+' · nivel '+r[0]+'"><span class="rank-icon" aria-hidden="true">'+r[2]+'</span><div><strong>'+r[1]+'</strong><small>Nivel '+r[0]+'</small></div></div>'}).join('');
+ document.getElementById('rankCurrent').textContent=RANKS[idx][2]+' '+RANKS[idx][1];
+ var next=RANKS[idx+1],el=document.getElementById('rankNext');el.textContent=next?'Siguiente rango: '+next[1]+' · nivel '+next[0]+' (actualmente nivel '+lv+')':'¡Has alcanzado el rango máximo!';
+ var old=-1;try{old=+(localStorage.getItem(RANK_KEY)||'-1')}catch(e){}
+ if(notify&&idx>old&&old>=0){var t=document.createElement('div');t.className='rank-toast';t.setAttribute('role','status');t.textContent='🏅 ¡Nuevo rango desbloqueado! '+RANKS[idx][1];document.body.appendChild(t);setTimeout(function(){if(t.parentNode)t.remove()},4500)}
+ try{localStorage.setItem(RANK_KEY,String(Math.max(old,idx)))}catch(e){}
+}
+var original=Storage.prototype.setItem;if(!Storage.prototype.__academicRankHook){Storage.prototype.setItem=function(k,v){var out=original.apply(this,arguments);if(k===KEY){try{draw(true)}catch(e){}}return out};Storage.prototype.__academicRankHook=true}
+window.addEventListener('storage',function(e){if(e.key===KEY)draw(true)});draw(false);
 })();
 </script>
 </body>
