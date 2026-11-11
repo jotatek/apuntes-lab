@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#04140f">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='20' rx='22' ry='8' fill='%23059669'/%3E%3Cpath d='M10 20v24c0 4.4 9.8 8 22 8s22-3.6 22-8V20' fill='%23059669'/%3E%3Cellipse cx='32' cy='20' rx='22' ry='8' fill='%2334d399'/%3E%3Ctext x='32' y='48' font-size='20' font-weight='900' fill='%23fff' text-anchor='middle' font-family='sans-serif'%3EDB%3C/text%3E%3C/svg%3E">
+
 <script>(function(){try{var s=localStorage.getItem('theme')||'auto';var d=s==='dark'||(s==='auto'&&matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -347,8 +348,50 @@ html.dark .toc__i a.active,html.dark thead th,html.dark .diff-btn.active,html.da
 @media print{.fig{page-break-inside:avoid}}
 .home-link{display:block;width:fit-content;margin:0 auto 1rem;padding:.35rem .85rem;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:rgba(255,255,255,.14);color:#fff;font:600 .85rem/1.2 inherit;text-decoration:none}.home-link:hover,.home-link:focus-visible{background:rgba(255,255,255,.28);outline:2px solid #fff;outline-offset:2px}@media print{.home-link{display:none}}
 </style>
-</head>
-<body>
+<style>
+/* Logros adicionales: independientes de los rangos propios de la asignatura */
+.achievement-panel{margin:1rem 0 1.4rem;padding:1.1rem;border:1px solid var(--bd,var(--border,#d8dee8));border-radius:16px;background:var(--bg-s,var(--surface-2,#f7f9fc));color:var(--tx,var(--text,#202938))}.achievement-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.8rem;flex-wrap:wrap}.achievement-head h3{margin:0;font-size:1.05rem}.achievement-count{font-size:.8rem;font-weight:700;opacity:.75}.achievement-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.65rem}.achievement{display:flex;gap:.65rem;align-items:center;padding:.7rem;border:1px solid var(--bd,var(--border,#d8dee8));border-radius:12px;background:var(--bg,var(--surface,#fff));min-width:0}.achievement.locked{opacity:.48;filter:grayscale(.8)}.achievement-icon{font-size:1.45rem;flex:0 0 2rem;text-align:center}.achievement strong{display:block;font-size:.84rem}.achievement small{display:block;font-size:.72rem;opacity:.72;line-height:1.35;margin-top:.12rem}.achievement-meter{height:4px;background:var(--bd,var(--border,#d8dee8));border-radius:9px;overflow:hidden;margin-top:.35rem}.achievement-meter i{display:block;height:100%;background:var(--p,#16a6a1);border-radius:9px}
+</style>
+<style>
+.rank-panel{margin:1rem 0 1.4rem;padding:1.1rem;border:1px solid var(--bd,var(--border,#d8dee8));border-radius:16px;background:var(--bg-s,var(--surface-2,#f7f9fc));color:var(--tx,var(--text,#202938))}
+.rank-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:.85rem}.rank-head h3{margin:0;font-size:1.05rem}.rank-head p{margin:.3rem 0 0;opacity:.72;font-size:.82rem}.rank-current{font-weight:800;padding:.4rem .7rem;border-radius:999px;background:var(--p, #16a6a1);color:white;font-size:.8rem}
+.rank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.65rem}.rank-item{padding:.75rem;border:1px solid var(--bd,var(--border,#d8dee8));border-radius:12px;background:var(--bg,var(--surface,#fff));display:flex;gap:.65rem;align-items:center}.rank-item.locked{opacity:.42;filter:grayscale(1)}.rank-icon{font-size:1.65rem}.rank-item strong{display:block;font-size:.84rem}.rank-item small{display:block;font-size:.72rem;opacity:.72;margin-top:.15rem}.rank-next{font-size:.82rem;margin:.8rem 0 0;opacity:.8}
+.rank-toast{position:fixed;z-index:99999;left:50%;bottom:24px;transform:translateX(-50%);padding:.85rem 1.2rem;border-radius:14px;background:#17212b;color:white;box-shadow:0 8px 30px #0004;font-weight:700;text-align:center;max-width:min(90vw,420px)}
+</style>
+
+<style>
+/* Panel de nivel y rangos en paralelo */
+.level-rank-layout{display:grid;grid-template-columns:minmax(260px,1fr) minmax(300px,1.15fr);gap:1rem;align-items:stretch;margin:1rem 0 1.4rem}
+.level-rank-layout>.xp-card,.level-rank-layout>.gm-stats{margin:0;min-width:0;align-self:start}
+.level-rank-layout>.rank-panel{margin:0;min-width:0;padding:.85rem}
+.level-rank-layout .rank-head{margin-bottom:.6rem}
+.level-rank-layout .rank-head p{display:none}
+.level-rank-layout .rank-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.45rem}
+.level-rank-layout .rank-item{padding:.5rem;gap:.45rem;min-width:0}
+.level-rank-layout .rank-icon{font-size:1.3rem;flex:0 0 auto}
+.level-rank-layout .rank-item strong{font-size:.76rem;line-height:1.25}
+.level-rank-layout .rank-item small{font-size:.66rem;line-height:1.25}
+.level-rank-layout .rank-next{font-size:.72rem;margin:.55rem 0 0}
+@media(max-width:720px){.level-rank-layout{grid-template-columns:1fr}.level-rank-layout .rank-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+
+
+<style>/* El rango sustituye al antiguo título descriptivo del nivel */ .xp-name,#lvlName,#badgesGrid,.badges-grid{display:none!important}</style>
+<style id="course-integration-style">
+.course-switcher{position:relative;z-index:20;display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem;padding:.7rem 1rem;background:#0b0e13;border-bottom:1px solid #252b34}
+.course-switcher a{display:inline-flex;align-items:center;padding:.42rem .72rem;border:1px solid #303844;border-radius:9px;color:#b8c5d3;text-decoration:none;font:600 .78rem/1.2 system-ui,sans-serif;background:#121720;transition:background .18s,border-color .18s}
+.course-switcher a:hover,.course-switcher a:focus-visible{background:#1b2730;border-color:#64818a;color:#e5f4f2;outline:none}
+.course-switcher a[href="lm.html"]{border-color:#765044;color:#d3a18c}
+.course-switcher a[href="redes.html"]{border-color:#526777;color:#a9c0d0}
+@media(max-width:650px){.course-switcher{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}.course-switcher a{white-space:nowrap}}
+</style></head>
+<body><nav class="course-switcher" aria-label="Navegación entre asignaturas">
+<a href="index.html">⌂ Inicio</a><a href="bd.html">Bases de Datos</a><a href="iso.html">Sistemas Operativos</a><a href="fhw.html">Hardware</a><a href="ingles.html">Inglés</a><a href="lm.html">Lenguaje de Marcas</a><a href="redes.html">Redes</a>
+</nav>
+<section class="rank-panel" id="rankPanel" aria-label="Rangos de Fundamentos de Hardware">
+ <div class="rank-head"><div><h3>🏅 Rangos de Fundamentos de Hardware</h3><p>Consigue niveles para ascender. Cada rango requiere más esfuerzo que el anterior.</p></div><span class="rank-current" id="rankCurrent">Rango inicial</span></div>
+ <div class="rank-grid" id="rankGrid"></div><p class="rank-next" id="rankNext"></p>
+ </section>
 
 <div class="progress"><div class="progress__bar" id="progressBar"></div></div>
 <a href="#main" class="skip-link">Saltar al contenido</a>
@@ -672,6 +715,7 @@ html.dark .toc__i a.active,html.dark thead th,html.dark .diff-btn.active,html.da
 
   <div class="xp-card" id="xpCard"></div>
 
+
   <div class="kpi-grid">
     <div class="kpi"><div class="kpi__label">Aciertos</div><div class="kpi__val"><span id="kpiCorrect">0</span><small>/<span id="kpiTotal">0</span></small></div><div class="kpi__bar"><div class="kpi__fill" id="kpiAccFill" style="width:0%"></div></div></div>
     <div class="kpi"><div class="kpi__label">Precisión</div><div class="kpi__val"><span id="kpiAcc">0</span>%</div><div class="kpi__bar"><div class="kpi__fill" id="kpiAccFill2" style="width:0%"></div></div></div>
@@ -730,8 +774,8 @@ html.dark .toc__i a.active,html.dark thead th,html.dark .diff-btn.active,html.da
   <div class="lvl-card">
     <div class="lvl-card__emoji" id="lvlEmoji">🌱</div>
     <p class="lvl-card__title">¡Nivel alcanzado!</p>
-    <h3 class="lvl-card__name" id="lvlName">Novato</h3>
-    <p class="lvl-card__desc">Sigue practicando para desbloquear la siguiente insignia.</p>
+    <h3 class="lvl-card__name" id="lvlName"></h3>
+    <p class="lvl-card__desc">Sigue practicando para alcanzar el siguiente rango.</p>
     <button class="btn btn--primary" onclick="document.getElementById('lvlModal').classList.remove('show')">¡Vamos!</button>
   </div>
 </div>
@@ -748,16 +792,16 @@ var TOPICS = ['tema1','tema2','tema3','tema4','tema5','tema6','tema7'];
 var TOPIC_NAMES = {tema1:'Introducción',tema2:'Numeración',tema3:'Unidades',tema4:'Archivos',tema5:'Historia',tema6:'Arquitectura',tema7:'Memoria'};
 
 var LEVELS = [
-  {lv:1,name:'Novato',emoji:'🌱',xp:0},
-  {lv:2,name:'Aprendiz',emoji:'🌿',xp:100},
-  {lv:3,name:'Conocedor',emoji:'🌳',xp:250},
-  {lv:4,name:'Experto',emoji:'🌟',xp:450},
-  {lv:5,name:'Maestro',emoji:'💎',xp:700},
-  {lv:6,name:'Veterano',emoji:'🏅',xp:1000},
-  {lv:7,name:'Sabio',emoji:'🎖️',xp:1350},
-  {lv:8,name:'Gurú',emoji:'🏆',xp:1750},
-  {lv:9,name:'Genio',emoji:'⚡',xp:2200},
-  {lv:10,name:'Leyenda',emoji:'👑',xp:2700}
+  {lv:1,name:'',emoji:'🌱',xp:0},
+  {lv:2,name:'',emoji:'🌿',xp:100},
+  {lv:3,name:'',emoji:'🌳',xp:250},
+  {lv:4,name:'',emoji:'🌟',xp:450},
+  {lv:5,name:'',emoji:'💎',xp:700},
+  {lv:6,name:'',emoji:'🏅',xp:1000},
+  {lv:7,name:'',emoji:'🎖️',xp:1350},
+  {lv:8,name:'',emoji:'🏆',xp:1750},
+  {lv:9,name:'',emoji:'⚡',xp:2200},
+  {lv:10,name:'',emoji:'👑',xp:2700}
 ];
 
 
@@ -883,13 +927,13 @@ function xpTag(x){return x?'<span class="xp-tag">+'+x+' XP</span>':''}
 function fb(ok,msg,xp){return '<div class="feedback '+(ok?'ok':'bad')+'" role="status"><span>'+(ok?'✅':'❌')+'</span><span>'+msg+'</span>'+xpTag(xp)+'</div>'}
 
 var lvT;
-function levelUp(L){var l=LEVELS[L-1];$('lvlEmoji').textContent=l.emoji;$('lvlName').textContent=l.name;qa('.lvl-card__title')[0].textContent='¡Nivel '+L+' alcanzado! Insignia desbloqueada';$('lvlModal').classList.add('show');clearTimeout(lvT);lvT=setTimeout(function(){$('lvlModal').classList.remove('show')},5000)}
+function levelUp(L){var l=LEVELS[L-1];$('lvlEmoji').textContent=l.emoji;$('lvlName').textContent='';qa('.lvl-card__title')[0].textContent='¡Has alcanzado el nivel '+L+'!';$('lvlModal').classList.add('show');clearTimeout(lvT);lvT=setTimeout(function(){$('lvlModal').classList.remove('show')},5000)}
 
 function paint(){
   var L=lvOf(S.xp),cur=LEVELS[L-1],nx=LEVELS[L],b=th(L),n=nx?th(L+1):b,pc=nx?Math.round((S.xp-b)/(n-b)*100):100;
   var old=qa('.xp-help',$('xpCard'))[0],open=old&&old.open;
-  $('xpCard').innerHTML='<div class="xp-head"><div class="xp-badge">'+cur.emoji+'</div><div class="xp-info"><p class="xp-level">Nivel '+L+' · '+cur.name+'</p><p class="xp-name">'+S.xp+' XP totales</p><div class="xp-progress"><div class="xp-bar"><div class="xp-fill" style="width:'+pc+'%"></div></div><div class="xp-text">'+(nx?'<strong>'+(n-S.xp)+' XP</strong> para «'+nx.name+'»':'¡Nivel máximo!')+'</div></div></div></div>'+
-   '<div class="badges-grid">'+LEVELS.map(function(l){var u=L>=l.lv;return '<div class="badge-item '+(u?'unlocked':'locked')+'" title="Nivel '+l.lv+' · '+l.xp+' XP"><div class="badge-item__emoji">'+l.emoji+'</div><div class="badge-item__name">'+l.name+'</div></div>'}).join('')+'</div>'+
+  $('xpCard').innerHTML='<div class="xp-head"><div class="xp-badge">'+cur.emoji+'</div><div class="xp-info"><p class="xp-level">Nivel '+L+'</p><p class="xp-name">'+S.xp+' XP totales</p><div class="xp-progress"><div class="xp-bar"><div class="xp-fill" style="width:'+pc+'%"></div></div><div class="xp-text">'+(nx?'<strong>'+(n-S.xp)+' XP</strong> para nivel '+(L+1):'¡Nivel máximo!')+'</div></div></div></div>'+
+   ''+
    '<details class="xp-help"'+(open?' open':'')+'><summary>¿Cómo gano XP?</summary><ul><li>Acierto: fácil 10 · media 15 · difícil 25 XP.</li><li>Modo escribir ×1,5 (+0,25 con 25 s, +0,5 con 12 s).</li><li>Flashcards ×0,6 · modo examen ×1,25.</li><li>Cada pista resta un 25 % (máx. 3). Saltar = 1 XP. Fallar = 0.</li><li>Ordenar da XP solo la primera vez.</li><li>Umbral del nivel L: 25·(L−1)·(L+2) XP.</li></ul></details>';
   var acc=S.tot?Math.round(S.ok/S.tot*100):0,rd=Object.keys(S.read).filter(function(k){return S.read[k]}).length;
   $('kpiCorrect').textContent=S.ok;$('kpiTotal').textContent=S.tot;$('kpiAcc').textContent=acc;$('kpiAccFill').style.width=acc+'%';$('kpiAccFill2').style.width=acc+'%';
@@ -1054,5 +1098,38 @@ $('resetAllBtn').onclick=function(){if(!confirm('¿Reiniciar TODO tu progreso (X
 paintRead();paint();onScroll();go('sim');
 })();
 </script>
+
+<script>(function(){
+var panel=document.getElementById('rankPanel'), level=document.getElementById('xpCard');
+if(panel&&level){var wrap=document.createElement('div');wrap.className='level-rank-layout';level.parentNode.insertBefore(wrap,level);wrap.appendChild(level);wrap.appendChild(panel);}
+})();</script>
+<script>(function(){'use strict';
+var KEY='fhw_lab_v1', RANK_KEY=KEY+'_rank_unlocked';
+var RANKS=[[1, 'Aprendiz de montaje', '🔩'], [3, 'Técnico de componentes', '🧰'], [6, 'Especialista en arquitectura', '⚙️'], [10, 'Ingeniero de hardware', '🖥️']];
+function getXP(){try{var d=JSON.parse(localStorage.getItem(KEY)||'{}');return Math.max(0,+d.xp||0)}catch(e){return 0}}
+function level(x){var l=1;while(l<10&&x>=25*l*(l+3))l++;return l}
+function draw(notify){var xp=getXP(),lv=level(xp),idx=0;RANKS.forEach(function(r,i){if(lv>=r[0])idx=i});
+var grid=document.getElementById('rankGrid');if(!grid)return;
+grid.innerHTML=RANKS.map(function(r){var open=lv>=r[0];return '<div class="rank-item '+(open?'unlocked':'locked')+'" title="'+r[1]+' · nivel '+r[0]+'"><span class="rank-icon" aria-hidden="true">'+r[2]+'</span><div><strong>'+r[1]+'</strong><small>Nivel '+r[0]+'</small></div></div>'}).join('');
+document.getElementById('rankCurrent').textContent=RANKS[idx][2]+' '+RANKS[idx][1];
+var next=RANKS[idx+1],el=document.getElementById('rankNext');el.textContent=next?'Siguiente rango: '+next[1]+' · nivel '+next[0]+' (actualmente nivel '+lv+')':'¡Has alcanzado el rango máximo!';
+var old=-1;try{old=+(localStorage.getItem(RANK_KEY)||'-1')}catch(e){}
+if(notify&&idx>old&&old>=0){var t=document.createElement('div');t.className='rank-toast';t.textContent='🏅 ¡Nuevo rango desbloqueado! '+RANKS[idx][1];document.body.appendChild(t);setTimeout(function(){t.remove()},4500)}
+try{localStorage.setItem(RANK_KEY,String(Math.max(old,idx)))}catch(e){}
+}
+var original=Storage.prototype.setItem;if(!Storage.prototype.__rankHook){Storage.prototype.setItem=function(k,v){var out=original.apply(this,arguments);if(k===KEY){try{draw(true)}catch(e){}}return out};Storage.prototype.__rankHook=true}
+window.addEventListener('storage',function(e){if(e.key===KEY)draw(true)});draw(false);
+})();</script>
+
+<style id="level-is-number-only">
+/* Los niveles son solo numericos; los emblemas y nombres pertenecen exclusivamente a los rangos. */
+.hud__badge, .xp-badge, .lvl-card__emoji, #hudEmoji, #xpBadgeEmoji, #lvlEmoji, #lvlName { display:none !important; }
+</style>
+<style id="calm-layout-overrides">
+/* Jerarquía visual más limpia: menos adornos, rangos compactos y navegación menos invasiva. */
+.hero__deco{opacity:.10!important}.hero__stats{opacity:.65!important}.rank-panel{padding:12px 16px!important;margin:8px auto 14px!important;border-radius:14px!important}.rank-head p{font-size:.78rem!important}.rank-grid{gap:6px!important}.rank-item{padding:7px 9px!important;min-height:0!important}.rank-item .rank-icon{font-size:1.15rem!important}.toc{box-shadow:none!important}.toc__i{gap:5px!important}.toc__i a{padding:7px 10px!important;font-size:.82rem!important}.section{box-shadow:none!important}.section__h{margin-bottom:12px!important}.callout{box-shadow:none!important}.hero__tools{gap:8px!important}
+.study-home-shortcut{position:fixed;right:16px;bottom:16px;z-index:9999;display:inline-flex;align-items:center;gap:7px;padding:10px 14px;border-radius:999px;background:#0f766e;color:white;text-decoration:none;font:600 13px system-ui;box-shadow:0 5px 18px #0002}.study-home-shortcut:hover{filter:brightness(1.08)}
+@media(max-width:650px){.study-home-shortcut{right:10px;bottom:10px;padding:9px 12px}.rank-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+</style><a class="study-home-shortcut" href="index.html">⌂ Centro de mando</a>
 </body>
 </html>

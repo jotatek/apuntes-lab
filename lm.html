@@ -1785,8 +1785,42 @@
         html.dark #tema1 thead th { color: #000; }
     .home-link{display:block;width:fit-content;margin:0 auto 1rem;padding:.35rem .85rem;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:rgba(255,255,255,.14);color:#fff;font:600 .85rem/1.2 inherit;text-decoration:none}.home-link:hover,.home-link:focus-visible{background:rgba(255,255,255,.28);outline:2px solid #fff;outline-offset:2px}@media print{.home-link{display:none}}
 </style>
-</head>
-<body>
+<style id="course-integration-style">
+.course-switcher{position:relative;z-index:20;display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem;padding:.7rem 1rem;background:#0b0e13;border-bottom:1px solid #252b34}
+.course-switcher a{display:inline-flex;align-items:center;padding:.42rem .72rem;border:1px solid #303844;border-radius:9px;color:#b8c5d3;text-decoration:none;font:600 .78rem/1.2 system-ui,sans-serif;background:#121720;transition:background .18s,border-color .18s}
+.course-switcher a:hover,.course-switcher a:focus-visible{background:#1b2730;border-color:#64818a;color:#e5f4f2;outline:none}
+.course-switcher a[href="lm.html"]{border-color:#765044;color:#d3a18c}
+.course-switcher a[href="redes.html"]{border-color:#526777;color:#a9c0d0}
+@media(max-width:650px){.course-switcher{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}.course-switcher a{white-space:nowrap}}
+</style><style id="integrated-dark-theme">
+:root{
+color-scheme:dark;
+--bg:#090c10!important;--bg-elevated:#11161d!important;--bg-soft:#151b22!important;--bg-hover:#202832!important;
+--text:#e1e7ed!important;--text-2:#bdc8d2!important;--text-muted:#8e9ba7!important;--text-soft:#71808d!important;
+--primary:#829aa9!important;--primary-2:#718b9b!important;--primary-3:#a5b8c3!important;--primary-soft:rgba(117,146,162,.14)!important;
+--accent:#8eaaa8!important;--success:#779f99!important;--danger:#c17b78!important;
+--border:#29313a!important;--border-2:#39444f!important;--code-bg:#090d12!important;--code-text:#dce5ed!important;
+--code-inline-bg:#222a32!important;--code-inline-text:#c3d2dc!important;--toc-bg:rgba(15,20,26,.96)!important;
+--mark-bg:#594b2b!important;--mark-text:#f4e8c9!important;--mark-ring:rgba(186,151,91,.4)!important;
+--hero-bg:linear-gradient(145deg,#0c1015 0%,#141a21 100%)!important;
+--shadow-xs:0 1px 2px rgba(0,0,0,.22)!important;--shadow-sm:0 2px 8px rgba(0,0,0,.24)!important;--shadow-md:0 6px 20px rgba(0,0,0,.28)!important;--shadow-lg:0 18px 42px rgba(0,0,0,.34)!important;
+}
+html,body{background:#090c10!important;color:#e1e7ed!important}
+.hero{background:linear-gradient(145deg,#0c1015,#151b22)!important}
+.section,.card,.panel,.xp,.xp-card,.toc,.sidebar,.quiz,.activity,.tool-card{background-color:#11161d!important;border-color:#29313a!important;color:#e1e7ed}
+button,.btn{background-color:#202832;border-color:#39444f;color:#dce5ed}
+a{color:#9eb4c2}
+a:hover{color:#c2d4dc}
+html.dark{--primary:#829aa9!important;--bg:#090c10!important;--bg-elevated:#11161d!important;--bg-soft:#151b22!important;--border:#29313a!important}
+</style><style id="subject-accent">
+:root{--primary:#a66b55!important;--primary-2:#a66b55!important;--primary-3:#c18b74!important;--primary-soft:rgba(166,107,85,.16)!important}
+.xp__lvl,.xp-badge,.xp-badge__icon{background:#273039!important;color:#d7e2e8!important}
+.xp__progress>i,.progress__bar,.bar-fill{background:#779f99!important}
+button.primary,.btn-primary,.quiz__option.is-correct{background:#263b3b!important;border-color:#587d78!important}
+</style></head>
+<body><nav class="course-switcher" aria-label="Navegación entre asignaturas">
+<a href="index.html">⌂ Inicio</a><a href="bd.html">Bases de Datos</a><a href="iso.html">Sistemas Operativos</a><a href="fhw.html">Hardware</a><a href="ingles.html">Inglés</a><a href="lm.html">Lenguaje de Marcas</a><a href="redes.html">Redes</a>
+</nav>
 
 <div class="progress" aria-hidden="true"><div class="progress__bar" id="progressBar"></div></div>
 
