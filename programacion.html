@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Apuntes y laboratorio de Iniciación a la Programación: algoritmos, pseudocódigo, variables, decisiones y bucles.">
+    <meta name="description" content="Apuntes y laboratorio de Iniciación a la Programación: algoritmos, variables, condicionales, bucles, arrays y funciones.">
     <meta name="author" content="Apuntes de Desarrollo Web">
     <meta name="theme-color" content="#0a0f1f">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M10 4h44l-4 47-18 8-18-8z' fill='%23E34F26'/%3E%3Cpath d='M32 8v48l14-6 3-42z' fill='%23F16529'/%3E%3Ctext x='32' y='45' font-family='sans-serif' font-size='26' font-weight='900' fill='%23fff' text-anchor='middle'%3E5%3C/text%3E%3C/svg%3E">
@@ -1633,7 +1633,7 @@
             .game { padding: 1rem; }
         }
         @media print {
-            #tema8, .read-toggle, .note { display: none !important; }
+            #tema9, .read-toggle, .note { display: none !important; }
         }
 
         /* ============================================================
@@ -1883,20 +1883,20 @@ button.primary,.btn-primary,.quiz__option.is-correct{background:#263b3b!importan
             </span>
 
             <h1 class="hero__title">Iniciación a la Programación · Pseudocódigo</h1>
-            <p class="hero__subtitle">Aprende a resolver problemas paso a paso: del enunciado al algoritmo, del pseudocódigo a la programación.</p>
+            <p class="hero__subtitle">Apuntes de programación en pseudocódigo: variables, decisiones, bucles, arrays y funciones, con ejemplos de PSeInt.</p>
 
             <div class="hero__stats">
                 <span class="stat">
                     <span class="stat__icon" aria-hidden="true">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                     </span>
-                    <strong>1</strong> tema
+                    <strong>8</strong> bloques
                 </span>
                 <span class="stat">
                     <span class="stat__icon" aria-hidden="true">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                     </span>
-                    <strong>30+</strong> conceptos
+                    <strong>70+</strong> conceptos
                 </span>
                 <span class="stat">
                     <span class="stat__icon" aria-hidden="true">
@@ -1933,8 +1933,15 @@ button.primary,.btn-primary,.quiz__option.is-correct{background:#263b3b!importan
     <!-- ================= TOC ================= -->
     <nav class="toc" aria-label="Índice de contenidos">
         <div class="toc__inner" id="toc">
-            <a href="#tema1" data-section="tema1">1. Pseudocódigo y algoritmos</a>
-            <a href="#tema8" data-section="tema8">2. Zona de práctica</a>
+            <a href="#tema1" data-section="tema1">1. Introducción</a>
+            <a href="#tema2" data-section="tema2">2. Variables</a>
+            <a href="#tema3" data-section="tema3">3. Condicionales</a>
+            <a href="#tema4" data-section="tema4">4. Funciones matemáticas</a>
+            <a href="#tema5" data-section="tema5">5. Bucles</a>
+            <a href="#tema6" data-section="tema6">6. Arrays</a>
+            <a href="#tema7" data-section="tema7">7. Cadenas</a>
+            <a href="#tema8" data-section="tema8">8. Funciones propias</a>
+            <a href="#tema9" data-section="tema9">9. Zona de práctica</a>
         </div>
     </nav>
 
@@ -1979,9 +1986,296 @@ ESCRIBIR resultado</code></pre>
 <div class="callout callout--tip"><strong>Idea clave:</strong> Problema → Algoritmo → Pseudocódigo → Lenguaje de programación.</div>
 <h3>El entorno de programación</h3><p>Igual que un carpintero necesita una mesa y herramientas, un programador utiliza un <strong>entorno de programación</strong> para escribir, probar y corregir sus algoritmos. Trabaja con un ordenador, programas y herramientas específicas. Algunos entornos y herramientas son de código abierto (<em>Open Source</em>).</p>
 </article>
-<article class="section section--lab" id="tema8">
+
+<article class="section" id="tema2">
+<header class="section__header"><span class="section__badge" aria-hidden="true">02</span><h2 class="section__title">Variables y entrada/salida de datos</h2></header>
+<h3>¿Qué es una variable?</h3>
+<p>Es un <strong>espacio reservado en memoria</strong> que tiene asignado un identificador (nombre) y sirve para guardar un dato que después podrá utilizar el algoritmo.</p>
+<div class="callout callout--tip"><strong>Idea clave:</strong> una variable es como una caja con nombre donde guardamos un dato.</div>
+<h3>Tipos de datos</h3>
+<table><thead><tr><th>Tipo</th><th>Qué almacena</th><th>Ejemplo</th></tr></thead><tbody>
+<tr><td><strong>Entero</strong></td><td>Números sin decimales.</td><td><code>14</code>, <code>-3</code></td></tr>
+<tr><td><strong>Real</strong></td><td>Números con decimales.</td><td><code>20.5</code>, <code>-3.6</code></td></tr>
+<tr><td><strong>Texto</strong></td><td>Palabras o cadenas de caracteres.</td><td><code>"Hola"</code></td></tr>
+<tr><td><strong>Lógico</strong></td><td>Uno de dos valores: verdadero o falso.</td><td><code>Verdadero</code>, <code>Falso</code></td></tr>
+</tbody></table>
+<h3>Operaciones con variables</h3>
+<div class="tarjetas">
+<div class="tarjeta"><div class="tarjeta__body"><h4>1. Definición</h4><p>Reserva espacio en memoria, asignándole un identificador y un tipo de dato.</p><pre><code>Definir sumaTotal Como Entero
+Definir precio Como Real
+Definir nota Como Texto
+Definir terminado Como Logico</code></pre></div></div>
+<div class="tarjeta"><div class="tarjeta__body"><h4>2. Inicialización</h4><p>Da un valor inicial a una variable que ya ha sido definida.</p><pre><code>sumaTotal ← 12
+precio ← 20.5
+terminado ← Falso
+nota ← "Hola"</code></pre></div></div>
+<div class="tarjeta"><div class="tarjeta__body"><h4>3. Modificación</h4><p>Asigna un nuevo valor a una variable, sustituyendo el que tenía.</p><pre><code>sumaTotal ← 16
+precio ← 8.0
+terminado ← Verdadero
+nota ← "Adios"</code></pre></div></div>
+</div>
+<div class="callout callout--warn"><strong>Importante:</strong> para inicializar una variable primero tiene que estar definida. Inicializarla no siempre es obligatorio, pero ayuda a evitar errores.</div>
+<h3>Leer y escribir datos</h3>
+<p>Estas instrucciones permiten intercambiar información entre el programa y la persona que lo utiliza.</p>
+<div class="tarjetas">
+<div class="tarjeta"><div class="tarjeta__body"><h4>LEER</h4><p>Recoge un dato introducido por pantalla/consola y lo guarda en una variable previamente definida.</p><pre><code>Definir precio Como Real
+LEER precio</code></pre></div></div>
+<div class="tarjeta"><div class="tarjeta__body"><h4>ESCRIBIR</h4><p>Muestra por pantalla el valor de una o varias variables. Se pueden separar con comas.</p><pre><code>ESCRIBIR precio
+ESCRIBIR "Precio:", precio</code></pre></div></div>
+</div>
+<h3>Ejemplo completo</h3>
+<pre data-lang="PSeInt"><code>Algoritmo CalcularPrecio
+    Definir precio Como Real
+    Definir cantidad Como Entero
+    Definir total Como Real
+
+    ESCRIBIR "Introduce el precio:"
+    LEER precio
+    ESCRIBIR "Introduce la cantidad:"
+    LEER cantidad
+
+    total ← precio * cantidad
+    ESCRIBIR "El total es:", total
+FinAlgoritmo</code></pre>
+<div class="callout callout--tip"><strong>Para memorizar:</strong> Definir = reservar y nombrar · Inicializar = dar el primer valor · Modificar = cambiarlo · LEER = recibir · ESCRIBIR = mostrar.</div>
+</article>
+
+<article class="section" id="tema3">
+<header class="section__header"><span class="section__badge" aria-hidden="true">03</span><h2 class="section__title">Condicionales y selección SEGÚN</h2></header>
+<h3>Expresiones lógicas</h3>
+<p>Una expresión lógica es una condición cuyo resultado solo puede ser <strong>Verdadero</strong> o <strong>Falso</strong>. Se construye con operadores relacionales y se pueden combinar con operadores lógicos.</p>
+<table><thead><tr><th>Grupo</th><th>Operadores</th><th>Significado</th></tr></thead><tbody>
+<tr><td>Relacionales</td><td><code>=</code>, <code>&lt;&gt;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></td><td>Igual, distinto, menor, mayor, menor o igual y mayor o igual.</td></tr>
+<tr><td>Lógicos</td><td><code>Y</code>, <code>O</code>, <code>NO</code></td><td>Combinar o negar condiciones.</td></tr>
+</tbody></table>
+<h3>Condicional SI - ENTONCES</h3>
+<p>Permite ejecutar instrucciones diferentes según el resultado de una o varias expresiones lógicas. La parte <code>SiNo</code> es <strong>opcional</strong>.</p>
+<pre data-lang="PSeInt"><code>SI condición ENTONCES
+    instrucciones si es verdadera
+SiNo
+    instrucciones si es falsa
+FinSi</code></pre>
+<h3>Condicionales anidados</h3>
+<p>Consiste en colocar una estructura <code>SI</code> dentro de otra. Sirve para comprobar varias condiciones de forma ordenada.</p>
+<pre data-lang="PSeInt"><code>SI nota >= 5 Entonces
+    SI nota >= 9 Entonces
+        ESCRIBIR "Sobresaliente"
+    SiNo
+        ESCRIBIR "Aprobado"
+    FinSi
+SiNo
+    ESCRIBIR "Suspenso"
+FinSi</code></pre>
+<h3>Estructura selectiva SEGÚN</h3>
+<p>Permite ejecutar un bloque diferente dependiendo del <strong>valor de una variable</strong>. Es útil cuando hay varias opciones posibles. La parte <code>De Otro Modo</code> es opcional y se ejecuta si ningún caso coincide.</p>
+<pre data-lang="PSeInt"><code>SEGUN opcion HACER
+    1:
+        ESCRIBIR "Has elegido sumar"
+    2:
+        ESCRIBIR "Has elegido restar"
+    3:
+        ESCRIBIR "Has elegido multiplicar"
+    De Otro Modo:
+        ESCRIBIR "Opción no válida"
+FinSegun</code></pre>
+<div class="callout callout--tip"><strong>¿SI o SEGÚN?</strong> Utiliza <code>SI</code> para evaluar condiciones (por ejemplo, nota &gt;= 5). Utiliza <code>SEGÚN</code> cuando quieras actuar según el valor concreto de una variable (por ejemplo, opción = 1, 2 o 3).</div>
+</article>
+
+<article class="section" id="tema4">
+<header class="section__header"><span class="section__badge" aria-hidden="true">04</span><h2 class="section__title">Funciones matemáticas</h2></header>
+<p>Una <strong>función matemática</strong> permite calcular el valor de una magnitud a partir del valor de otra. Se le proporciona un dato y devuelve un resultado.</p>
+<table><thead><tr><th>Función</th><th>Qué hace</th><th>Ejemplo</th><th>Resultado</th></tr></thead><tbody>
+<tr><td><code>abs(número)</code></td><td>Devuelve el valor absoluto: el número sin signo.</td><td><code>abs(-3.6)</code></td><td><code>3.6</code></td></tr>
+<tr><td><code>trunc(número)</code></td><td>Devuelve la parte entera, eliminando los decimales.</td><td><code>trunc(-3.6)</code></td><td><code>-3</code></td></tr>
+<tr><td><code>redon(número)</code></td><td>Redondea al entero más próximo.</td><td><code>redon(-3.6)</code></td><td><code>-4</code></td></tr>
+<tr><td><code>azar(n)</code></td><td>Devuelve un entero aleatorio entre 0 y n−1.</td><td><code>azar(21)</code></td><td>Entre <code>0</code> y <code>20</code></td></tr>
+</tbody></table>
+<h3>Ejemplos rápidos</h3>
+<pre data-lang="PSeInt"><code>resultado ← abs(-4.3)   // 4.3
+resultado ← trunc(4.9)  // 4
+resultado ← redon(4.9)  // 5
+resultado ← azar(20)    // Un número entre 0 y 19</code></pre>
+<div class="callout callout--warn"><strong>No confundas truncar y redondear:</strong> <code>trunc(4.9)</code> da <code>4</code>, mientras que <code>redon(4.9)</code> da <code>5</code>.</div>
+<div class="callout callout--tip"><strong>Para memorizar:</strong> ABS = quitar el signo · TRUNC = quitar decimales · REDON = aproximar · AZAR = número aleatorio.</div>
+</article>
+
+<article class="section" id="tema5">
+<header class="section__header"><span class="section__badge" aria-hidden="true">05</span><h2 class="section__title">Bucles o estructuras iterativas</h2></header>
+<p>Un <strong>bucle</strong> es una secuencia de instrucciones que se ejecuta varias veces. Según el tipo de bucle, la condición se comprueba al principio o al final, o las repeticiones se cuentan mediante una variable.</p>
+<h3>1. MIENTRAS</h3>
+<p>Repite las instrucciones <strong>mientras la condición sea verdadera</strong>. La condición se comprueba antes de entrar en el bucle.</p>
+<pre data-lang="PSeInt"><code>temporizador ← 3
+MIENTRAS temporizador > 0 Hacer
+    ESCRIBIR temporizador
+    temporizador ← temporizador - 1
+FinMientras</code></pre>
+<div class="callout callout--warn"><strong>Ojo:</strong> si la condición es falsa desde el principio, el bucle no se ejecuta ninguna vez. Si siempre es verdadera, se convierte en un bucle infinito. Hay que modificar la condición desde dentro del bucle para que pueda terminar.</div>
+<h3>2. REPETIR - HASTA QUE</h3>
+<p>Es parecido a <code>MIENTRAS</code>, pero la condición se comprueba <strong>al final</strong>. Por eso, las instrucciones se ejecutan al menos una vez. El bucle termina cuando la condición es verdadera.</p>
+<pre data-lang="PSeInt"><code>REPETIR
+    ESCRIBIR "Introduce un número positivo:"
+    LEER numero
+HASTA QUE numero > 0</code></pre>
+<div class="callout callout--warn"><strong>Ojo:</strong> si la condición de salida nunca llega a ser verdadera, el bucle será infinito. Asegúrate de que las instrucciones pueden cambiar el resultado de la condición.</div>
+<h3>3. PARA</h3>
+<p>Se utiliza cuando conocemos el número de repeticiones. Una variable toma un valor inicial y va aumentando o disminuyendo en cada vuelta.</p>
+<pre data-lang="PSeInt"><code>Definir i Como Entero
+PARA i ← 1 Hasta 5 Hacer
+    ESCRIBIR i
+FinPara</code></pre>
+<p>También se puede indicar un paso para incrementar o decrementar la variable.</p>
+<pre data-lang="PSeInt"><code>PARA i ← 10 Hasta 0 Con Paso -2 Hacer
+    ESCRIBIR i
+FinPara</code></pre>
+<div class="callout callout--warn"><strong>Importante:</strong> la variable del bucle <code>PARA</code> (por ejemplo, <code>i</code>) debe definirse como cualquier otra variable.</div>
+<h3>Comparación de los tres bucles</h3>
+<table><thead><tr><th>Bucle</th><th>Cuándo comprueba</th><th>Cuándo usarlo</th></tr></thead><tbody>
+<tr><td><strong>MIENTRAS</strong></td><td>Antes de ejecutar.</td><td>Cuando no sabemos cuántas veces se repetirá y depende de una condición.</td></tr>
+<tr><td><strong>REPETIR - HASTA QUE</strong></td><td>Después de ejecutar.</td><td>Cuando necesitamos que las instrucciones se ejecuten al menos una vez.</td></tr>
+<tr><td><strong>PARA</strong></td><td>Controla un contador.</td><td>Cuando conocemos el número de repeticiones o un rango.</td></tr>
+</tbody></table>
+<div class="callout callout--tip"><strong>Truco para memorizar:</strong> MIENTRAS = comprueba antes · REPETIR = comprueba después · PARA = repeticiones contadas.</div>
+</article>
+
+<article class="section" id="tema6">
+<header class="section__header"><span class="section__badge" aria-hidden="true">06</span><h2 class="section__title">Arrays o estructuras de datos</h2></header>
+<h3>¿Qué es un array?</h3>
+<p>Es una estructura de datos de <strong>tamaño determinado</strong> que permite almacenar varios valores del mismo tipo bajo un único identificador.</p>
+<p>Por ejemplo, para guardar las edades de 20 alumnos no necesitamos crear 20 variables distintas: podemos utilizar un array llamado <code>edadesAlumnos</code>.</p>
+<pre data-lang="Estructura"><code>edadesAlumnos
+Índice:  0    1    2   ...   19
+Valor:  14   16   18   ...   17</code></pre>
+<div class="callout callout--tip"><strong>Idea clave:</strong> un array es como una fila de casillas con un mismo nombre; cada casilla tiene una posición (índice).</div>
+<h3>Tipos de arrays</h3>
+<div class="tarjetas">
+<div class="tarjeta"><div class="tarjeta__body"><h4>Unidimensional</h4><p>Los datos se organizan en una sola dimensión, como una lista.</p><pre><code>edades[0] = 14
+edades[1] = 16
+edades[2] = 18</code></pre></div></div>
+<div class="tarjeta"><div class="tarjeta__body"><h4>Bidimensional</h4><p>Los datos se organizan en filas y columnas, como una tabla. Cada posición se identifica con dos índices.</p><pre><code>notas[0,0] = 7
+notas[0,1] = 8
+notas[1,0] = 6</code></pre></div></div>
+</div>
+<h3>Operaciones con arrays</h3>
+<ol><li><strong>Definición:</strong> indicar el identificador, el tipo de dato y la dimensión/tamaño.</li><li><strong>Inicialización:</strong> establecer los valores iniciales de sus posiciones.</li><li><strong>Modificación:</strong> cambiar el valor de una posición concreta.</li><li><strong>Lectura/escritura:</strong> leer datos en posiciones del array o mostrar los valores almacenados.</li></ol>
+<h3>Ejemplo de uso</h3>
+<pre data-lang="PSeInt"><code>Algoritmo Edades
+    Definir edades Como Entero
+    Dimension edades[3]
+
+    edades[0] ← 14
+    edades[1] ← 16
+    edades[2] ← 18
+
+    ESCRIBIR edades[0]
+    ESCRIBIR edades[1]
+    ESCRIBIR edades[2]
+FinAlgoritmo</code></pre>
+<p>En el ejemplo se utiliza un array unidimensional de tres posiciones. Los índices identifican cada elemento; en este ejemplo comienzan en 0.</p>
+<div class="callout callout--warn"><strong>Recuerda:</strong> el índice no es el valor guardado, sino la posición del elemento. En un array de 20 posiciones, las posiciones mostradas en los apuntes van de 0 a 19.</div>
+</article>
+
+<article class="section" id="tema7">
+<header class="section__header"><span class="section__badge" aria-hidden="true">07</span><h2 class="section__title">Cadenas de caracteres y sus funciones</h2></header>
+<h3>¿Qué es una cadena de caracteres?</h3>
+<p>Es un dato de tipo <strong>texto</strong> formado por una secuencia de caracteres. También puede entenderse como un array de caracteres: cada letra, número, símbolo o espacio ocupa una posición.</p>
+<pre data-lang="Ejemplo"><code>Texto: "Nota de texto"
+Posición: 0 1 2 3 4 5 6 7 8 9 10 11 12
+Carácter: N o t a _ d e _ t e  x  t  o</code></pre>
+<div class="callout callout--warn"><strong>Importante:</strong> los espacios también cuentan como caracteres y ocupan una posición.</div>
+<h3>Funciones para trabajar con cadenas</h3>
+<table><thead><tr><th>Función</th><th>Para qué sirve</th><th>Ejemplo</th></tr></thead><tbody>
+<tr><td><code>Longitud(cadena)</code></td><td>Devuelve el número de caracteres.</td><td><code>Longitud("Nota de texto")</code> → <code>13</code></td></tr>
+<tr><td><code>SubCadena(cadena, desde, hasta)</code></td><td>Devuelve una parte del texto, desde una posición hasta otra.</td><td><code>SubCadena("Nota de texto", 4, 13)</code></td></tr>
+<tr><td><code>Concatenar(cadena1, cadena2)</code></td><td>Une dos cadenas de texto.</td><td><code>Concatenar("Hola ", "todos")</code> → <code>"Hola todos"</code></td></tr>
+<tr><td><code>ConvertirANumero(cadena)</code></td><td>Convierte una cadena numérica en un número.</td><td><code>ConvertirANumero("23")</code> → <code>23</code></td></tr>
+<tr><td><code>ConvertirATexto(numero)</code></td><td>Convierte un número en una cadena de caracteres.</td><td><code>ConvertirATexto(23)</code> → <code>"23"</code></td></tr>
+<tr><td><code>Mayusculas(cadena)</code></td><td>Devuelve el texto en mayúsculas.</td><td><code>Mayusculas("Hola")</code> → <code>"HOLA"</code></td></tr>
+<tr><td><code>Minusculas(cadena)</code></td><td>Devuelve el texto en minúsculas.</td><td><code>Minusculas("HOLA")</code> → <code>"hola"</code></td></tr>
+</tbody></table>
+<h3>Ejemplos de funciones</h3>
+<pre data-lang="PSeInt"><code>texto ← "Hola a todos!"
+largo ← Longitud(texto)                 // 13
+parte ← SubCadena("Nota de texto", 4, 13)
+saludo ← Concatenar("Hola a ", "todos!")
+numero ← ConvertirANumero("23")         // 23
+cadena ← ConvertirATexto(23)            // "23"
+mayus ← Mayusculas("Hola a todos!")     // "HOLA A TODOS!"
+minus ← Minusculas("Hola A Todos!")     // "hola a todos!"</code></pre>
+<div class="callout callout--tip"><strong>Para memorizar:</strong> Longitud = contar · SubCadena = extraer · Concatenar = unir · Convertir = cambiar de tipo · Mayúsculas/Minúsculas = cambiar el formato.</div>
+</article>
+
+<article class="section" id="tema8">
+<header class="section__header"><span class="section__badge" aria-hidden="true">08</span><h2 class="section__title">Funciones propias</h2></header>
+<h3>¿Qué es una función propia?</h3>
+<p>Es un conjunto de instrucciones que creamos para realizar una tarea concreta y que podemos llamar desde el algoritmo cuando la necesitemos.</p>
+<ul><li>Organiza mejor el código y hace que sea más fácil de seguir.</li><li>Evita repetir un mismo conjunto de instrucciones varias veces.</li><li>Puede recibir datos mediante <strong>parámetros</strong> y puede devolver un resultado mediante una <strong>variable de retorno</strong>.</li></ul>
+<div class="callout callout--tip"><strong>Idea clave:</strong> en vez de copiar las mismas instrucciones varias veces, las agrupamos en una función y la llamamos cuando haga falta.</div>
+<h3>¿Dónde se escriben?</h3>
+<p>Según los apuntes, las funciones se desarrollan <strong>antes del algoritmo principal</strong>, para que puedan ser llamadas desde él.</p>
+<h3>Parámetros y valor de retorno</h3>
+<ul><li><strong>Parámetros:</strong> datos que recibe la función para trabajar.</li><li><strong>Variable de retorno:</strong> dato que devuelve la función al algoritmo que la ha llamado.</li></ul>
+<h3>Los cuatro tipos de funciones</h3>
+<table><thead><tr><th>Parámetros</th><th>Retorno</th><th>Qué hace</th></tr></thead><tbody>
+<tr><td>No</td><td>No</td><td>Realiza instrucciones, pero no recibe ni devuelve datos.</td></tr>
+<tr><td>Sí</td><td>No</td><td>Recibe datos, realiza instrucciones y no devuelve un resultado.</td></tr>
+<tr><td>No</td><td>Sí</td><td>No recibe datos, pero devuelve un resultado.</td></tr>
+<tr><td>Sí</td><td>Sí</td><td>Recibe datos y devuelve un resultado.</td></tr>
+</tbody></table>
+<h3>1. Sin parámetros y sin retorno</h3>
+<p>No necesita recibir datos y no devuelve ningún valor. Se utiliza para ejecutar una tarea fija.</p>
+<pre data-lang="PSeInt"><code>SubProceso Saludar()
+    ESCRIBIR "Hola"
+FinSubProceso
+
+Algoritmo Principal
+    Saludar()
+FinAlgoritmo</code></pre>
+<h3>2. Con parámetros y sin retorno</h3>
+<p>Recibe uno o varios datos, pero no devuelve un valor al algoritmo.</p>
+<pre data-lang="PSeInt"><code>SubProceso SaludarNombre(nombre)
+    ESCRIBIR "Hola ", nombre
+FinSubProceso
+
+Algoritmo Principal
+    Definir nombre Como Texto
+    nombre ← "Salva"
+    SaludarNombre(nombre)
+FinAlgoritmo</code></pre>
+<div class="callout callout--warn"><strong>Ojo con los parámetros:</strong> los apuntes explican que el parámetro recibe una copia del dato en otro espacio de memoria y con otro identificador. Si se modifica esa copia dentro de la función, no cambia la variable original. Al terminar la función, se eliminan los parámetros y las variables definidas dentro de ella.</div>
+<h3>3. Sin parámetros y con retorno</h3>
+<p>No recibe datos, pero devuelve un valor que el algoritmo puede guardar en una variable.</p>
+<pre data-lang="PSeInt"><code>Funcion resultado ← ObtenerNumero()
+    Definir num1, num2 Como Entero
+    num1 ← 9
+    num2 ← 10
+    resultado ← num1 + num2
+FinFuncion
+
+Algoritmo Principal
+    Definir suma Como Entero
+    suma ← ObtenerNumero()
+    ESCRIBIR suma
+FinAlgoritmo</code></pre>
+<div class="callout callout--warn"><strong>Importante:</strong> las variables definidas dentro de la función no pueden ser leídas directamente desde el algoritmo principal. El valor que se necesita fuera debe devolverse. El tipo de la variable de retorno debe coincidir con el tipo de la variable donde se guarda el resultado.</div>
+<h3>4. Con parámetros y con retorno</h3>
+<p>Recibe datos para trabajar y devuelve un resultado. Es el tipo que permite crear funciones reutilizables y flexibles.</p>
+<pre data-lang="PSeInt"><code>Funcion resultado ← Sumar(a, b)
+    resultado ← a + b
+FinFuncion
+
+Algoritmo Principal
+    Definir total Como Entero
+    total ← Sumar(4, 6)
+    ESCRIBIR total
+FinAlgoritmo</code></pre>
+<h3>Alcance y memoria</h3>
+<ul><li>Los parámetros y las variables definidas dentro de una función pertenecen a esa función.</li><li>Al terminar la función, esas variables y copias se eliminan.</li><li>Al terminar el algoritmo, también se eliminan las variables definidas dentro del propio algoritmo.</li></ul>
+<div class="callout callout--tip"><strong>Resumen para memorizar:</strong> parámetros = lo que entra · retorno = lo que sale. Una función puede tener ambos, uno solo o ninguno.</div>
+</article>
+
+<article class="section section--lab" id="tema9">
             <header class="section__header">
-                <span class="section__badge section__badge--accent" aria-hidden="true">08</span>
+                <span class="section__badge section__badge--accent" aria-hidden="true">09</span>
                 <h2 class="section__title">Zona de práctica · Algoritmos y pseudocódigo</h2>
             </header>
 
@@ -2077,7 +2371,7 @@ FinProceso</textarea><div class="pseudo-toolbar"><button class="lab-btn primary"
 </main>
 
     <!-- ================= FOOTER ================= -->
-    <footer class="footer"><div class="footer__inner"><div class="footer__brand"><h3>Compendio · Iniciación a la Programación</h3><p>Módulo optativo · Algoritmos, pseudocódigo y resolución de problemas.</p></div><div class="footer__col"><h4>Contenido</h4><ul><li><a href="#tema1">Pseudocódigo y algoritmos</a></li><li><a href="#tema8">Zona de práctica</a></li></ul></div><div class="footer__col"><h4>Ruta recomendada</h4><p>Comprende el problema, identifica los datos y las variables, diseña las operaciones y comprueba el algoritmo en pseudocódigo.</p></div></div><div class="footer__bottom"><span>© <span id="year">2026</span> · Compendio educativo · Uso libre</span><a href="#inicio">Volver al inicio ↑</a></div></footer>
+    <footer class="footer"><div class="footer__inner"><div class="footer__brand"><h3>Compendio · Iniciación a la Programación</h3><p>Módulo optativo · Algoritmos, pseudocódigo y resolución de problemas.</p></div><div class="footer__col"><h4>Contenido</h4><ul><li><a href="#tema1">Pseudocódigo y algoritmos</a></li><li><a href="#tema9">Zona de práctica</a></li></ul></div><div class="footer__col"><h4>Ruta recomendada</h4><p>Comprende el problema, identifica los datos y las variables, diseña las operaciones y comprueba el algoritmo en pseudocódigo.</p></div></div><div class="footer__bottom"><span>© <span id="year">2026</span> · Compendio educativo · Uso libre</span><a href="#inicio">Volver al inicio ↑</a></div></footer>
 
     <button class="back-to-top" id="backToTop" type="button" aria-label="Volver arriba" title="Volver arriba">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2161,7 +2455,7 @@ FinProceso</textarea><div class="pseudo-toolbar"><button class="lab-btn primary"
             });
         }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
         sections.forEach(function (s) { spy.observe(s); });
-        spy.observe(document.getElementById('tema8'));
+        spy.observe(document.getElementById('tema9'));
 
         /* ============================================================
            5) BUSCADOR CON RESALTADO TIPO FOSFORITO
@@ -2523,7 +2817,7 @@ function ensureHud() {
     var b = document.createElement('button');
     b.type = 'button'; b.id = 'xpHud'; b.className = 'xp-hud'; b.title = 'Ver mi nivel e insignias';
     b.innerHTML = '<span class="xp-hud__lvl" id="xpHudLvl">1</span><span class="xp-hud__txt"><b id="xpHudName">Nv 1</b><small id="xpHudXp">0 XP</small></span><span class="xp-hud__bar"><i id="xpHudBar"></i></span>';
-    b.addEventListener('click', function () { var t = $('tema8'); if (t) t.scrollIntoView({ behavior: 'smooth' }); });
+    b.addEventListener('click', function () { var t = $('tema9'); if (t) t.scrollIntoView({ behavior: 'smooth' }); });
     document.body.appendChild(b);
     var f = document.createElement('div'); f.id = 'xpFloat'; f.className = 'xp-float'; f.setAttribute('aria-hidden', 'true');
     document.body.appendChild(f);
@@ -3240,7 +3534,7 @@ document.addEventListener('input', function (e) {
    ATAJOS, BÚSQUEDA GLOBAL, REINICIO E INICIALIZACIÓN
    ============================================================ */
 function labVisible() {
-    var r = $('tema8').getBoundingClientRect();
+    var r = $('tema9').getBoundingClientRect();
     return r.top < window.innerHeight * 0.7 && r.bottom > 100;
 }
 document.addEventListener('keydown', function (e) {
@@ -3256,8 +3550,8 @@ document.addEventListener('keydown', function (e) {
 });
 (function () {
     var si = $('searchInput');
-    si.addEventListener('input', function () { $('tema8').hidden = !!si.value.trim(); });
-    si.addEventListener('keydown', function (e) { if (e.key === 'Escape') $('tema8').hidden = false; });
+    si.addEventListener('input', function () { $('tema9').hidden = !!si.value.trim(); });
+    si.addEventListener('keydown', function (e) { if (e.key === 'Escape') $('tema9').hidden = false; });
 })();
 $('resetProgress').addEventListener('click', function () {
     if (!window.confirm('¿Seguro que quieres borrar todo tu progreso, notas y marcas de lectura?')) return;
